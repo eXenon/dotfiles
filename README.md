@@ -8,4 +8,4 @@ Configuration files for my setup
 * [playerctl](https://github.com/acrisci/playerctl) for the media buttons
 * feh for the wallpaper
 * python3 for the scripts
-* fish, tmux, vim
+* rxvt-unicode-256color, fish, tmux, vim
