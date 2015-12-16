@@ -220,7 +220,7 @@ bindsym $mod+F3 exec spotify
 bindsym $mod+F4 exec keepass2
 
 # Lock workspace
-bindsym $mod+l exec ~/.config/i3/lock.sh
+bindsym $mod+l exec /home/xnunn/.config/i3/lock.sh
 
 # Disable window title bars
 for_window [class="^.*"] border pixel 0
@@ -248,11 +248,13 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Scratchpad
 bindsym $mod+F10 move scratchpad
-bindsym $mod+k [title=".*KeePass.*"] scratchpad show 
+bindsym $mod+k [title=".*KeePass.*"] scratchpad show
 bindsym $mod+p [title="python3 .*"] scratchpad show
+bindsym $mod+m [title="Spotify.*"] scratchpad show
 bindsym $mod+F11 scratchpad show
 bindsym $mod+F12 floating toggle
 
-
-# Autostart
-exec feh --bg-scale ~/Pictures/wallpaper.jpg
+# Baclight
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20
