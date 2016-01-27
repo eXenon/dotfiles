@@ -16,6 +16,4 @@ override_utf8_locale yes
 cpu_avg_samples 2
 
 TEXT
-,[ \
-  ${exec $HOME/.config/scripts/conkyrc.py | tee $HOME/.config/status.logs} \
-]
+,[ ${exec $HOME/.config/scripts/i3bar.py} ]
