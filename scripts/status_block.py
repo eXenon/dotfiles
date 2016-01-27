@@ -8,6 +8,7 @@ class StatusBlock:
   def __init__(self, name):
     self.block = {}
     self.set_name(name)
+    self.set_border(colors["blue"], 0, 0, 0, 0)
 
   def set_key(self, key, value):
     self.block[key] = value
@@ -50,8 +51,9 @@ class StatusUnit:
     self.icon_block = StatusBlock(name)
     self.status_block = StatusBlock(name)
 
-    self.set_color(colors['lime'], colors['white'])
-    self.status_block.set_separator(False, 1)
+    self.set_color(colors['blue'], colors['blue'])
+    self.set_background(colors['lime'])
+    self.status_block.set_separator(False, 0)
     self.icon_block.set_separator(False, 0)
 
   def set_color(self, icon_color, text_color):
@@ -60,6 +62,7 @@ class StatusUnit:
 
   def set_icon(self, icon):
     self.icon_block.set_full_text(icon)
+    self.icon_block.set_min_width(20, "left")
 
   def set_text(self, text):
     self.status_block.set_full_text(text)

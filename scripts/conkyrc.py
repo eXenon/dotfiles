@@ -27,7 +27,7 @@ def blockify_active_window():
     active_window = active_window[:80] + '...' + active_window[-20:]
 
   block = StatusUnit('active-window')
-  block.set_icon('')
+  block.set_icon('')
   block.set_text(active_window)
 
   return block.to_json()
@@ -78,7 +78,7 @@ def blockify_volume():
   else:
     block.set_icon('')
     block.set_text('muted')
-    block.set_urgent()
+    #block.set_urgent()
     block.status_block.set_name('toggle-volume')
 
   return block.to_json()
@@ -111,11 +111,12 @@ def blockify_battery():
     color = get_color_gradient(battery_int, [ 
       { 'threshold': 0,   'color': colors['urgent'] },
       { 'threshold': 20,  'color': colors['urgent'] },
-      { 'threshold': 80,  'color': colors['blue'] },
-      { 'threshold': 100, 'color': colors['blue'] } ])
-    block.set_border(color, 0, TOP_BORDER_WIDTH, 0, 0)
+      { 'threshold': 80,  'color': colors['lime'] },
+      { 'threshold': 100, 'color': colors['lime'] } ])
+    #block.set_border(colors["blue"], 0, 1, 0, 1)
   else:
-    block.set_urgent()
+    #block.set_urgent()
+    pass
 
   block.status_block.set_min_width(40, 'right')
   return block.to_json()
@@ -213,11 +214,20 @@ def blockify_time():
   clock.set_text(now.strftime('%H:%M:%S'))
   return clock.to_json()
 
+def blockify_initiator():
+  block = StatusBlock('separator')
+  block.set_full_text('\uE0B2')
+  block.set_color(colors['lime'])
+  block.set_separator(False, -1)
+  return block.to_json()
+
 def blockify_separator():
   block = StatusBlock('separator')
-  block.set_full_text('    ')
-  block.set_color(colors['yellow'])
+  block.set_full_text('\uE0B3')
+  block.set_color(colors['blue'])
+  block.set_background(colors['lime'])
   block.set_separator(False, 0)
+  block.set_min_width(25, "center")
   return block.to_json()
 
 #########################################
@@ -226,13 +236,11 @@ def blockify_separator():
 
 if __name__ == '__main__':
   blocks = [
+    blockify_initiator(),
     blockify_active_window(),
-    blockify_pidgin(),
     blockify_volume(),
     blockify_battery(),
     blockify_cpu(),
-    blockify_wifi(),
-    blockify_ethernet(),
     blockify_date(),
     blockify_time()
   ]
