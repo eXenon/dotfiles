@@ -6,7 +6,7 @@
 # scrot
  
 IMAGE=/tmp/lock.screen.png
-LOCK=~/.config/i3/lock.png
+LOCK=$HOME/.config/i3/lock.png
  
 # All options are here: http://www.imagemagick.org/Usage/blur/#blur_args
 BLURTYPE="0x5" # 7.52s

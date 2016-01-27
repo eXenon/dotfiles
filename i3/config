@@ -15,15 +15,14 @@ set $darkgray  #444444
 set $white     #FFFFFF
 set $urgentred #B33A3A
 
-set $default_gaps_inner 15
-set $default_gaps_outer 30
+set $default_gaps_inner 7
+set $default_gaps_outer 10
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 0 ms
 
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
 #                       BORDER     BACKGROUND TEXT   INDICATOR
 client.focused          $lime      $lime      $white $lime
@@ -38,9 +37,9 @@ bindsym $mod+n exec --no-startup-id nautilus --browser --no-desktop
 
 bar {
         status_command $HOME/.config/i3/conky-i3bar.py
+	font pango:DejaVu Sans Mono 10
         position bottom
-        font pango:Terminus, Icons 8
-        strip_workspace_numbers yes
+        strip_workspace_numbers no
         height 20
         colors {
                 statusline         $lightgray
@@ -78,6 +77,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
+# It is also a patched powerline font.
 font pango:DejaVu Sans Mono 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
@@ -212,15 +212,17 @@ bindsym $mod+r mode "resize"
 
 
 # Personal
+exec feh --bg-scale ~/Pictures/wallpaper.jpg
 
 # Launcher shortcuts
 bindsym $mod+F1 exec chromium-browser
 bindsym $mod+F2 exec thunderbird
 bindsym $mod+F3 exec spotify
 bindsym $mod+F4 exec keepass2
+bindsym $mod+F5 exec subl
 
 # Lock workspace
-bindsym $mod+l exec /home/xnunn/.config/i3/lock.sh
+bindsym $mod+l exec ~/.config/i3/lock.sh
 
 # Disable window title bars
 for_window [class="^.*"] border pixel 0
@@ -254,7 +256,10 @@ bindsym $mod+m [title="Spotify.*"] scratchpad show
 bindsym $mod+F11 scratchpad show
 bindsym $mod+F12 floating toggle
 
-# Baclight
+# Backlight
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20
+
+# Print Screen
+bindsym Print exec scrot -s screenshot.png -e 'mv $f ~/Pictures/.'
