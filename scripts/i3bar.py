@@ -65,6 +65,11 @@ def blockify_battery():
   is_charging = bool(re.search('Charging|Unknown', acpi))
 
   block.set_text(battery)
+  if battery_int < 40 and not is_charging:
+    block.set_hl()
+  elif battery_int < 20 and not is_charging:
+    block.set_urgent()
+
 
   return block
 
@@ -88,21 +93,28 @@ def blockify_cpu():
 ### NETWORK #############################
 #########################################
 
-def blockify_ping():
-  """ Prints the ping time to 8.8.8.8 and alerts if the ping is high """
-  block = Powerblock("ping")
+def blockify_internet():
+  """ Prints primary IP and ping time to 8.8.8.8.
+      Alerts when ping is high or IP not found.
+  """
+  block = Powerblock("internet")
 
   pingtime = executor.run("fping -C 1 -t 200 8.8.8.8")[0]
-  if len(pingtime) < 4:
+  ip = executor.run("ip a | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'")[0]
+  if len(ip) < 4:
     block.set_urgent()
-    block.set_text("UNREACHABLE")
+    block.set_text("NO IP")
   else:
-    pingtime = float(pingtime.split(" ")[5])
-    if pingtime > 500:
+    if len(pingtime) < 4:
+      block.set_text(ip + " >200 ms")
       block.set_hl()
-    elif pingtime > 1000:
-      block.set_urgent()
-    block.set_text(str(pingtime) + " ms")
+    else:
+      pingtime = float(pingtime.split(" ")[5])
+      if pingtime > 500:
+        block.set_hl()
+      elif pingtime > 1000:
+        block.set_urgent()
+      block.set_text(ip + " " + str(pingtime) + " ms")
   
   return block
 
@@ -115,12 +127,16 @@ def blockify_wifi():
     with open('/sys/class/net/{}/operstate'.format(interface)) as operstate:
       status = operstate.read().strip()
   except:
-    block.set_text("Wifi disc.")
+    block.set_text("No wifi adapter")
     block.set_hl()
     return block 
 
   info = basiciw.iwinfo(interface)
-  block.set_text(info['essid'])
+  if len(info['essid']) > 2:
+    block.set_text(info['essid'])
+  else:
+    block.set_text("Wifi disc.")
+    block.set_hl()
 
   return block
 
@@ -177,7 +193,7 @@ if __name__ == '__main__':
     blockify_battery(),
     blockify_cpu(),
     blockify_wifi(),
-    blockify_ping(),
+    blockify_internet(),
     blockify_date(),
     blockify_time()
   ]

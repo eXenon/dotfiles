@@ -10,3 +10,4 @@ Configuration files for my setup
 * feh for the wallpaper
 * python3 for the scripts
 * rxvt-unicode-256color, fish, tmux, vim
+* [dmenu2](https://bitbucket.org/melek/dmenu2) for more options with dmenu
