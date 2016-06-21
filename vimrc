@@ -4,5 +4,7 @@
 set laststatus=2
 
 " Use 256 colors
-"set t_Co=256
+set t_Co=256
 
+set expandtab
+set tabstop=4
