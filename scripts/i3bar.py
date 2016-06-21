@@ -187,22 +187,25 @@ def blockify_time():
 #########################################
 
 if __name__ == '__main__':
-  blocks = [
-    blockify_active_window(),
-    blockify_volume(),
-    blockify_battery(),
-    blockify_cpu(),
-    blockify_wifi(),
-    blockify_internet(),
-    blockify_date(),
-    blockify_time()
-  ]
+  while True:
+    blocks = [
+      blockify_active_window(),
+      blockify_volume(),
+      blockify_battery(),
+      blockify_cpu(),
+      blockify_wifi(),
+      blockify_internet(),
+      blockify_date(),
+      blockify_time()
+    ]
 
-  blocks = list(filter(lambda x:x!= None, blocks))
-  for i in range(len(blocks)-1, 0, -1):
-    blocks[i].update(blocks[i-1])
+    blocks = list(filter(lambda x:x!= None, blocks))
+    for i in range(len(blocks)-1, 0, -1):
+      blocks[i].update(blocks[i-1])
 
-  json = ",".join(block.to_json() for block in blocks if block)
+    json = ",".join(block.to_json() for block in blocks if block)
 
-  sys.stdout.write(json)
-  sys.stdout.flush()
+    sys.stdout.write(",[ " + json + " ]")
+    sys.stdout.flush()
+    
+    time.sleep(1)

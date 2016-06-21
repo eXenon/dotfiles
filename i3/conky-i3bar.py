@@ -24,9 +24,10 @@ if __name__ == '__main__':
   write('{ "version": 1, "stop_signal": 10, "cont_signal": 12, "click_events": true }')
   write('[[]')
 
-  os.system('conky -d -c ~/.config/conkyrc')
+  os.system('python3 ~/.config/scripts/i3bar.py &')
 
   while True:
+
     line, prefix = read(), ''
     if line.startswith(','):
       line, prefix = line[1:], ','
