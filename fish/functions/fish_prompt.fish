@@ -19,20 +19,20 @@ set c6          4F3A5E
 set c14         667D77
 set c7          999999
 set c15         FFFFFF
-
+set urgent      DD3333
 
 # User prompt block
 if [ (whoami) != 'root' ]
-    set __user_back $c12
-    set __user_for $c15
-else
-    set __user_back $c2
+    set __user_back $c10
     set __user_for $c0
+else
+    set __user_back $urgent
+    set __user_for $c15
 end
 
 # Pwd
 set __pwd_back $background
-set __pwd_for $c9
+set __pwd_for $c10
 
 # Git
 set __git_back $c12
