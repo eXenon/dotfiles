@@ -224,7 +224,7 @@ bindsym $mod+F1 exec chromium-browser
 bindsym $mod+F2 exec thunderbird
 bindsym $mod+F3 exec spotify
 bindsym $mod+F4 exec keepass2
-bindsym $mod+F5 exec --no-startup-id urxvt -name scratchpython -e python3
+bindsym $mod+F5 exec --no-startup-id urxvt -name scratchpython -e ipython3
 bindsym $mod+F6 exec subl
 
 # dmenu launcher (using dmenu2 for the additionnal options)
@@ -277,4 +277,4 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 
 # Print Screen
-bindsym Print exec scrot -s screenshot.png -e 'mv $f ~/Pictures/.'
+bindsym $mod+Shift+F5 exec scrot -s -e 'mv $f ~/Pictures/.'
