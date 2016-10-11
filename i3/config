@@ -220,7 +220,7 @@ for_window [class="Spotify"] move scratchpad
 for_window [title=".*Mozilla Thunderbird.*"] move workspace 10
 
 # Launcher shortcuts
-bindsym $mod+F1 exec chromium-browser
+bindsym $mod+F1 exec vivaldi-stable
 bindsym $mod+F2 exec thunderbird
 bindsym $mod+F3 exec spotify
 bindsym $mod+F4 exec keepass2
@@ -234,7 +234,7 @@ bindsym $mod+d exec dmenu_run -q -l 10 -p ">" -x 640 -y 360 -w 640 -fn "DejaVu S
 exec spotify
 exec keepass2
 exec thunderbird
-exec chromium-browser
+exec vivaldi-stable
 
 # Lock workspace
 bindsym $mod+Control+l exec /home/xnunn/.config/i3/lock.sh

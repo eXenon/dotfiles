@@ -8,6 +8,7 @@ Configuration files for my setup
 * [playerctl](https://github.com/acrisci/playerctl) for the media buttons
 * amixer, xbacklight for volume and screen brightness control
 * feh for the wallpaper
-* python3 for the scripts
+* python3 for the scripts, basiciw package
 * rxvt-unicode-256color, fish, tmux, vim
 * [dmenu2](https://bitbucket.org/melek/dmenu2) for more options with dmenu
+* [pathogen](https://github.com/tpope/vim-pathogen) for vim plugins
