@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import sys
-import netifaces
-import basiciw
-import time
-import datetime
+import os
 import re
+import sys
+import time
+import basiciw
+import datetime
+import netifaces
 
 from jsonpath_rw import jsonpath, parse
 
@@ -18,6 +19,17 @@ from powerblocks import Powerblock
 ### MISC ################################
 #########################################
 
+GRAPHBARS = " ▁▂▃▄▅▆▇█"
+
+def to_graph_bar(val, max_val, min_val=0):
+    """ Return the graphbar for a value, given the min and max of the desired scale. """
+    if max_val == min_val:
+        return GRAPHBARS[0]
+    min_graph, max_graph = 0, len(GRAPHBARS) - 1
+    graph_index = val * (min_graph - max_graph) / (min_val - max_val) + (max_val*min_graph - min_val*max_graph) / (max_val - min_val)
+    graph_index = int(graph_index)
+    graph_index = min(max(graph_index, min_graph), max_graph)
+    return GRAPHBARS[graph_index]
 
 def blockify_active_window():
   """ Print the currently active window (or 'none'). """
@@ -41,10 +53,10 @@ def blockify_volume():
   status = volume_control.status()
   if status == "on":
     volume = int(volume_control.get_volume())
-    block.set_text(str(volume) + '%')
+    block.set_text('🔊  ' + str(volume) + '%')
 
   else:
-    block.set_text('muted')
+    block.set_text('🔇')
     #block.set_urgent()
 
   return block
@@ -62,9 +74,12 @@ def blockify_battery():
   acpi = executor.run('acpi -b')[0]
   battery = re.search('\d*%', acpi).group(0)
   battery_int = int(battery[:-1])
-  is_charging = bool(re.search('Charging|Unknown', acpi))
+  is_charging = not bool(re.search('Discharging', acpi))
 
-  block.set_text(battery)
+  if not is_charging:
+      block.set_text('🔋  ' + battery)
+  else:
+      block.set_text('⚡  ' + battery)
   if battery_int < 40 and not is_charging:
     block.set_hl()
   elif battery_int < 20 and not is_charging:
@@ -73,20 +88,27 @@ def blockify_battery():
 
   return block
 
-def blockify_cpu():
+def blockify_cpu(cache=[]):
   """ Print the CPU load average and temperature """
   
   block = Powerblock("cpu")
 
   cpuload = executor.run("uptime | awk -F'[a-z]:' '{ print $2}'")[0]
   oneminload = float(cpuload.split(",")[0] + "." + cpuload.split(",")[1])
-  cputemp = executor.run("cat /sys/class/thermal/thermal_zone7/temp")[0]
-  temp = int(cputemp) / 1000
+  #cputemp = executor.run("cat /sys/class/thermal/thermal_zone7/temp")[0]
+  #temp = int(cputemp) / 1000
+  cache.append(oneminload)
+  if len(cache) > 5:
+      cache.pop(0)
   
-  if oneminload > 3 or temp > 80:
+  #if oneminload > 3 or temp > 80:
+  if oneminload > 4:
     block.set_urgent()
 
-  block.set_text(str(oneminload) + "/" + str(temp))
+  txt = "".join([to_graph_bar(l, 4) for l in cache]) + " " * (5 - len(cache))
+  block.set_text(txt)
+
+  #block.set_text(str(oneminload) + "/" + str(temp))
   return block
 
 #########################################
@@ -187,14 +209,15 @@ def blockify_time():
 #########################################
 
 if __name__ == '__main__':
+  os.nice(19)
   while True:
     blocks = [
       blockify_active_window(),
       blockify_volume(),
       blockify_battery(),
-      blockify_cpu(),
       blockify_wifi(),
       blockify_internet(),
+      blockify_cpu(),
       blockify_date(),
       blockify_time()
     ]
