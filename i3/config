@@ -5,6 +5,36 @@
 # this file and re-run i3-config-wizard(1).
 #
 
+set $foreground   #c7c8db
+set $background   #0d0e1d
+set $cursorColor  #c7c8db
+# black 
+set $color0       #16182b
+set $color8       #7bcbd5
+# red 
+set $color1       #1f2038
+set $color9       #cac77d
+# green 
+set $color2       #2e3051
+set $color10      #c9cae2
+# yellow 
+set $color3       #444773
+set $color11      #e8e6a1
+# blue 
+set $color4       #616496
+set $color12      #c5c39b
+# magenta 
+set $color5       #8688b1
+set $color13      #d2a399
+# cyan 
+set $color6       #b1b2cd
+set $color14      #d9b3cd
+# white 
+set $color7       #e1e2ec
+set $color15      #e1e2ec
+set $urgent       #DD3333
+
+
 # From github.com/Airblader/dotfiles
 set $lime      #9FBC00
 set $darklime  #505e00
@@ -25,9 +55,9 @@ force_display_urgency_hint 0 ms
 
 
 #                       BORDER     BACKGROUND TEXT   INDICATOR
-client.focused          $lime      $lime      $white $lime
-client.unfocused        $darkgray  $darklime  $white $darklime
-client.focused_inactive $darkgray  $darklime  $white $darklime
+client.focused          $color0    $color0    $white $color0
+client.unfocused        $darkgray  $color8    $white $color8
+client.focused_inactive $darkgray  $color8    $white $color8
 client.urgent           $urgentred $urgentred $white $urgentred
 
 
@@ -37,7 +67,7 @@ bindsym $mod+n exec --no-startup-id nautilus --browser --no-desktop
 
 bar {
         status_command $HOME/.config/i3/conky-i3bar.py
-	font pango:DejaVu Sans Mono 10
+    	font pango:DejaVu Sans Mono 10
         position bottom
         strip_workspace_numbers no
         height 20
@@ -212,20 +242,22 @@ bindsym $mod+r mode "resize"
 
 
 # Set wallpaper
-exec feh --bg-scale ~/Pictures/3.wallpaper.jpg
+exec feh --bg-scale ~/Pictures/4.wallpaper.jpg
 
 # Move a few windows to scratchpad/workspaces by default
 for_window [instance="scratchpython"] move scratchpad
+for_window [instance="scratchvim"] move scratchpad
 for_window [class="Spotify"] move scratchpad
 for_window [title=".*Mozilla Thunderbird.*"] move workspace 10
 
 # Launcher shortcuts
-bindsym $mod+F1 exec vivaldi-stable
+bindsym $mod+F1 exec chromium-browser
 bindsym $mod+F2 exec thunderbird
 bindsym $mod+F3 exec spotify
 bindsym $mod+F4 exec keepass2
 bindsym $mod+F5 exec --no-startup-id urxvt -name scratchpython -e ipython3
 bindsym $mod+F6 exec subl
+bindsym $mod+F7 exec --no-startup-id urxvt -name scratchvim -e vim /home/xnunn/notes
 
 # dmenu launcher (using dmenu2 for the additionnal options)
 bindsym $mod+d exec dmenu_run -q -l 10 -p ">" -x 640 -y 360 -w 640 -fn "DejaVu Sans Mono for Powerline:antialias=true:pixelsize=14" -h 30
@@ -234,7 +266,10 @@ bindsym $mod+d exec dmenu_run -q -l 10 -p ">" -x 640 -y 360 -w 640 -fn "DejaVu S
 exec spotify
 exec keepass2
 exec thunderbird
-exec vivaldi-stable
+exec chromium-browser
+exec --no-startup-id urxvt -name scratchvim -e vim /home/xnunn/notes
+exec --no-startup-id urxvt -name scratchpython -e ipython3
+
 
 # Lock workspace
 bindsym $mod+Control+l exec /home/xnunn/.config/i3/lock.sh
@@ -251,6 +286,7 @@ bindsym $mod+Shift+F1 exec xrandr --output DP1 --auto --primary --above eDP1
 # Power management - done right
 bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, reboot' '$HOME/.config/i3/i3exit reboot'"
 bindsym $mod+Shift+o exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut. Do you really want to shutdown?' -b 'Yes, shutdown' '$HOME/.config/i3/i3exit shutdown'"
+bindsym $mod+Shift+l exec "i3-nagbar -t warning -m 'You pressed the logout shortcut. Do you really want to logout?' -b 'Yes, logout' 'logout'"
 
 
 # Audio media keys
@@ -268,6 +304,7 @@ bindsym $mod+F10 move scratchpad
 bindsym $mod+k [title=".*KeePass.*"] scratchpad show
 bindsym $mod+p [instance="scratchpython"] scratchpad show
 bindsym $mod+m [class="Spotify"] scratchpad show
+bindsym $mod+o [instance="scratchvim"] scratchpad show
 bindsym $mod+F11 scratchpad show
 bindsym $mod+F12 floating toggle
 

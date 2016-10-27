@@ -6,6 +6,8 @@ Xft.autohint: false
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 
+URxvt.print-pipe: "cat > /dev/null"
+
 URxvt.geometry: 200x40
 URxvt.depth: 32
 URxvt.internalBorder: 10
@@ -29,40 +31,40 @@ URxvt.font-size.step: 2
 *Menu.background: Black
 *Menu.foreground: White
 
-
 ! special
-*.foreground:   #c0c5ce
-*.background:   #2b303b
-*.cursorColor:  #c0c5ce
+*.foreground:   #98d1ce
+*.background:   #0a0f14
+*.cursorColor:  #98d1ce
 
 ! black
-*.color0:       #2b303b
-*.color8:       #65737e
+*.color0:       #0a0f14
+*.color8:       #10151b
 
 ! red
-*.color1:       #bf616a
-*.color9:       #bf616a
+*.color1:       #c33027
+*.color9:       #d26939
 
 ! green
-*.color2:       #a3be8c
-*.color10:      #a3be8c
+*.color2:       #26a98b
+*.color10:      #081f2d
 
 ! yellow
-*.color3:       #ebcb8b
-*.color11:      #ebcb8b
+*.color3:       #edb54b
+*.color11:      #245361
 
 ! blue
-*.color4:       #8fa1b3
-*.color12:      #8fa1b3
+*.color4:       #195465
+*.color12:      #093748
 
 ! magenta
-*.color5:       #b48ead
-*.color13:      #b48ead
+*.color5:       #4e5165
+*.color13:      #888ba5
 
 ! cyan
-*.color6:       #96b5b4
-*.color14:      #96b5b4
+*.color6:       #33859d
+*.color14:      #599caa
 
 ! white
-*.color7:       #c0c5ce
-*.color15:      #eff1f5 
+*.color7:       #98d1ce
+*.color15:      #d3ebe9
+
