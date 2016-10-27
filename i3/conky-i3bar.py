@@ -42,6 +42,16 @@ if __name__ == '__main__':
     button = int(parsed['button'])
 
     try:
+        with open('/tmp/i3bar.log', 'a') as f:
+            f.write(str(module) + '\n')
+            f.write(str(button) + '\n')
+    except Exception as e:
+        with open('/tmp/i3bar.log', 'w') as f:
+            f.write(str(e))
+        
+    
+
+    try:
       if module == 'calendar' and button == 1:
         run('gsimplecal')
       elif module == 'volume':

@@ -2,41 +2,63 @@
 # Colors
 #
 
-set background  2B303B
-set c0          000000
-set c8          38372C
-set c1          571DC2 
-set c9          7C54B0
-set c2          14DB49
-set c10         A2E655
-set c3          403D70
-set c11         9C6F59
-set c4          385A70
-set c12         323F5C
-set c5          384894
-set c13         5E6C99
-set c6          4F3A5E
-set c14         667D77
-set c7          999999
-set c15         FFFFFF
-set urgent      DD3333
+
+# special
+set foreground   98d1ce
+set background   0a0f14
+set cursorColor  98d1ce
+
+# black
+set color0       0a0f14
+set color8       10151b
+
+# red
+set color1       c33027
+set color9       d26939
+
+# green
+set color2       26a98b
+set color10      081f2d
+
+# yellow
+set color3       edb54b
+set color11      245361
+
+# blue
+set color4       195465
+set color12      093748
+
+# magenta
+set color5       4e5165
+set color13      888ba5
+
+# cyan
+set color6       33859d
+set color14      599caa
+
+# white
+set color7       98d1ce
+set color15      d3ebe9
+
+set urgent       c33027
+
 
 # User prompt block
 if [ (whoami) != 'root' ]
-    set __user_back $c10
-    set __user_for $c0
+    set __user_back $color8
+    set __user_for $color15
 else
     set __user_back $urgent
-    set __user_for $c15
+    set __user_for $color15
 end
 
 # Pwd
 set __pwd_back $background
-set __pwd_for $c10
+set __pwd_for $color15
 
 # Git
-set __git_back $c12
-set __git_for $c15
+set __git_back $color12
+set __git_for $color15
 
 #
 #
