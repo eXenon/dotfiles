@@ -19,7 +19,17 @@ from powerblocks import Powerblock
 ### MISC ################################
 #########################################
 
+CPU_CACHE_LEN = 3
 GRAPHBARS = " ▁▂▃▄▅▆▇█"
+WEATHER = {'sunny': '☀',
+           'cloudy': '☁',
+           'low_rain': '☂',
+           'high_rain': '☔',
+           'thunder': '⛈',
+           'sun_cloudy': '⛅',
+           'snow': '☃'
+          } 
+
 
 def to_graph_bar(val, max_val, min_val=0):
     """ Return the graphbar for a value, given the min and max of the desired scale. """
@@ -98,14 +108,14 @@ def blockify_cpu(cache=[]):
   #cputemp = executor.run("cat /sys/class/thermal/thermal_zone7/temp")[0]
   #temp = int(cputemp) / 1000
   cache.append(oneminload)
-  if len(cache) > 5:
+  if len(cache) > CPU_CACHE_LEN:
       cache.pop(0)
   
   #if oneminload > 3 or temp > 80:
   if oneminload > 4:
     block.set_urgent()
 
-  txt = "".join([to_graph_bar(l, 4) for l in cache]) + " " * (5 - len(cache))
+  txt = str(cache[-1]) + "".join([to_graph_bar(l, 4) for l in cache]) + " " * (CPU_CACHE_LEN - len(cache))
   block.set_text(txt)
 
   #block.set_text(str(oneminload) + "/" + str(temp))
@@ -121,14 +131,14 @@ def blockify_internet():
   """
   block = Powerblock("internet")
 
-  pingtime = executor.run("fping -C 1 -t 200 8.8.8.8")[0]
+  pingtime = executor.run("fping -C 1 -t 400 8.8.8.8")[0]
   ip = executor.run("ip a | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'")[0]
   if len(ip) < 4:
     block.set_urgent()
     block.set_text("NO IP")
   else:
     if len(pingtime) < 4:
-      block.set_text(ip + " >200 ms")
+      block.set_text(ip + " >400 ms")
       block.set_hl()
     else:
       pingtime = float(pingtime.split(" ")[5])
@@ -192,7 +202,7 @@ def blockify_date():
   now = datetime.datetime.now()
 
   calendar = Powerblock('calendar')
-  calendar.set_text(now.strftime('%a., %d. %b. %Y'))
+  calendar.set_text(now.strftime('%a., %d. %b. %Y %H:%M'))
   return calendar
 
 def blockify_time():
@@ -201,7 +211,7 @@ def blockify_time():
   now = datetime.datetime.now()
 
   clock = Powerblock('clock')
-  clock.set_text(now.strftime('%H:%M:%S'))
+  clock.set_text(now.strftime('%H:%M'))
   return clock
 
 #########################################
@@ -219,7 +229,6 @@ if __name__ == '__main__':
       blockify_internet(),
       blockify_cpu(),
       blockify_date(),
-      blockify_time()
     ]
 
     blocks = list(filter(lambda x:x!= None, blocks))
@@ -231,4 +240,4 @@ if __name__ == '__main__':
     sys.stdout.write(",[ " + json + " ]")
     sys.stdout.flush()
     
-    time.sleep(1)
+    time.sleep(2)
