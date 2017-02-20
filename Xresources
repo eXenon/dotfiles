@@ -32,39 +32,38 @@ URxvt.font-size.step: 2
 *Menu.foreground: White
 
 ! special
-*.foreground:   #98d1ce
-*.background:   #0a0f14
-*.cursorColor:  #98d1ce
+*.foreground:   #d7d0c7
+*.background:   #151515
+*.cursorColor:  #d7d0c7
 
 ! black
-*.color0:       #0a0f14
-*.color8:       #10151b
+*.color0:       #101010
+*.color8:       #404040
 
 ! red
-*.color1:       #c33027
-*.color9:       #d26939
+*.color1:       #e84f4f
+*.color9:       #d23d3d
 
 ! green
-*.color2:       #26a98b
-*.color10:      #081f2d
+*.color2:       #b8d68c
+*.color10:      #a0cf5d
 
 ! yellow
-*.color3:       #edb54b
-*.color11:      #245361
+*.color3:       #e1aa5d
+*.color11:      #f39d21
 
 ! blue
-*.color4:       #195465
-*.color12:      #093748
+*.color4:       #7dc1cf
+*.color12:      #4e9fb1
 
 ! magenta
-*.color5:       #4e5165
-*.color13:      #888ba5
+*.color5:       #9b64fb
+*.color13:      #8542ff
 
 ! cyan
-*.color6:       #33859d
-*.color14:      #599caa
+*.color6:       #6d878d
+*.color14:      #42717b
 
 ! white
-*.color7:       #98d1ce
-*.color15:      #d3ebe9
-
+*.color7:       #dddddd
+*.color15:      #dddddd
