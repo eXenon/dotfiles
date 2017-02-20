@@ -257,6 +257,7 @@ bindsym $mod+F3 exec spotify
 bindsym $mod+F4 exec keepass2
 bindsym $mod+F5 exec --no-startup-id urxvt -name scratchpython -e ipython3
 bindsym $mod+F6 exec subl
+exec rm /home/xnunn/.notes.swp
 bindsym $mod+F7 exec --no-startup-id urxvt -name scratchvim -e vim /home/xnunn/notes
 
 # dmenu launcher (using dmenu2 for the additionnal options)
@@ -284,7 +285,7 @@ force_xinerama yes
 bindsym $mod+Shift+F1 exec xrandr --output DP1 --auto --primary --above eDP1 
 
 # Power management - done right
-bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, reboot' '$HOME/.config/i3/i3exit reboot'"
+bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, reboot' '/home/xnunn/.config/i3/i3exit reboot'"
 bindsym $mod+Shift+o exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut. Do you really want to shutdown?' -b 'Yes, shutdown' '$HOME/.config/i3/i3exit shutdown'"
 bindsym $mod+Shift+l exec "i3-nagbar -t warning -m 'You pressed the logout shortcut. Do you really want to logout?' -b 'Yes, logout' 'logout'"
 
