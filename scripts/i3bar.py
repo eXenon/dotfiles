@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import time
+import random
 import basiciw
 import datetime
 import netifaces
@@ -28,8 +29,9 @@ WEATHER = {'sunny': '☀',
            'thunder': '⛈',
            'sun_cloudy': '⛅',
            'snow': '☃'
-          } 
-
+          }
+SPORT = ['\o\\', '/o/', '_o_', '(o)',]
+LOOP_TIME = 2
 
 def to_graph_bar(val, max_val, min_val=0):
     """ Return the graphbar for a value, given the min and max of the desired scale. """
@@ -40,6 +42,11 @@ def to_graph_bar(val, max_val, min_val=0):
     graph_index = int(graph_index)
     graph_index = min(max(graph_index, min_graph), max_graph)
     return GRAPHBARS[graph_index]
+
+
+#########################################
+### OS SETTINGS #########################
+#########################################
 
 def blockify_active_window():
   """ Print the currently active window (or 'none'). """
@@ -196,13 +203,25 @@ def blockify_ethernet():
 ### TIME ################################
 #########################################
 
-def blockify_date():
-  """ Prints the date and time. """
+def blockify_date(insert_stretch=True, loop=0):
+  """ Prints the date and time. Insert a reminder
+  that I should stretch once every hour instead
+  of the time.
+  """
 
   now = datetime.datetime.now()
 
   calendar = Powerblock('calendar')
-  calendar.set_text(now.strftime('%a., %d. %b. %Y %H:%M'))
+  if not insert_stretch:
+    calendar.set_text(now.strftime('%a., %d. %b. %Y %H:%M'))
+  else:
+    int_time = int(datetime.datetime.timestamp(now))
+    if int_time % 3600 < 50:
+      calendar.set_text(now.strftime('%a., %d. %b. %Y ') + SPORT[loop % len(SPORT)])
+      if loop % 2:
+        calendar.set_urgent()
+    else:
+      calendar.set_text(now.strftime('%a., %d. %b. %Y %H:%M'))
   return calendar
 
 def blockify_time():
@@ -214,11 +233,16 @@ def blockify_time():
   clock.set_text(now.strftime('%H:%M'))
   return clock
 
+
 #########################################
 ### MAIN ################################
 #########################################
 
 if __name__ == '__main__':
+
+  # Add a global counter that helps individual blocks keep track of GUI loops
+  loop = 0
+
   os.nice(19)
   while True:
     blocks = [
@@ -228,7 +252,7 @@ if __name__ == '__main__':
       blockify_wifi(),
       blockify_internet(),
       blockify_cpu(),
-      blockify_date(),
+      blockify_date(loop=loop),
     ]
 
     blocks = list(filter(lambda x:x!= None, blocks))
@@ -239,5 +263,6 @@ if __name__ == '__main__':
 
     sys.stdout.write(",[ " + json + " ]")
     sys.stdout.flush()
-    
-    time.sleep(2)
+
+    loop += 1
+    time.sleep(LOOP_TIME)
