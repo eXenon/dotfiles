@@ -46,7 +46,7 @@ set $white     #FFFFFF
 set $urgentred #B33A3A
 
 set $default_gaps_inner 15
-set $default_gaps_outer 30
+set $default_gaps_outer 5
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 
@@ -242,7 +242,7 @@ bindsym $mod+r mode "resize"
 
 
 # Set wallpaper
-exec feh --bg-scale ~/Pictures/4.wallpaper.jpg
+exec feh --bg-scale ~/Pictures/wallpaper_lake+door.jpg
 
 # Move a few windows to scratchpad/workspaces by default
 for_window [instance="scratchpython"] move scratchpad

@@ -27,6 +27,7 @@ URxvt.font: xft:DejaVu Sans Mono for Powerline:antialias=true:pixelsize=14
 URxvt.boldFont: xft:DejaVu Sans Mono for Powerline:style=bold:antialias=true:pixelsize=14
 URxvt.letterSpace: -1
 URxvt.font-size.step: 2
+URxvt.lineSpace: 1
 
 *Menu.background: Black
 *Menu.foreground: White

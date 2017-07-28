@@ -1,4 +1,6 @@
 execute pathogen#infect()
+:call pathogen#helptags()
+filetype plugin on
 set syntax=on
 
 " Always show powerline
@@ -20,15 +22,17 @@ nmap <c-l> :bprevious<CR>
 " Tab management
 noremap <C-Tab> :tabNext<CR>
 
+" Allow to force sudo save
+cmap w!! w !sudo tee % >/dev/null
+
 " Disable arrows
 noremap <Up> <nop>
 noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
-noremap ù l
-noremap m k
-noremap l j
-noremap k h
+
+" Disable stupid F1
+noremap <F1> <nop>
 
 " Replace ESC in INSERT mode
 inoremap jj <ESC>

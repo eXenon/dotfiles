@@ -161,7 +161,7 @@ def blockify_wifi():
   """ Prints information about the connected wifi. """
 
   block = Powerblock('network')
-  interface = "wlx48ee0cf2d8fe"
+  interface = "wlp58s0"
   try:
     with open('/sys/class/net/{}/operstate'.format(interface)) as operstate:
       status = operstate.read().strip()
