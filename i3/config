@@ -67,7 +67,7 @@ bindsym $mod+n exec --no-startup-id nautilus --browser --no-desktop
 
 bar {
         status_command $HOME/.config/i3/conky-i3bar.py
-    	font pango:DejaVu Sans Mono 10
+        font pango:DejaVu Sans Mono 10
         position bottom
         strip_workspace_numbers no
         height 20
@@ -171,32 +171,8 @@ bindsym $mod+q focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# switch to workspace
-bindsym $mod+ampersand workspace 1
-bindsym $mod+eacute workspace 2
-bindsym $mod+quotedbl workspace 3
-bindsym $mod+apostrophe workspace 4
-bindsym $mod+parenleft workspace 5
-bindsym $mod+minus workspace 6
-bindsym $mod+egrave workspace 7
-bindsym $mod+underscore workspace 8
-bindsym $mod+ccedilla workspace 9
-bindsym $mod+agrave workspace 10
-
-# move focused container to workspace
-bindsym $mod+Shift+ampersand move container to workspace 1
-bindsym $mod+Shift+eacute move container to workspace 2
-bindsym $mod+Shift+quotedbl move container to workspace 3
-bindsym $mod+Shift+apostrophe move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+minus move container to workspace 6
-bindsym $mod+Shift+egrave move container to workspace 7
-bindsym $mod+Shift+underscore move container to workspace 8
-bindsym $mod+Shift+ccedilla move container to workspace 9
-bindsym $mod+Shift+agrave move container to workspace 10
-
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+j reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -234,15 +210,15 @@ bindsym $mod+r mode "resize"
 
 # ---------------------------------------------------------------------------------------------
 #
-#	END BLOCK
+#   END BLOCK
 #
 # ---------------------------------------------------------------------------------------------
 
 
 
 
-# Set wallpaper
-exec feh --bg-scale ~/Pictures/wallpaper_lake+door.jpg
+# Set wallpaper - using symlink for quick switching
+exec feh --bg-scale ~/Pictures/i3wallpaper 
 
 # Move a few windows to scratchpad/workspaces by default
 for_window [instance="scratchpython"] move scratchpad
@@ -251,21 +227,21 @@ for_window [class="Spotify"] move scratchpad
 for_window [title=".*Mozilla Thunderbird.*"] move workspace 10
 
 # Launcher shortcuts
-bindsym $mod+F1 exec chromium-browser
-bindsym $mod+F2 exec thunderbird
-bindsym $mod+F3 exec spotify
-bindsym $mod+F4 exec keepass2
-bindsym $mod+F5 exec --no-startup-id urxvt -name scratchpython -e ipython3
-bindsym $mod+F6 exec subl
+bindsym $mod+1 exec chromium-browser
+bindsym $mod+2 exec thunderbird
+bindsym $mod+3 exec spotify
+bindsym $mod+4 exec keepassxc
+bindsym $mod+5 exec --no-startup-id urxvt -name scratchpython -e ipython3
+bindsym $mod+6 exec subl
 exec rm /home/xnunn/.notes.swp
-bindsym $mod+F7 exec --no-startup-id urxvt -name scratchvim -e vim /home/xnunn/notes
+bindsym $mod+7 exec --no-startup-id urxvt -name scratchvim -e vim /home/xnunn/notes
 
 # dmenu launcher (using dmenu2 for the additionnal options)
 bindsym $mod+d exec dmenu_run -q -l 10 -p ">" -x 640 -y 360 -w 640 -fn "DejaVu Sans Mono for Powerline:antialias=true:pixelsize=14" -h 30
 
 # Start a few programms
 exec spotify
-exec keepass2
+exec keepassxc
 exec thunderbird
 exec chromium-browser
 exec --no-startup-id urxvt -name scratchvim -e vim /home/xnunn/notes
@@ -273,7 +249,7 @@ exec --no-startup-id urxvt -name scratchpython -e ipython3
 
 
 # Lock workspace
-bindsym $mod+Control+l exec /home/xnunn/.config/i3/lock.sh
+bindsym $mod+l exec /home/xnunn/.config/i3/lock.sh
 
 # Disable window title bars
 for_window [class="^.*"] border pixel 0
@@ -282,7 +258,7 @@ for_window [class="^.*"] border pixel 0
 force_xinerama yes
 
 # Load monitor settings
-bindsym $mod+Shift+F1 exec xrandr --output DP1 --auto --primary --above eDP1 
+bindsym $mod+Shift+F12 exec xrandr --output DP1 --auto --primary --above eDP1 
 
 # Power management - done right
 bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, reboot' '/home/xnunn/.config/i3/i3exit reboot'"
@@ -301,18 +277,40 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 
 # Scratchpad
-bindsym $mod+F10 move scratchpad
+bindsym $mod+Shift+s move scratchpad
 bindsym $mod+k [title=".*KeePass.*"] scratchpad show
 bindsym $mod+p [instance="scratchpython"] scratchpad show
 bindsym $mod+m [class="Spotify"] scratchpad show
 bindsym $mod+o [instance="scratchvim"] scratchpad show
-bindsym $mod+F11 scratchpad show
-bindsym $mod+F12 floating toggle
+bindsym $mod+Shift+t scratchpad show
+bindsym $mod+Shift+c floating toggle
 
 # Backlight
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 
-# Print Screen
-bindsym $mod+Shift+F5 exec scrot -s -e 'mv $f ~/Pictures/.'
+
+# switch to workspace
+bindsym $mod+F1 workspace 1
+bindsym $mod+F2 workspace 2
+bindsym $mod+F3 workspace 3
+bindsym $mod+F4 workspace 4
+bindsym $mod+F5 workspace 5
+bindsym $mod+F6 workspace 6
+bindsym $mod+F7 workspace 7
+bindsym $mod+F8 workspace 8
+bindsym $mod+F9 workspace 9
+bindsym $mod+F10 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+F1 move container to workspace 1
+bindsym $mod+Shift+F2 move container to workspace 2
+bindsym $mod+Shift+F3 move container to workspace 3
+bindsym $mod+Shift+F4 move container to workspace 4
+bindsym $mod+Shift+F5 move container to workspace 5
+bindsym $mod+Shift+F6 move container to workspace 6
+bindsym $mod+Shift+F7 move container to workspace 7
+bindsym $mod+Shift+F8 move container to workspace 8
+bindsym $mod+Shift+F9 move container to workspace 9
+bindsym $mod+Shift+F10 move container to workspace 10
