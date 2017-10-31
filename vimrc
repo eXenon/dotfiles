@@ -25,17 +25,8 @@ noremap <C-Tab> :tabNext<CR>
 " Allow to force sudo save
 cmap w!! w !sudo tee % >/dev/null
 
-" Disable arrows
-noremap <Up> <nop>
-noremap <Down> <nop>
-noremap <Left> <nop>
-noremap <Right> <nop>
-
 " Disable stupid F1
 noremap <F1> <nop>
-
-" Replace ESC in INSERT mode
-inoremap jj <ESC>
 
 " Display non-breaking space
 set listchars=trail:◃,nbsp:•
@@ -75,3 +66,8 @@ set statusline +=%1*%4v\ %*             "virtual column number
 
 " Remove delays for ESC key
 set timeoutlen=1000 ttimeoutlen=0
+
+" Bépo conditionnal remapping
+if !empty(system("setxkbmap -print|grep bepo"))
+    source ~/.vimrc.bepo
+endif
