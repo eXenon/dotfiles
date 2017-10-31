@@ -78,6 +78,17 @@ def blockify_volume():
 
   return block
 
+def blockify_keyboard_layout():
+  """ Print the currect keyboard layout. """
+  block = Powerblock('keyboard')
+  if os.path.isfile('/tmp/azerty'):
+    block.set_text('AZER')
+  elif os.path.isfile('/tmp/bepo'):
+    block.set_text('BEPO')
+  else:
+    block.set_text('AZER')
+  return block
+
 
 #########################################
 ### HARDWARE ############################
@@ -139,7 +150,9 @@ def blockify_internet():
   block = Powerblock("internet")
 
   pingtime = executor.run("fping -C 1 -t 400 8.8.8.8")[0]
-  ip = executor.run("ip a | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'")[0]
+  ip_wifi = executor.run("ip a | grep wlp -A 3 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'")[0]
+  ip_vpn = executor.run("ip a | grep tun0 -A 3 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'")[0]
+  ip = ip_vpn + ' (VPN)' if len(ip_vpn) > 4 else ip_wifi
   if len(ip) < 4:
     block.set_urgent()
     block.set_text("NO IP")
@@ -154,7 +167,7 @@ def blockify_internet():
       elif pingtime > 1000:
         block.set_urgent()
       block.set_text(ip + " " + str(pingtime) + " ms")
-  
+
   return block
 
 def blockify_wifi():
@@ -248,6 +261,7 @@ if __name__ == '__main__':
     blocks = [
       blockify_active_window(),
       blockify_volume(),
+      blockify_keyboard_layout(),
       blockify_battery(),
       blockify_wifi(),
       blockify_internet(),
