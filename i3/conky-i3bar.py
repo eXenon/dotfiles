@@ -48,8 +48,6 @@ if __name__ == '__main__':
     except Exception as e:
         with open('/tmp/i3bar.log', 'w') as f:
             f.write(str(e))
-        
-    
 
     try:
       if module == 'calendar' and button == 1:
@@ -65,5 +63,10 @@ if __name__ == '__main__':
           os.system('$HOME/.config/scripts/volume_control.py down 1')
       elif module == 'toggle-volume' and button == 1:
         run('$HOME/.config/scripts/volume_control.py toggle')
+      elif module == 'keyboard' and button == 1:
+        if not os.path.isfile('/tmp/bepo'):
+          run('setxkbmap fr bepo ; touch /tmp/bepo ; rm -f /tmp/azerty')
+        else:
+          run('setxkbmap fr ; touch /tmp/azert ; rm -f /tmp/bepo')
     except:
       pass
