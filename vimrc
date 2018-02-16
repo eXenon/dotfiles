@@ -1,5 +1,15 @@
-execute pathogen#infect()
-:call pathogen#helptags()
+" Neovim plugins - may not be compatible with classical vim
+let g:deoplete#enable_at_startup = 1
+call plug#begin('~/.config/nvim/plugs')
+
+" Vim plugs
+Plug 'elixir-editors/vim-elixir'
+Plug 'thinca/vim-ref'
+Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
+
+" Initialize plugs
+call plug#end()
+
 filetype plugin on
 set syntax=on
 
@@ -41,11 +51,11 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 set mouse=""
 
 " Toggle visibility
-nmap <F2> :set hlsearch!<CR>
-nmap <F3> :set number!<CR>
-nmap <F4> :set list!<CR>
-nmap <F5> :set cursorline!<CR>:set cursorcolumn!<CR>
-nmap <F6> :set nu!<CR>
+nmap <c-h> :set hlsearch!<CR>
+nmap <c-j> :set number!<CR>
+nmap <c-k> :set list!<CR>
+nmap <c-l> :set cursorline!<CR>:set cursorcolumn!<CR>
+nmap <c-m> :set nu!<CR>
 
 " Statusline
 hi User1 guifg=#eea040 guibg=#222222
