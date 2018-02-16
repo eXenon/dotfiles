@@ -292,16 +292,16 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 
 
 # switch to workspace
-bindsym $mod+F1 workspace 1
-bindsym $mod+F2 workspace 2
-bindsym $mod+F3 workspace 3
-bindsym $mod+F4 workspace 4
-bindsym $mod+F5 workspace 5
-bindsym $mod+F6 workspace 6
-bindsym $mod+F7 workspace 7
-bindsym $mod+F8 workspace 8
-bindsym $mod+F9 workspace 9
-bindsym $mod+F10 workspace 10
+bindsym F1 workspace 1
+bindsym F2 workspace 2
+bindsym F3 workspace 3
+bindsym F4 workspace 4
+bindsym F5 workspace 5
+bindsym F6 workspace 6
+bindsym F7 workspace 7
+bindsym F8 workspace 8
+bindsym F9 workspace 9
+bindsym F10 workspace 10
 
 # move focused container to workspace
 bindsym $mod+Shift+F1 move container to workspace 1
