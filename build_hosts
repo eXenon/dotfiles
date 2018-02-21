@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "" > /etc/hosts
+for f in /etc/hosts.d/*.hosts; do
+	echo "# $f" >> /etc/hosts
+	cat $f >> /etc/hosts
+	echo "" >> /etc/hosts
+done
