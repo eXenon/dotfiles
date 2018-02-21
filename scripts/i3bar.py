@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import time
+import clock
 import random
 import basiciw
 import datetime
@@ -99,9 +100,9 @@ def blockify_battery():
 
   block = Powerblock('battery')
 
-  acpi = executor.run('acpi -b')[0]
-  battery = re.search('\d*%', acpi).group(0)
-  battery_int = int(battery[:-1])
+  acpi = executor.run('upower -i /org/freedesktop/UPower/devices/battery_BAT1')[0]
+  battery = re.search('percentage:\D*(\d*)%', acpi).group(1)
+  battery_int = int(battery)
   is_charging = not bool(re.search('Discharging', acpi))
 
   if not is_charging:
@@ -174,7 +175,7 @@ def blockify_wifi():
   """ Prints information about the connected wifi. """
 
   block = Powerblock('network')
-  interface = "wlp58s0"
+  interface = "wlp3s0"
   try:
     with open('/sys/class/net/{}/operstate'.format(interface)) as operstate:
       status = operstate.read().strip()
@@ -234,7 +235,7 @@ def blockify_date(insert_stretch=True, loop=0):
       if loop % 2:
         calendar.set_urgent()
     else:
-      calendar.set_text(now.strftime('%a., %d. %b. %Y %H:%M'))
+      calendar.set_text(now.strftime('%a., %d. %b. %Y ') + clock.clock(1))
   return calendar
 
 def blockify_time():
@@ -259,7 +260,6 @@ if __name__ == '__main__':
   os.nice(19)
   while True:
     blocks = [
-      blockify_active_window(),
       blockify_volume(),
       blockify_keyboard_layout(),
       blockify_battery(),
