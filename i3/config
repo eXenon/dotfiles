@@ -227,7 +227,7 @@ for_window [class="Spotify"] move scratchpad
 for_window [title=".*Mozilla Thunderbird.*"] move workspace 10
 
 # Launcher shortcuts
-bindsym $mod+1 exec chromium-browser
+bindsym $mod+1 exec firefox
 bindsym $mod+2 exec thunderbird
 bindsym $mod+3 exec spotify
 bindsym $mod+4 exec keepassxc
@@ -243,13 +243,13 @@ bindsym $mod+d exec dmenu_run -q -l 10 -p ">" -x 640 -y 360 -w 640 -fn "DejaVu S
 exec spotify
 exec keepassxc
 exec thunderbird
-exec chromium-browser
+exec firefox
 exec --no-startup-id urxvt -name scratchvim -e vim /home/xnunn/notes
 exec --no-startup-id urxvt -name scratchpython -e ipython3
 
 
 # Lock workspace
-bindsym $mod+l exec /home/xnunn/.config/i3/lock.sh
+bindsym $mod+l exec i3lock --blur=1 --ringcolor=000000ff --linecolor=000000ff --keyhlcolor=000000ff --ringvercolor=000000ff --insidevercolor=000000ff --ringwrongcolor=000000ff --insidewrongcolor=000000ff --screen=2
 
 # Disable window title bars
 for_window [class="^.*"] border pixel 0
@@ -258,7 +258,7 @@ for_window [class="^.*"] border pixel 0
 force_xinerama yes
 
 # Load monitor settings
-bindsym $mod+Shift+F12 exec xrandr --output DP1 --auto --primary --above eDP1 
+bindsym $mod+Shift+F12 exec xrandr --output HDMI-1 --auto --primary --above eDP-1 --output eDP-1 --auto
 
 # Power management - done right
 bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, reboot' '/home/xnunn/.config/i3/i3exit reboot'"
