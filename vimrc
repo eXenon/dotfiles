@@ -2,10 +2,26 @@
 let g:deoplete#enable_at_startup = 1
 call plug#begin('~/.config/nvim/plugs')
 
+highlight Pmenu ctermfg=black ctermbg=white
+
 " Vim plugs
+Plug 'cocopon/iceberg.vim'
+Plug 'morhetz/gruvbox'
 Plug 'elixir-editors/vim-elixir'
 Plug 'thinca/vim-ref'
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
+Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:highlighter#auto_update = 2
+
+" Deoplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
 " Initialize plugs
 call plug#end()
@@ -77,7 +93,11 @@ set statusline +=%1*%4v\ %*             "virtual column number
 " Remove delays for ESC key
 set timeoutlen=1000 ttimeoutlen=0
 
+" Colorscheme
+colorscheme gruvbox
+set background=dark
+
 " Bépo conditionnal remapping
-if !empty(system("setxkbmap -print|grep bepo"))
-    source ~/.vimrc.bepo
-endif
+" if !empty(system("setxkbmap -print|grep bepo"))
+"     source ~/.vimrc.bepo
+" endif

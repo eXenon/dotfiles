@@ -4,41 +4,42 @@
 
 
 # special
-set foreground   98d1ce
-set background   0a0f14
-set cursorColor  98d1ce
+set foreground   c0c5ce
+set background   2b303b
+set cursorColor  c0c5ce
 
 # black
-set color0       0a0f14
-set color8       10151b
+set color0       2b303b
+set color8       65737e
 
 # red
-set color1       c33027
-set color9       d26939
+set color1       bf616a
+set color9       bf616a
 
 # green
-set color2       26a98b
-set color10      081f2d
+set color2       a3be8c
+set color10      a3be8c
 
 # yellow
-set color3       edb54b
-set color11      245361
+set color3       ebcb8b
+set color11      ebcb8b
 
 # blue
-set color4       195465
-set color12      093748
+set color4       8fa1b3
+set color12      8fa1b3
 
 # magenta
-set color5       4e5165
-set color13      888ba5
+set color5       b48ead
+set color13      b48ead
 
 # cyan
-set color6       33859d
-set color14      599caa
+set color6       96b5b4
+set color14      96b5b4
 
 # white
-set color7       98d1ce
-set color15      d3ebe9
+set color7       c0c5ce
+set color15      eff1f5
+
 
 set urgent       c33027
 
@@ -57,7 +58,7 @@ set __pwd_back $background
 set __pwd_for $color15
 
 # Git
-set __git_back $color12
+set __git_back $color8
 set __git_for $color15
 
 #
@@ -65,13 +66,21 @@ set __git_for $color15
 #
 
 # fish git prompt
+set __fish_git_prompt_color $__git_for
+set __fish_git_prompt_color_prefix $__git_for
 set __fish_git_prompt_color -b $__git_back
+set __fish_git_prompt_color_branch $__git_for
+set __fish_git_prompt_color_branch -b $__git_back
+set __fish_git_prompt_color_flags $__git_for
+set __fish_git_prompt_color_flags -b $__git_back
+set __fish_git_prompt_color_upstream -b $__git_back
+set __fish_git_prompt_color_suffix -b $__git_back
+set __fish_git_prompt_color_merging -b $__git_back
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate 'yes'
 set __fish_git_prompt_showstagedstate 'yes'
 set __fish_git_prompt_showupstream 'yes'
 set __fish_git_prompt_showuntrackedfiles 'yes'
-set __fish_git_prompt_color_branch -b $__git_back
 
 # Status Chars
 set __fish_git_prompt_char_dirtystate '• '
@@ -108,7 +117,7 @@ function fish_prompt
         echo -n \uE0B0
 
         # Git
-        printf '%s ' (__fish_git_prompt)
+        printf '%s' (__fish_git_prompt)
 
         # End
         set_color normal
