@@ -86,7 +86,7 @@ bar {
 
 
 # start network-manager
-exec nm-applet
+exec kde5-nm-connection-editor
 
 
 # ---------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec rxvt-unicode
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+x kill
@@ -227,14 +227,14 @@ for_window [class="Spotify"] move scratchpad
 for_window [title=".*Mozilla Thunderbird.*"] move workspace 10
 
 # Launcher shortcuts
-bindsym $mod+1 exec firefox
+bindsym $mod+1 exec vivaldi
 bindsym $mod+2 exec thunderbird
 bindsym $mod+3 exec spotify
 bindsym $mod+4 exec keepassxc
-bindsym $mod+5 exec --no-startup-id urxvt -name scratchpython -e ipython3
+bindsym $mod+5 exec --no-startup-id alacritty -t scratchpython -e ipython3
 bindsym $mod+6 exec subl
 exec rm /home/xnunn/.notes.swp
-bindsym $mod+7 exec --no-startup-id urxvt -name scratchvim -e vim /home/xnunn/notes
+bindsym $mod+7 exec --no-startup-id alacritty -t scratchvim -e nvim /home/xnunn/notes
 
 # dmenu launcher (using dmenu2 for the additionnal options)
 bindsym $mod+d exec dmenu_run -q -l 10 -p ">" -x 640 -y 360 -w 640 -fn "DejaVu Sans Mono for Powerline:antialias=true:pixelsize=14" -h 30
@@ -243,9 +243,9 @@ bindsym $mod+d exec dmenu_run -q -l 10 -p ">" -x 640 -y 360 -w 640 -fn "DejaVu S
 exec spotify
 exec keepassxc
 exec thunderbird
-exec firefox
-exec --no-startup-id urxvt -name scratchvim -e vim /home/xnunn/notes
-exec --no-startup-id urxvt -name scratchpython -e ipython3
+exec vivaldi
+exec --no-startup-id alacritty -t scratchvim -e nvim /home/xnunn/notes
+exec --no-startup-id alacritty -t scratchpython -e ipython3
 
 
 # Lock workspace
@@ -258,11 +258,11 @@ for_window [class="^.*"] border pixel 0
 force_xinerama yes
 
 # Load monitor settings
-bindsym $mod+Shift+F12 exec xrandr --output HDMI-1 --auto --primary --above eDP-1 --output eDP-1 --auto
+bindsym $mod+Shift+F12 exec /home/cba/.screenlayout/dual.sh
 
 # Power management - done right
 bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, reboot' '/home/xnunn/.config/i3/i3exit reboot'"
-bindsym $mod+Shift+o exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut. Do you really want to shutdown?' -b 'Yes, shutdown' '$HOME/.config/i3/i3exit shutdown'"
+bindsym $mod+Shift+o exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut. Do you really want to shutdown?' -b 'Yes, shutdown' 'shutdown -t now'"
 bindsym $mod+Shift+l exec "i3-nagbar -t warning -m 'You pressed the logout shortcut. Do you really want to logout?' -b 'Yes, logout' 'logout'"
 
 
