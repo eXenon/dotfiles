@@ -65,23 +65,6 @@ client.urgent           $urgentred $urgentred $white $urgentred
 bindsym $mod+n exec --no-startup-id nautilus --browser --no-desktop
 
 
-bar {
-        status_command $HOME/.config/i3/conky-i3bar.py
-        font pango:DejaVu Sans Mono 10
-        position bottom
-        strip_workspace_numbers no
-        height 20
-        colors {
-                statusline         $lightgray
-                background         $blue
-                separator          $lime
-
-#                                  BORDER     BACKGROUND TEXT
-                focused_workspace  $lightblue $lightblue $lime 
-                inactive_workspace $blue      $blue      $white
-                urgent_workspace   $urgentred $urgentred $white
-        }
-}
 
 
 
@@ -215,6 +198,8 @@ bindsym $mod+r mode "resize"
 # ---------------------------------------------------------------------------------------------
 
 
+# Polybar
+exec --no-startup-id $HOME/.config/i3/polybar.sh
 
 
 # Set wallpaper - using symlink for quick switching
@@ -235,6 +220,7 @@ bindsym $mod+5 exec --no-startup-id alacritty -t scratchpython -e ipython3
 bindsym $mod+6 exec subl
 exec rm /home/xnunn/.notes.swp
 bindsym $mod+7 exec --no-startup-id alacritty -t scratchvim -e nvim /home/xnunn/notes
+bindsym $mod+8 exec --no-startup-id $HOME/.config/i3/polybar.sh
 
 # dmenu launcher (using dmenu2 for the additionnal options)
 bindsym $mod+d exec dmenu_run -q -l 10 -p ">" -x 640 -y 360 -w 640 -fn "DejaVu Sans Mono for Powerline:antialias=true:pixelsize=14" -h 30
