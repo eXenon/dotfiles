@@ -103,7 +103,7 @@ def blockify_battery():
   acpi = executor.run('upower -i /org/freedesktop/UPower/devices/battery_BAT1')[0]
   battery = re.search('percentage:\D*(\d*)%', acpi).group(1)
   battery_int = int(battery)
-  is_charging = not bool(re.search('Discharging', acpi))
+  is_charging = not bool(re.search('state:\s+discharging', acpi))
 
   if not is_charging:
       block.set_text('🔋  ' + battery)
