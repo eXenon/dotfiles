@@ -9,23 +9,41 @@
 
 [colors]
 ; Dracula theme ============
-base00 = #282936
-base01 = #3a3c4e
-base02 = #4d4f68
-base03 = #626483
-base04 = #62d6e8
-base05 = #e9e9f4
-base06 = #f1f2f8
-base07 = #f7f7fb
-base08 = #ea51b2
-base09 = #b45bcf
-base0A = #00f769
-base0B = #ebff87
-base0C = #a1efe4
-base0D = #62d6e8
-base0E = #b45bcf
-base0F = #00f769
+;base00 = #282936
+;base01 = #3a3c4e
+;base02 = #4d4f68
+;base03 = #626483
+;base04 = #62d6e8
+;base05 = #e9e9f4
+;base06 = #f1f2f8
+;base07 = #f7f7fb
+;base08 = #ea51b2
+;base09 = #b45bcf
+;base0A = #00f769
+;base0B = #ebff87
+;base0C = #a1efe4
+;base0D = #62d6e8
+;base0E = #b45bcf
+;base0F = #00f769
 ; =======================
+
+base00 = #000000
+base01 = #edf5f2
+base02 = #ffffff
+base03 = #ffffff
+base04 = #ffffff
+base05 = #ffffff
+base06 = #ffffff
+base07 = #ffffff
+base08 = #ffffff
+base09 = #ffffff
+base0A = #ffffff
+base0B = #ffffff
+base0C = #ffffff
+base0D = #ffffff
+base0E = #ffffff
+base0F = #00f769
+
 
 [bar/default]
 width = 100%
@@ -49,7 +67,7 @@ font-3 = Droid Sans:style=Regular:size=8
 
 modules-left = i3
 modules-center = time
-modules-right = keyboard cpu memory ping network battery volume date
+modules-right = keyboard ping network battery volume date
 
 [module/keyboard]
 type = custom/script
@@ -81,14 +99,14 @@ label-urgent-padding = 1
 [module/cpu]
 type = internal/cpu
 interval = 5
-format = "%{F#62d6e8}%{F-} <label>"
+format = " <label>"
 format-foreground = ${colors.base05}
 label = %percentage%%
 
 [module/memory]
 type = internal/memory
 interval = 5
-format = "%{F#ebff87}%{F-} <label>"
+format = " <label>"
 format-foreground = ${colors.base05}
 label = %percentage_used%%
 
@@ -99,7 +117,7 @@ interval = 1
 time = %H:%M:%S
 label = %time%
 
-format = "%{F#b45bcf}%{F-} <label>"
+format = " <label>"
 format-foreground = ${colors.base05}
 
 [module/date]
@@ -109,7 +127,7 @@ interval = 1
 date = "%m/%d/%Y"
 label = %date%
 
-format = "%{F#ea51b2}%{F-} <label>"
+format = " <label>"
 format-foreground = ${colors.base05}
 
 [module/vpn]
@@ -145,9 +163,9 @@ type = internal/network
 interface = wlp3s0
 interval = 1
 ping-interval = 3
-format-connected = %{F#62d6e8}%{F-} <label-connected>
+format-connected =   <label-connected>
 label-connected = %essid%
-format-disconnected = %{F#ea51b2}%{F-} <label-disconnected>
+format-disconnected =   <label-disconnected>
 label-disconnected = "Not Connected"
 
 [module/ping]
