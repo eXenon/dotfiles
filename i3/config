@@ -104,7 +104,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec alacritty -e tmux
 
 # kill focused window
 bindsym $mod+Shift+x kill
@@ -218,8 +218,7 @@ bindsym $mod+3 exec spotify
 bindsym $mod+4 exec keepassxc
 bindsym $mod+5 exec --no-startup-id alacritty -t scratchpython -e ipython3
 bindsym $mod+6 exec subl
-exec rm /home/xnunn/.notes.swp
-bindsym $mod+7 exec --no-startup-id alacritty -t scratchvim -e nvim /home/xnunn/notes
+bindsym $mod+7 exec --no-startup-id alacritty -t scratchvim -e nvim -n /home/cba/notes
 bindsym $mod+8 exec --no-startup-id $HOME/.config/i3/polybar.sh
 
 # dmenu launcher (using dmenu2 for the additionnal options)
@@ -228,9 +227,8 @@ bindsym $mod+d exec dmenu_run -q -l 10 -p ">" -x 640 -y 360 -w 640 -fn "DejaVu S
 # Start a few programms
 exec spotify
 exec keepassxc
-exec thunderbird
 exec vivaldi
-exec --no-startup-id alacritty -t scratchvim -e nvim /home/xnunn/notes
+exec --no-startup-id alacritty -t scratchvim -e nvim -n /home/cba/notes
 exec --no-startup-id alacritty -t scratchpython -e ipython3
 
 

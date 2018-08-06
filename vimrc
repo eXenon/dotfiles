@@ -1,7 +1,8 @@
-" Neovim plugins - may not be compatible with classical vim
-let g:deoplete#enable_at_startup = 1
-call plug#begin('~/.config/nvim/plugs')
+" General options
+let g:netrw_liststyle = 3 " File explorer style
 
+" Neovim plugins - may not be compatible with classical vim
+call plug#begin('~/.config/nvim/plugs')
 highlight Pmenu ctermfg=black ctermbg=white
 
 " Vim plugs
@@ -11,17 +12,19 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'thinca/vim-ref'
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ElmCast/elm-vim'
+Plug 'nvie/vim-flake8'
+Plug 'tpope/vim-surround'
+Plug 'ervandew/supertab'
 let g:highlighter#auto_update = 2
 
 " Deoplete
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
+
+" Flake8
+let g:flake8_show_in_gutter = 1
+autocmd FileType python map <buffer> <C-F> :call Flake8()<CR>
 
 " Initialize plugs
 call plug#end()
