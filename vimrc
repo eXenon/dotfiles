@@ -1,4 +1,5 @@
 " General options
+let mapleader = "\<Space>"
 let g:netrw_liststyle = 3 " File explorer style
 
 " Neovim plugins - may not be compatible with classical vim
@@ -104,3 +105,7 @@ set background=dark
 " if !empty(system("setxkbmap -print|grep bepo"))
 "     source ~/.vimrc.bepo
 " endif
+
+" Leader Shortcuts
+nmap <leader>w :w<CR>
+nmap <leader>wq :wq<CR>
