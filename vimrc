@@ -6,26 +6,34 @@ let g:netrw_liststyle = 3 " File explorer style
 call plug#begin('~/.config/nvim/plugs')
 highlight Pmenu ctermfg=black ctermbg=white
 
+" vim-one Theme
+Plug 'mhartington/oceanic-next'
+
 " Vim plugs
-Plug 'cocopon/iceberg.vim'
-Plug 'morhetz/gruvbox'
-Plug 'elixir-editors/vim-elixir'
-Plug 'thinca/vim-ref'
-Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
+Plug 'thinca/vim-ref' " Docs on K-press
+Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
+Plug 'ervandew/supertab' " Autocomplete on tab
+
+" Elixir stuff
+Plug 'elixir-editors/vim-elixir' " Highlighting, indentation and filetype for elixir
+Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' } " Elixir docs, eval and completion
+
+" Highlighter
 Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ElmCast/elm-vim'
-Plug 'nvie/vim-flake8'
-Plug 'tpope/vim-surround'
-Plug 'ervandew/supertab'
 let g:highlighter#auto_update = 2
 
 " Deoplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 
-" Flake8
+" Python stuff
+"   Flake8
+Plug 'nvie/vim-flake8'
 let g:flake8_show_in_gutter = 1
 autocmd FileType python map <buffer> <C-F> :call Flake8()<CR>
+"   Autopep8
+Plug 'tell-k/vim-autopep8'
+let g:autopep8_on_save = 1
 
 " Initialize plugs
 call plug#end()
@@ -36,8 +44,16 @@ set syntax=on
 " Always show powerline
 set laststatus=2
 
-" Use 256 colors
-set t_Co=256
+" Colorscheme
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+colorscheme OceanicNext
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
+set t_8b=^[[48;2;%lu;%lu;%lum
+set t_8f=^[[38;2;%lu;%lu;%lum
+set background=dark
+
 
 set expandtab
 set tabstop=4
@@ -78,11 +94,6 @@ nmap <c-l> :set cursorline!<CR>:set cursorcolumn!<CR>
 nmap <c-m> :set nu!<CR>
 
 " Statusline
-hi User1 guifg=#eea040 guibg=#222222
-hi User2 guifg=#dd3333 guibg=#222222
-hi User3 guifg=#ff66ff guibg=#222222
-hi User4 guifg=#a0ee40 guibg=#222222
-hi User5 guifg=#eeee40 guibg=#222222
 set statusline=
 set statusline +=%1*\ %n\ %*            "buffer number
 set statusline +=%5*%{&ff}%*            "file format
@@ -97,10 +108,6 @@ set statusline +=%1*%4v\ %*             "virtual column number
 " Remove delays for ESC key
 set timeoutlen=1000 ttimeoutlen=0
 
-" Colorscheme
-colorscheme gruvbox
-set background=dark
-
 " Bépo conditionnal remapping
 " if !empty(system("setxkbmap -print|grep bepo"))
 "     source ~/.vimrc.bepo
@@ -109,3 +116,4 @@ set background=dark
 " Leader Shortcuts
 nmap <leader>w :w<CR>
 nmap <leader>wq :wq<CR>
+nmap <leader>q :q<CR>
