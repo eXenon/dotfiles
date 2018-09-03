@@ -21,9 +21,9 @@ URxvt.scrollTtyKeypress: True
 URxvt.urgentOnBell: True
 URxvt.visualBell: False
 
-URxvt.perl-ext-common: default,selection-to-clipboard,font-size
+URxvt.perl-ext-common: default,selection-to-clipboard,font-size,config-reload
 
-URxvt.font: xft:DejaVu Sans Mono for Powerline:antialias=true:pixelsize=14
+URxvt.font: xft:Inconsolata Nerd Font Mono:style=Medium
 URxvt.boldFont: xft:DejaVu Sans Mono for Powerline:style=bold:antialias=true:pixelsize=14
 URxvt.letterSpace: -1
 URxvt.font-size.step: 2
