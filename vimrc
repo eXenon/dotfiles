@@ -33,7 +33,6 @@ let g:flake8_show_in_gutter = 1
 autocmd FileType python map <buffer> <C-F> :call Flake8()<CR>
 "   Autopep8
 Plug 'tell-k/vim-autopep8'
-let g:autopep8_on_save = 1
 
 " Initialize plugs
 call plug#end()

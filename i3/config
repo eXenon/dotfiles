@@ -5,45 +5,38 @@
 # this file and re-run i3-config-wizard(1).
 #
 
-set $foreground   #c7c8db
-set $background   #0d0e1d
-set $cursorColor  #c7c8db
-# black 
-set $color0       #16182b
-set $color8       #7bcbd5
-# red 
-set $color1       #1f2038
-set $color9       #cac77d
-# green 
-set $color2       #2e3051
-set $color10      #c9cae2
-# yellow 
-set $color3       #444773
-set $color11      #e8e6a1
-# blue 
-set $color4       #616496
-set $color12      #c5c39b
-# magenta 
-set $color5       #8688b1
-set $color13      #d2a399
-# cyan 
-set $color6       #b1b2cd
-set $color14      #d9b3cd
-# white 
-set $color7       #e1e2ec
-set $color15      #e1e2ec
-set $urgent       #DD3333
 
+## Base16 Material Darker
+# Author: Nate Peterson
+#
+# You can use these variables anywhere in the i3 configuration file.
 
-# From github.com/Airblader/dotfiles
-set $lime      #9FBC00
-set $darklime  #505e00
-set $blue      #131D24
-set $lightblue #232D34
-set $lightgray #DDEEDD
-set $darkgray  #444444
-set $white     #FFFFFF
-set $urgentred #B33A3A
+set $base00 #212121
+set $base01 #303030
+set $base02 #353535
+set $base03 #4A4A4A
+set $base04 #B2CCD6
+set $base05 #EEFFFF
+set $base06 #EEFFFF
+set $base07 #FFFFFF
+set $base08 #F07178
+set $base09 #F78C6C
+set $base0A #FFCB6B
+set $base0B #C3E88D
+set $base0C #89DDFF
+set $base0D #82AAFF
+set $base0E #C792EA
+set $base0F #FF5370
+
+# Basic color configuration using the Base16 variables for windows and borders.
+# Property Name         Border  BG      Text    Indicator Child Border
+client.focused          $base05 $base0D $base00 $base0D $base0D
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.background       $base07
+
 
 set $default_gaps_inner 15
 set $default_gaps_outer 5
@@ -52,14 +45,6 @@ gaps outer $default_gaps_outer
 
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 0 ms
-
-
-#                       BORDER     BACKGROUND TEXT   INDICATOR
-client.focused          $color0    $color0    $white $color0
-client.unfocused        $darkgray  $color8    $white $color8
-client.focused_inactive $darkgray  $color8    $white $color8
-client.urgent           $urgentred $urgentred $white $urgentred
-
 
 # nautilus
 bindsym $mod+n exec --no-startup-id nautilus --browser --no-desktop
@@ -104,7 +89,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt -e tmux
+bindsym $mod+Return exec termite -e tmux
 
 # kill focused window
 bindsym $mod+Shift+x kill
@@ -216,9 +201,9 @@ bindsym $mod+1 exec vivaldi
 bindsym $mod+2 exec thunderbird
 bindsym $mod+3 exec spotify
 bindsym $mod+4 exec keepassxc
-bindsym $mod+5 exec --no-startup-id urxvt -name scratchpython -e ipython3
+bindsym $mod+5 exec --no-startup-id termite -name scratchpython -e ipython3
 bindsym $mod+6 exec subl
-bindsym $mod+7 exec --no-startup-id urxvt -name scratchvim -e nvim -n /home/cba/notes
+bindsym $mod+7 exec --no-startup-id termite -name scratchvim -e nvim -n /home/cba/notes
 bindsym $mod+8 exec --no-startup-id $HOME/.config/i3/polybar.sh
 
 # dmenu launcher (using dmenu2 for the additionnal options)
@@ -230,8 +215,8 @@ bindsym $mod+s exec rofi -show ssh
 exec spotify
 exec keepassxc
 exec vivaldi
-exec --no-startup-id urxvt -name scratchvim -e nvim -n /home/cba/notes
-exec --no-startup-id urxvt -name scratchpython -e ipython3
+exec --no-startup-id termite -name scratchvim -e nvim -n /home/cba/notes
+exec --no-startup-id termite -name scratchpython -e ipython3
 
 
 # Lock workspace
