@@ -201,9 +201,9 @@ bindsym $mod+1 exec vivaldi
 bindsym $mod+2 exec thunderbird
 bindsym $mod+3 exec spotify
 bindsym $mod+4 exec keepassxc
-bindsym $mod+5 exec --no-startup-id termite -name scratchpython -e ipython3
+bindsym $mod+5 exec --no-startup-id termite --name scratchpython -e ipython3
 bindsym $mod+6 exec subl
-bindsym $mod+7 exec --no-startup-id termite -name scratchvim -e nvim -n /home/cba/notes
+bindsym $mod+7 exec --no-startup-id termite --name scratchvim -e nvim -n /home/cba/notes
 bindsym $mod+8 exec --no-startup-id $HOME/.config/i3/polybar.sh
 
 # dmenu launcher (using dmenu2 for the additionnal options)
@@ -215,8 +215,8 @@ bindsym $mod+s exec rofi -show ssh
 exec spotify
 exec keepassxc
 exec vivaldi
-exec --no-startup-id termite -name scratchvim -e nvim -n /home/cba/notes
-exec --no-startup-id termite -name scratchpython -e ipython3
+exec --no-startup-id termite --name scratchvim -e nvim -n /home/cba/notes
+exec --no-startup-id termite --name scratchpython -e ipython3
 
 
 # Lock workspace
