@@ -14,6 +14,11 @@ Plug 'thinca/vim-ref' " Docs on K-press
 Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
 Plug 'ervandew/supertab' " Autocomplete on tab
 
+" VimWiki
+Plug 'vimwiki/vimwiki'
+let g:vimwiki_path='/home/cba/wiki/vimwiki/'
+let g:vimwiki_template_path='/home/cba/wiki/vimwiki_template/'
+
 " Elixir stuff
 Plug 'elixir-editors/vim-elixir' " Highlighting, indentation and filetype for elixir
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' } " Elixir docs, eval and completion
@@ -26,6 +31,9 @@ let g:highlighter#auto_update = 2
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 
+" Date increment/decrement
+Plug 'tpope/vim-speeddating'
+
 " Python stuff
 "   Flake8
 Plug 'nvie/vim-flake8'
@@ -33,10 +41,14 @@ let g:flake8_show_in_gutter = 1
 autocmd FileType python map <buffer> <C-F> :call Flake8()<CR>
 "   Autopep8
 Plug 'tell-k/vim-autopep8'
+let g:autopep8_on_save = 1
+let g:autopep8_max_line_length = 120
+let g:autopep8_disable_show_diff = 1
 
 " Initialize plugs
 call plug#end()
 
+set nocompatible
 filetype plugin on
 set syntax=on
 
