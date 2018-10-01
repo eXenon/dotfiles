@@ -57,8 +57,8 @@ if [ (whoami) != 'root' ]
     set __user_back $color0
     set __user_for $color3
 else
-    set __user_back $color1
-    set __user_for $color0
+    set __user_back FF0000
+    set __user_for $color5
 end
 
 # Pwd
