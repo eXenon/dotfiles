@@ -16,8 +16,8 @@ Plug 'ervandew/supertab' " Autocomplete on tab
 
 " VimWiki
 Plug 'vimwiki/vimwiki'
-let g:vimwiki_path='/home/cba/wiki/vimwiki/'
-let g:vimwiki_template_path='/home/cba/wiki/vimwiki_template/'
+let g:vimwiki_path='/keybase/private/xaviernunn/wiki/'
+let g:vimwiki_template_path='/keybase/private/xaviernunn/wiki_templates/'
 
 " Elixir stuff
 Plug 'elixir-editors/vim-elixir' " Highlighting, indentation and filetype for elixir
