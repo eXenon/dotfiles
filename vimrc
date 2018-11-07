@@ -44,6 +44,9 @@ Plug 'tell-k/vim-autopep8'
 let g:autopep8_on_save = 1
 let g:autopep8_max_line_length = 120
 let g:autopep8_disable_show_diff = 1
+"   Import sorter
+Plug 'fisadev/vim-isort'
+let g:vim_isort_python_version = 'python3'
 
 " Initialize plugs
 call plug#end()
@@ -119,12 +122,21 @@ set statusline +=%1*%4v\ %*             "virtual column number
 " Remove delays for ESC key
 set timeoutlen=1000 ttimeoutlen=0
 
+" Fold python friendly
+set foldmethod=indent
+set foldlevel=99
+function ToggleFolding()
+    :normal za
+    :syntax sync fromstart
+endfunc
+nnoremap <leader><space> :call ToggleFolding()<cr>
+
 " Bépo conditionnal remapping
 " if !empty(system("setxkbmap -print|grep bepo"))
 "     source ~/.vimrc.bepo
 " endif
 
 " Leader Shortcuts
-nmap <leader>w :w<CR>
-nmap <leader>wq :wq<CR>
-nmap <leader>q :q<CR>
+nmap <leader>w :w<cr>
+nmap <leader>wq :wq<cr>
+nmap <leader>q :q<cr>
