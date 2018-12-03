@@ -11,8 +11,11 @@ Plug 'mhartington/oceanic-next'
 
 " Vim plugs
 Plug 'thinca/vim-ref' " Docs on K-press
-Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
 Plug 'ervandew/supertab' " Autocomplete on tab
+Plug 'justinmk/vim-sneak'
+
+" Elm stuff
+Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
 
 " VimWiki
 Plug 'vimwiki/vimwiki'
@@ -26,10 +29,6 @@ Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' } " Elixir docs, eval 
 " Highlighter
 Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:highlighter#auto_update = 2
-
-" Deoplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
 
 " Date increment/decrement
 Plug 'tpope/vim-speeddating'
@@ -126,8 +125,11 @@ set timeoutlen=1000 ttimeoutlen=0
 set foldmethod=indent
 set foldlevel=99
 function ToggleFolding()
-    :normal za
-    :syntax sync fromstart
+    try
+        :normal za
+        :syntax sync fromstart
+    catch /No fold found/
+    endtry
 endfunc
 nnoremap <leader><space> :call ToggleFolding()<cr>
 
@@ -136,7 +138,17 @@ nnoremap <leader><space> :call ToggleFolding()<cr>
 "     source ~/.vimrc.bepo
 " endif
 
+" AutoIndent certain files on save
+augroup autoindent
+    au!
+    autocmd BufWritePre *.html :normal migg=G`i
+augroup End
+
 " Leader Shortcuts
 nmap <leader>w :w<cr>
 nmap <leader>wq :wq<cr>
 nmap <leader>q :q<cr>
+nmap <leader><left> :bp<cr>
+nmap <leader><right> :bn<cr>
+nmap <leader><ENTER> :set hlsearch!<CR>
+nmap <leader>M zM
