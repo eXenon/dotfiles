@@ -11,8 +11,11 @@ Plug 'mhartington/oceanic-next'
 
 " Vim plugs
 Plug 'thinca/vim-ref' " Docs on K-press
-Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
 Plug 'ervandew/supertab' " Autocomplete on tab
+Plug 'justinmk/vim-sneak'
+
+" Elm stuff
+Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
 
 " VimWiki
 Plug 'vimwiki/vimwiki'
@@ -27,10 +30,6 @@ Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' } " Elixir docs, eval 
 Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:highlighter#auto_update = 2
 
-" Deoplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
-
 " Date increment/decrement
 Plug 'tpope/vim-speeddating'
 
@@ -44,6 +43,9 @@ Plug 'tell-k/vim-autopep8'
 let g:autopep8_on_save = 1
 let g:autopep8_max_line_length = 120
 let g:autopep8_disable_show_diff = 1
+"   Import sorter
+Plug 'fisadev/vim-isort'
+let g:vim_isort_python_version = 'python3'
 
 " Initialize plugs
 call plug#end()
@@ -119,12 +121,35 @@ set statusline +=%1*%4v\ %*             "virtual column number
 " Remove delays for ESC key
 set timeoutlen=1000 ttimeoutlen=0
 
-" Bépo conditionnal remapping
-" if !empty(system("setxkbmap -print|grep bepo"))
-"     source ~/.vimrc.bepo
-" endif
+" Fold python friendly
+set foldmethod=indent
+set foldlevel=99
+function ToggleFolding()
+    try
+        :normal za
+        :syntax sync fromstart
+    catch /No fold found/
+    endtry
+endfunc
+nnoremap <leader><space> :call ToggleFolding()<cr>
+
 
 " Leader Shortcuts
 nmap <leader>w :w<CR>
 nmap <leader>wq :wq<CR>
 nmap <leader>q :q<CR>
+
+" AutoIndent certain files on save
+augroup autoindent
+    au!
+    autocmd BufWritePre *.html :normal migg=G`i
+augroup End
+
+" Leader Shortcuts
+nmap <leader>w :w<cr>
+nmap <leader>wq :wq<cr>
+nmap <leader>q :q<cr>
+nmap <leader><left> :bp<cr>
+nmap <leader><right> :bn<cr>
+nmap <leader><ENTER> :set hlsearch!<CR>
+nmap <leader>M zM
