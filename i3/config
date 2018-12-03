@@ -216,8 +216,10 @@ bindsym $mod+s exec rofi -show ssh
 exec spotify
 exec keepassxc
 exec vivaldi
-exec --no-startup-id termite --name scratchvim -e nvim -n /home/cba/notes
 exec --no-startup-id termite --name scratchpython -e ipython3
+
+# Start keybase
+exec termite --name sync -e sync
 
 
 # Lock workspace
