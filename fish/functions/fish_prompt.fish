@@ -3,141 +3,94 @@
 #
 
 
+
 # special
-set foreground   EEFFFF
-set background   212121
-set cursorColor  EEFFFF
+set foreground      "FFFFFF"
+set foreground_bold "FFFFFF"
+set cursor          "FFFFFF"
+set background      "000000"
 
 # black
-set color0       212121
-set color8       4A4A4A
+set color0  "2E3436"
+set color8  "555753"
 
 # red
-set color1       F07178
-set color9       F07178
+set color1  "A31604"
+set color9  "C60001"
 
 # green
-set color2       C3E88D
-set color10      C3E88D
+set color2  "447241"
+set color10 "27A343"
 
 # yellow
-set color3       FFCB6B
-set color11      FFCB6B
+set color3  "C1951A"
+set color11 "D5A30E"
 
 # blue
-set color4       82AAFF
-set color12      82AAFF
+set color4  "425387"
+set color12 "4A5A8D"
 
 # magenta
-set color5       C792EA
-set color13      C792EA
+set color5  "965D98"
+set color13 "893C8C"
 
 # cyan
-set color6       89DDFF
-set color14      89DDFF
+set color6  "06989A"
+set color14 "12BCCB"
 
 # white
-set color7       EEFFFF
-set color15      FFFFFF
+set color7  "D3D7CF"
+set color15 "EEEEEC"
 
-# Extra colors
-set color16      F78C6C
-set color17      FF5370
-set color18      303030
-set color19      353535
-set color20      B2CCD6
-set color21      EEFFFF
-
-
-set urgent       c33027
-
-
-# User prompt block
-if [ (whoami) != 'root' ]
-    set __user_back $color0
-    set __user_for $color3
-else
-    set __user_back FF0000
-    set __user_for $color5
-end
-
-# Pwd
-set __pwd_back $color3
-set __pwd_for $color0
-
-# Git
-set __git_back $color18
-set __git_for $color14
-
-# End separator
-set __end_back $color3
-set __end_for $color0
-
-#
-#
-#
-
-# fish git prompt
-set __fish_git_prompt_color $__git_for
-set __fish_git_prompt_color_prefix $__git_for
-set __fish_git_prompt_color -b $__git_back
-set __fish_git_prompt_color_branch $__git_for
-set __fish_git_prompt_color_branch -b $__git_back
-set __fish_git_prompt_color_flags $__git_for
-set __fish_git_prompt_color_flags -b $__git_back
-set __fish_git_prompt_color_upstream -b $__git_back
-set __fish_git_prompt_color_suffix -b $__git_back
-set __fish_git_prompt_color_merging -b $__git_back
-set __fish_git_prompt_showdirtystate 'yes'
-set __fish_git_prompt_showstashstate 'yes'
-set __fish_git_prompt_showstagedstate 'yes'
-set __fish_git_prompt_showupstream 'yes'
-set __fish_git_prompt_showuntrackedfiles 'yes'
+# Extra coloRS
+set color16 "000000"
+set color17 "FFFFFF"
 
 # Status Chars
-set __fish_git_prompt_char_dirtystate '• '
+set __fish_git_prompt_char_dirtystate '•'
 set __fish_git_prompt_char_stagedstate '+'
 set __fish_git_prompt_char_stashstate '$'
 set __fish_git_prompt_char_upstream_ahead '▲'
 set __fish_git_prompt_char_upstream_behind '▼'
 set __fish_git_prompt_char_upstream_equal '▸'
-set __fish_git_prompt_char_untrackedfiles '… ' 
+set __fish_git_prompt_char_untrackedfiles '…'
 
- 
+function __segment --desc "Create a powerline segment with color transition"
+    set bg1 $argv[1]
+    set fg1 $argv[2]
+    set bg2 $argv[3]
+    set fg2 $argv[4]
+
+    # A final space
+    set_color -b "$bg1"
+    set_color "$fg1"
+    echo -n " "
+
+    # Then the arrow
+    set_color -b "$bg2"
+    set_color "$bg1"
+    echo -n \uE0B0
+
+    # Then a space with color transition
+    set_color "$fg2"
+    echo -n " "
+end
+
 function fish_prompt
-        set last_status $status
-
-        # User 
-        set_color -b $__user_back
-        set_color $__user_for
+        # User
+        set_color white
+        set_color -b blue
         echo -n "$USER "
 
-        # Transition
-        set_color -b $__pwd_back
-        set_color $__user_back
-        echo -n \uE0B0
-
         # Pwd
-        set_color -b $__pwd_back
-        set_color $__pwd_for
-        printf ' %s ' (prompt_pwd)
-
-        # Transition
-        set_color $__pwd_back
-        set_color -b $color0
-        echo -n \uE0B0
+        __segment blue white green white
+        echo -n (prompt_pwd)
 
         # Git
-        printf '%s ' (__fish_git_prompt)
+        __segment green white red white
+        printf "%s" (__fish_git_prompt)
 
         # End
-        set_color -b $__end_back
-        set_color $__git_back
-        echo -n \uE0B0
-        set_color $__end_for
-        echo -n ' '
-        set_color $__end_back
-        set_color -b $background
-        echo -n \uE0B0
+        __segment red white normal normal
 end
 
