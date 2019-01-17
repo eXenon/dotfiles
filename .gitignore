@@ -21,3 +21,4 @@ fish/functions/menu.fish
 fish/functions/node.fish
 fish/functions/npm.fish
 fish/functions/sync.fish
+fish/config.fish
