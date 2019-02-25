@@ -54,6 +54,11 @@ set __fish_git_prompt_char_upstream_ahead '▲'
 set __fish_git_prompt_char_upstream_behind '▼'
 set __fish_git_prompt_char_upstream_equal '▸'
 set __fish_git_prompt_char_untrackedfiles '…'
+set __fish_git_prompt_showdirtystate 'yes'
+set __fish_git_prompt_showstashstate 'yes'
+set __fish_git_prompt_showstagedstate 'yes'
+set __fish_git_prompt_showupstream 'yes'
+set __fish_git_prompt_showuntrackedfiles 'yes'
 
 function __segment --desc "Create a powerline segment with color transition"
     set bg1 $argv[1]

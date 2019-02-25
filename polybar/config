@@ -67,7 +67,7 @@ font-3 = Droid Sans:style=Regular:size=8
 
 modules-left = i3
 modules-center = time
-modules-right = keyboard ping network battery volume date
+modules-right = keyboard todoist toggl ping network battery volume date
 
 [module/keyboard]
 type = custom/script
@@ -178,6 +178,15 @@ type = custom/script
 exec = ~/.config/polybar/volume.sh
 interval = 1
 
+[module/todoist]
+type = custom/script
+exec = ~/.config/polybar/todoist.sh
+interval = 60
+
+[module/toggl]
+type = custom/script
+exec = ~/.config/polybar/toggl.sh
+interval = 30
 
 [settings]
 screenchange-reload = true
