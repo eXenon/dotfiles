@@ -1,5 +1,6 @@
 " General options
 let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 let g:netrw_liststyle = 3 " File explorer style
 
 " Neovim plugins - may not be compatible with classical vim
@@ -25,6 +26,8 @@ let g:vimwiki_template_path='/keybase/private/xaviernunn/wiki_templates/'
 " Elixir stuff
 Plug 'elixir-editors/vim-elixir' " Highlighting, indentation and filetype for elixir
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' } " Elixir docs, eval and completion
+Plug 'mhinz/vim-mix-format'
+let g:mix_format_on_save = 1
 
 " Highlighter
 Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -37,7 +40,7 @@ Plug 'tpope/vim-speeddating'
 "   Flake8
 Plug 'nvie/vim-flake8'
 let g:flake8_show_in_gutter = 1
-autocmd FileType python map <buffer> <C-F> :call Flake8()<CR>
+autocmd FileType python noremap <buffer> <C-F> :call Flake8()<CR>
 "   Autopep8
 Plug 'tell-k/vim-autopep8'
 let g:autopep8_on_save = 1
@@ -72,14 +75,13 @@ set softtabstop=4
 
 " Buffer management
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-nmap <c-m> :bnext<CR>
-nmap <c-l> :bprevious<CR>
+nnoremap <c-m> :bnext<CR>
 
 " Tab management
 noremap <C-Tab> :tabNext<CR>
 
 " Allow to force sudo save
-cmap w!! w !sudo tee % >/dev/null
+cnoremap w!! w !sudo tee % >/dev/null
 
 " Disable stupid F1
 noremap <F1> <nop>
@@ -97,11 +99,11 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 set mouse=""
 
 " Toggle visibility
-nmap <c-h> :set hlsearch!<CR>
-nmap <c-j> :set number!<CR>
-nmap <c-k> :set list!<CR>
-nmap <c-l> :set cursorline!<CR>:set cursorcolumn!<CR>
-nmap <c-m> :set nu!<CR>
+nnoremap <c-h> :set hlsearch!<CR>
+nnoremap <c-j> :set number!<CR>
+nnoremap <c-k> :set list!<CR>
+nnoremap <c-l> :set cursorline!<CR>:set cursorcolumn!<CR>
+nnoremap <c-m> :set nu!<CR>
 
 " Statusline
 set statusline=
@@ -118,35 +120,32 @@ set statusline +=%1*%4v\ %*             "virtual column number
 " Remove delays for ESC key
 set timeoutlen=1000 ttimeoutlen=0
 
-" Fold python friendly
-set foldmethod=indent
-set foldlevel=99
-function ToggleFolding()
-    try
-        :normal za
-        :syntax sync fromstart
-    catch /No fold found/
-    endtry
-endfunc
-nnoremap <leader><space> :call ToggleFolding()<cr>
-
+" Leader Shortcuts
+nnoremap <leader>w :w<CR>
+nnoremap <leader>wq :wq<CR>
+nnoremap <leader>q :q<CR>
 
 " Leader Shortcuts
-nmap <leader>w :w<CR>
-nmap <leader>wq :wq<CR>
-nmap <leader>q :q<CR>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>wq :wq<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader><left> :bp<cr>
+nnoremap <leader><right> :bn<cr>
+nnoremap <leader><ENTER> :set hlsearch!<CR>
+nnoremap <leader>M zM
 
-" AutoIndent certain files on save
-augroup autoindent
-    au!
-    autocmd BufWritePre *.html :normal migg=G`i
-augroup End
+" Strict mode
+inoremap <Left> <nop>
+inoremap <Up> <nop>
+inoremap <Down> <nop>
+inoremap <Right> <nop>
 
-" Leader Shortcuts
-nmap <leader>w :w<cr>
-nmap <leader>wq :wq<cr>
-nmap <leader>q :q<cr>
-nmap <leader><left> :bp<cr>
-nmap <leader><right> :bn<cr>
-nmap <leader><ENTER> :set hlsearch!<CR>
-nmap <leader>M zM
+" Exercice stuff
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>t  itest<esc>
+vnoremap <leader>' <esc>`<i'<esc>`>2li'<esc>h
+vnoremap <leader>" <esc>"<i'<esc>`>2li"<esc>h
+vnoremap <leader>) <esc>`<i(<esc>`>2li)<esc>h
+vnoremap <leader>} <esc>`<i{<esc>`>2li}<esc>h
+vnoremap <leader>] <esc>`<i[<esc>`>2li]<esc>h
