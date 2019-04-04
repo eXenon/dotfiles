@@ -7,6 +7,16 @@ let g:netrw_liststyle = 3 " File explorer style
 call plug#begin('~/.config/nvim/plugs')
 highlight Pmenu ctermfg=black ctermbg=white
 
+" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+nnoremap <C-p> :Files<CR>
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+nnoremap <C-g> :GGrep<CR>
+
 " vim-one Theme
 Plug 'mhartington/oceanic-next'
 
@@ -14,6 +24,13 @@ Plug 'mhartington/oceanic-next'
 Plug 'thinca/vim-ref' " Docs on K-press
 Plug 'ervandew/supertab' " Autocomplete on tab
 Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-fugitive'
+
+" Fish stuff
+Plug 'dag/vim-fish'
+if &shell =~# 'fish$'
+    set shell=sh
+endif
 
 " Elm stuff
 Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
@@ -40,7 +57,6 @@ Plug 'tpope/vim-speeddating'
 "   Flake8
 Plug 'nvie/vim-flake8'
 let g:flake8_show_in_gutter = 1
-autocmd FileType python noremap <buffer> <C-F> :call Flake8()<CR>
 "   Autopep8
 Plug 'tell-k/vim-autopep8'
 let g:autopep8_on_save = 1
@@ -49,6 +65,14 @@ let g:autopep8_disable_show_diff = 1
 "   Import sorter
 Plug 'fisadev/vim-isort'
 let g:vim_isort_python_version = 'python3'
+"   Autocmds
+augroup pyautocmd
+    au!
+    "   Flake8 on command
+    autocmd FileType python nnoremap <buffer> <C-F> :call Flake8()<CR>
+    "   Break a function call into mutiple lines
+    autocmd FileType python nnoremap <buffer> <leader>J :s/\((\zs\\|,\ *\zs\\|)\)/\r&/g<CR><Bar>:'[,']Autopep8<CR>:set nohlsearch<CR>
+augroup END
 
 " Initialize plugs
 call plug#end()
@@ -62,10 +86,12 @@ set laststatus=2
 
 " Colorscheme
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set termguicolors
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
 set background=dark
+if exists('$TMUX')
+    set termguicolors
+endif
 
 
 set expandtab
@@ -124,6 +150,7 @@ set timeoutlen=1000 ttimeoutlen=0
 nnoremap <leader>w :w<CR>
 nnoremap <leader>wq :wq<CR>
 nnoremap <leader>q :q<CR>
+nnoremap <leader>J i<CR><ESC>
 
 " Leader Shortcuts
 nnoremap <leader>w :w<cr>
