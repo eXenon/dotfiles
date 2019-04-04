@@ -5,46 +5,25 @@
 
 
 # special
-set foreground      "FFFFFF"
-set foreground_bold "FFFFFF"
-set cursor          "FFFFFF"
-set background      "000000"
-
-# black
-set color0  "2E3436"
-set color8  "555753"
-
-# red
-set color1  "A31604"
-set color9  "C60001"
-
-# green
-set color2  "447241"
-set color10 "27A343"
-
-# yellow
-set color3  "C1951A"
-set color11 "D5A30E"
-
-# blue
-set color4  "425387"
-set color12 "4A5A8D"
-
-# magenta
-set color5  "965D98"
-set color13 "893C8C"
-
-# cyan
-set color6  "06989A"
-set color14 "12BCCB"
-
-# white
-set color7  "D3D7CF"
-set color15 "EEEEEC"
-
-# Extra coloRS
-set color16 "000000"
-set color17 "FFFFFF"
+set foreground   "ffffff"
+set background   "000000"
+set cursorColor  "ffffff"
+set color0       "2e3436"
+set color8       "555753"
+set color1       "cc0000"
+set color9       "ef2929"
+set color2       "4e9a06"
+set color10      "8ae234"
+set color3       "c4a000"
+set color11      "fce94f"
+set color4       "3465a4"
+set color12      "729fcf"
+set color5       "75507b"
+set color13      "ad7fa8"
+set color6       "06989a"
+set color14      "34e2e2"
+set color7       "e6eae2"
+set color15      "f3f3f1"
 
 # Status Chars
 set __fish_git_prompt_char_dirtystate '•'
@@ -59,6 +38,14 @@ set __fish_git_prompt_showstashstate 'yes'
 set __fish_git_prompt_showstagedstate 'yes'
 set __fish_git_prompt_showupstream 'yes'
 set __fish_git_prompt_showuntrackedfiles 'yes'
+
+function __user_color --desc "Return background color depending on active user"
+    if test "$USER" = "root"
+        echo $color1
+    else
+        echo $color4
+    end
+end
 
 function __segment --desc "Create a powerline segment with color transition"
     set bg1 $argv[1]
@@ -83,19 +70,19 @@ end
 
 function fish_prompt
         # User
-        set_color white
-        set_color -b blue
+        set_color $foreground
+        set_color -b (__user_color)
         echo -n "$USER "
 
         # Pwd
-        __segment blue white green white
+        __segment (__user_color) $background $color0 $foreground
         echo -n (prompt_pwd)
 
         # Git
-        __segment green white red white
+        __segment $color0 $foreground $color8 $foreground
         printf "%s" (__fish_git_prompt)
 
         # End
-        __segment red white normal normal
+        __segment $color8 $foreground normal normal
 end
 
