@@ -40,9 +40,12 @@ set __fish_git_prompt_showupstream 'yes'
 set __fish_git_prompt_showuntrackedfiles 'yes'
 
 function __user_color --desc "Return background color depending on active user"
-    if test "$USER" = "root"
+    switch $USER
+    case root
         echo $color1
-    else
+    case exenon
+        echo $color2
+    case '*'
         echo $color4
     end
 end
