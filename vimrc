@@ -44,7 +44,6 @@ let g:vimwiki_template_path='/keybase/private/xaviernunn/wiki_templates/'
 Plug 'elixir-editors/vim-elixir' " Highlighting, indentation and filetype for elixir
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' } " Elixir docs, eval and completion
 Plug 'mhinz/vim-mix-format'
-let g:mix_format_on_save = 1
 
 " Highlighter
 Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -86,6 +85,7 @@ set laststatus=2
 
 " Colorscheme
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" set termguicolors
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
 set background=dark
@@ -93,6 +93,20 @@ if exists('$TMUX')
     set termguicolors
 endif
 
+" Autoformatting
+augroup autoformatting
+    au!
+    autocmd FileType python noremap <buffer> <C-F> :call Flake8()<CR>
+    autocmd FileType elixir noremap <buffer> <C-F> :MixFormat<CR>
+augroup END
+
+" Commenting
+augroup commenting
+    au!
+    autocmd FileType python noremap <buffer> <C-C> :s/^/#<CR>/dhdhdhdhdh<CR>
+    autocmd FileType elixir noremap <buffer> <C-C> :s/^/#<CR>/dhdhdhdhdh<CR>
+    autocmd FileType javascript noremap <buffer> <C-C> :s/^/\/\/<CR>/dhdhdhdhdh<CR>
+augroup END
 
 set expandtab
 set tabstop=4
@@ -147,12 +161,6 @@ set statusline +=%1*%4v\ %*             "virtual column number
 set timeoutlen=1000 ttimeoutlen=0
 
 " Leader Shortcuts
-nnoremap <leader>w :w<CR>
-nnoremap <leader>wq :wq<CR>
-nnoremap <leader>q :q<CR>
-nnoremap <leader>J i<CR><ESC>
-
-" Leader Shortcuts
 nnoremap <leader>w :w<cr>
 nnoremap <leader>wq :wq<cr>
 nnoremap <leader>q :q<cr>
@@ -160,6 +168,7 @@ nnoremap <leader><left> :bp<cr>
 nnoremap <leader><right> :bn<cr>
 nnoremap <leader><ENTER> :set hlsearch!<CR>
 nnoremap <leader>M zM
+nnoremap <leader>J i<CR><ESC>
 
 " Strict mode
 inoremap <Left> <nop>
@@ -176,3 +185,10 @@ vnoremap <leader>" <esc>"<i'<esc>`>2li"<esc>h
 vnoremap <leader>) <esc>`<i(<esc>`>2li)<esc>h
 vnoremap <leader>} <esc>`<i{<esc>`>2li}<esc>h
 vnoremap <leader>] <esc>`<i[<esc>`>2li]<esc>h
+
+" Language specific bindings
+augroup ifabbrev
+    au!
+    autocmd FileType python :iabbrev <buffer> iff if:<left>
+    autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+augroup END
