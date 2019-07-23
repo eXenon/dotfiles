@@ -4,11 +4,10 @@ Configuration files for my setup
 ## Dependencies / Setup
 * [i3gaps](https://github.com/Airblader/i3.git)
 * [i3lock-color](https://github.com/eXenon/i3lock-color)
-* conky, fping for the i3bar
+* [polybar](https://github.com/polybar/polybar) for i3 status bar
 * [playerctl](https://github.com/acrisci/playerctl) for the media buttons
-* amixer, xbacklight for volume and screen brightness control
+* pamixer, xbacklight for volume and screen brightness control
 * feh for the wallpaper
-* python3 for the scripts, basiciw package
-* rxvt-unicode-256color, fish, tmux, vim
-* [dmenu2](https://bitbucket.org/melek/dmenu2) for more options with dmenu
-* [pathogen](https://github.com/tpope/vim-pathogen) for vim plugins
+* [kitty](https://sw.kovidgoyal.net/kitty/) as terminal emulator (for the sweet sweet ligatures)
+* [FiraCode](https://github.com/tonsky/FiraCode) as font (for the sweet sweet ligatures)
+* [rofi](https://github.com/davatorium/rofi) for the launcher
