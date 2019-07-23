@@ -67,7 +67,7 @@ font-3 = Droid Sans:style=Regular:size=15
 
 modules-left = i3
 modules-center = time
-modules-right = keyboard todoist toggl ping network battery volume date
+modules-right = keyboard ping network battery volume date
 
 [module/keyboard]
 type = custom/script
