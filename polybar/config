@@ -60,10 +60,10 @@ foreground = ${colors.base05}
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = DroidSansMono Nerd Font:style=Book:size=8
-font-1 = Inconsolata for Powerline:style=Medium:size=12
-font-2 = Font Awesome:style=Regular:size=8
-font-3 = Droid Sans:style=Regular:size=8
+font-0 = DroidSansMonoForPowerline Nerd Font:style=Book:size=15
+font-1 = Inconsolata for Powerline:style=Medium:size=15
+font-2 = Font Awesome:style=Regular:size=15
+font-3 = Droid Sans:style=Regular:size=15
 
 modules-left = i3
 modules-center = time
@@ -143,7 +143,7 @@ interval = 1
 [module/battery]
 type = internal/battery
 
-battery = BAT1
+battery = BAT0
 adapter = ACAD
 poll-interval = 5
 time-format = %H:%M

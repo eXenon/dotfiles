@@ -17,8 +17,7 @@ command! -bang -nargs=* GGrep
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 nnoremap <C-g> :GGrep<CR>
 
-" vim-one Theme
-Plug 'mhartington/oceanic-next'
+" Theming
 
 " Vim plugs
 Plug 'thinca/vim-ref' " Docs on K-press
@@ -37,8 +36,8 @@ Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
 
 " VimWiki
 Plug 'vimwiki/vimwiki'
-let g:vimwiki_path='/keybase/private/xaviernunn/wiki/'
-let g:vimwiki_template_path='/keybase/private/xaviernunn/wiki_templates/'
+let g:vimwiki_path='$KBFS/private/xaviernunn/wiki/'
+let g:vimwiki_template_path='$KBFS/private/xaviernunn/wiki_templates/'
 
 " Elixir stuff
 Plug 'elixir-editors/vim-elixir' " Highlighting, indentation and filetype for elixir
