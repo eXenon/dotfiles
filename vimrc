@@ -38,11 +38,24 @@ Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
 Plug 'vimwiki/vimwiki'
 let g:vimwiki_path='$KBFS/private/xaviernunn/wiki/'
 let g:vimwiki_template_path='$KBFS/private/xaviernunn/wiki_templates/'
+"   Auto-open vimwiki if no file is specified
+autocmd VimEnter * if argc() == 0 | execute 'VimwikiIndex' | endif
 
 " Elixir stuff
 Plug 'elixir-editors/vim-elixir' " Highlighting, indentation and filetype for elixir
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' } " Elixir docs, eval and completion
 Plug 'mhinz/vim-mix-format'
+
+" Ocaml stuff
+augroup ocamlau
+    au!
+
+    "    Setup merlin
+    let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+    execute "set rtp+=" . g:opamshare . "/merlin/vim"
+    nnoremap <leader>t :MerlinTypeOf<return>
+    nnoremap <leader>g :MerlinLocate<return>
+augroup END
 
 " Highlighter
 Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -97,6 +110,7 @@ augroup autoformatting
     au!
     autocmd FileType python noremap <buffer> <C-F> :call Flake8()<CR>
     autocmd FileType elixir noremap <buffer> <C-F> :MixFormat<CR>
+    autocmd FileType ocaml  noremap <buffer> <C-F> :%!ocamlformat --inplace --enable-outside-detected-project %
 augroup END
 
 " Commenting
@@ -178,7 +192,6 @@ inoremap <Right> <nop>
 " Exercice stuff
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>t  itest<esc>
 vnoremap <leader>' <esc>`<i'<esc>`>2li'<esc>h
 vnoremap <leader>" <esc>"<i'<esc>`>2li"<esc>h
 vnoremap <leader>) <esc>`<i(<esc>`>2li)<esc>h
