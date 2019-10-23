@@ -33,6 +33,11 @@ endif
 
 " Elm stuff
 Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
+augroup elmautocmd
+    au!
+    "   elm-format on command
+    autocmd FileType elm nnoremap <buffer> <C-F> :ElmFormat<CR>
+augroup END
 
 " VimWiki
 Plug 'vimwiki/vimwiki'
