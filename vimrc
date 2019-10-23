@@ -56,8 +56,10 @@ augroup ocamlau
     au!
 
     "    Setup merlin
-    let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-    execute "set rtp+=" . g:opamshare . "/merlin/vim"
+    if executable('opam')
+        let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+        execute "set rtp+=" . g:opamshare . "/merlin/vim"
+    endif
     nnoremap <leader>t :MerlinTypeOf<return>
     nnoremap <leader>g :MerlinLocate<return>
 augroup END
