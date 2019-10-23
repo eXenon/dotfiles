@@ -8,6 +8,7 @@ alias txl="tmuxp load"
 
 set -xg ERL_AFLAGS "-kernel shell_history enabled"
 set -xg PATH ~/.local/bin/ $PATH
+set -xg EDITOR "/usr/bin/nvim"
 
 set -xg KBFS /home/xavier/kbfs/
 
@@ -27,7 +28,3 @@ kitty + complete setup fish | source
 
 # Direnv
 direnv hook fish | source
-
-# fnm
-set PATH $HOME/.fnm $PATH
-fnm env --multi | source

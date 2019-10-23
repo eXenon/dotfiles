@@ -144,7 +144,7 @@ interval = 1
 type = internal/battery
 
 battery = BAT0
-adapter = ACAD
+adapter = AC
 poll-interval = 5
 time-format = %H:%M
 format-charging = %{F#00f769}%{F-} <label-charging>
