@@ -33,11 +33,6 @@ endif
 
 " Elm stuff
 Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
-augroup elmautocmd
-    au!
-    "   elm-format on command
-    autocmd FileType elm nnoremap <buffer> <C-F> :ElmFormat<CR>
-augroup END
 
 " VimWiki
 Plug 'vimwiki/vimwiki'
@@ -55,6 +50,15 @@ Plug 'mhinz/vim-mix-format'
 augroup ocamlau
     au!
 
+    "    Function to toggle between ml and mli files
+    function! ToggleMLI()
+        if expand('%:e') ==# "ml"
+            execute "e " . expand('%:p') . "i"
+        elseif expand('%:e') ==# "mli"
+            execute "e " . substitute(expand('%:p'), ".mli", ".ml", "")
+        end
+    endfunction
+
     "    Setup merlin
     if executable('opam')
         let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
@@ -62,6 +66,9 @@ augroup ocamlau
     endif
     nnoremap <leader>t :MerlinTypeOf<return>
     nnoremap <leader>g :MerlinLocate<return>
+
+    "    Switch between ml and mli
+    nnoremap <leader>m :call ToggleMLI()<return>
 augroup END
 
 " Highlighter
@@ -117,6 +124,7 @@ augroup autoformatting
     au!
     autocmd FileType python noremap <buffer> <C-F> :call Flake8()<CR>
     autocmd FileType elixir noremap <buffer> <C-F> :MixFormat<CR>
+    autocmd FileType elm nnoremap <buffer> <C-F> :ElmFormat<CR>
     autocmd FileType ocaml  noremap <buffer> <C-F> :%!ocamlformat --inplace --enable-outside-detected-project %
 augroup END
 
