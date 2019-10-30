@@ -9,6 +9,8 @@ set -gx LC_CTYPE en_US.UTF-8
 
 set -gx KBFS /keybase/
 
+set -gx TERM xterm
+
 function tx
   tmux attach -t txmain; or tmux new -s txmain
 end
