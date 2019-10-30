@@ -3,6 +3,12 @@ let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 let g:netrw_liststyle = 3 " File explorer style
 
+set clipboard+=unnamed " Use general clipboard for y and p
+set formatoptions+=j " Delete comment character when joining commented lines
+set undodir=~/.config/nvim/undo " Persistent undo
+set undofile
+
+
 " Neovim plugins - may not be compatible with classical vim
 call plug#begin('~/.config/nvim/plugs')
 highlight Pmenu ctermfg=black ctermbg=white
@@ -204,18 +210,6 @@ inoremap <Up> <nop>
 inoremap <Down> <nop>
 inoremap <Right> <nop>
 
-" Exercice stuff
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-vnoremap <leader>' <esc>`<i'<esc>`>2li'<esc>h
-vnoremap <leader>" <esc>"<i'<esc>`>2li"<esc>h
-vnoremap <leader>) <esc>`<i(<esc>`>2li)<esc>h
-vnoremap <leader>} <esc>`<i{<esc>`>2li}<esc>h
-vnoremap <leader>] <esc>`<i[<esc>`>2li]<esc>h
 
-" Language specific bindings
-augroup ifabbrev
-    au!
-    autocmd FileType python :iabbrev <buffer> iff if:<left>
-    autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
-augroup END
+nnoremap m :Buffers<CR>
+nnoremap f :Files<CR>
