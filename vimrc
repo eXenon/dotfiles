@@ -105,6 +105,9 @@ augroup pyautocmd
     autocmd FileType python nnoremap <buffer> <leader>J :s/\((\zs\\|,\ *\zs\\|)\)/\r&/g<CR><Bar>:'[,']Autopep8<CR>:set nohlsearch<CR>
 augroup END
 
+" Dart
+Plug 'dart-lang/dart-vim-plugin'
+
 " Initialize plugs
 call plug#end()
 
@@ -132,6 +135,7 @@ augroup autoformatting
     autocmd FileType elixir noremap <buffer> <C-F> :MixFormat<CR>
     autocmd FileType elm nnoremap <buffer> <C-F> :ElmFormat<CR>
     autocmd FileType ocaml  noremap <buffer> <C-F> :%!ocamlformat --enable-outside-detected-project %<CR>
+    autocmd FileType dart noremap <buffer> <C-F> :DartFmt<CR>
 augroup END
 
 " Commenting
