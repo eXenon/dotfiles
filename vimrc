@@ -131,7 +131,7 @@ augroup autoformatting
     autocmd FileType python noremap <buffer> <C-F> :call Flake8()<CR>
     autocmd FileType elixir noremap <buffer> <C-F> :MixFormat<CR>
     autocmd FileType elm nnoremap <buffer> <C-F> :ElmFormat<CR>
-    autocmd FileType ocaml  noremap <buffer> <C-F> :%!ocamlformat --inplace --enable-outside-detected-project %
+    autocmd FileType ocaml  noremap <buffer> <C-F> :%!ocamlformat --enable-outside-detected-project %<CR>
 augroup END
 
 " Commenting
@@ -140,6 +140,7 @@ augroup commenting
     autocmd FileType python noremap <buffer> <C-C> :s/^/#<CR>/dhdhdhdhdh<CR>
     autocmd FileType elixir noremap <buffer> <C-C> :s/^/#<CR>/dhdhdhdhdh<CR>
     autocmd FileType javascript noremap <buffer> <C-C> :s/^/\/\/<CR>/dhdhdhdhdh<CR>
+    autocmd FileType elm noremap <buffer> <C-C> :s/^/--<CR>/dhdhdhdhdh<CR>
 augroup END
 
 set expandtab
@@ -211,5 +212,5 @@ inoremap <Down> <nop>
 inoremap <Right> <nop>
 
 
-nnoremap m :Buffers<CR>
+nnoremap s :Buffers<CR>
 nnoremap f :Files<CR>
