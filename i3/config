@@ -190,6 +190,7 @@ exec feh --bg-scale ~/Pictures/i3wallpaper
 # Move a few windows to scratchpad/workspaces by default
 for_window [instance="scratchpython"] move scratchpad
 for_window [instance="scratchvim"] move scratchpad
+for_window [instance="scratchterm"] move scratchpad
 for_window [class="Spotify"] move scratchpad
 for_window [title=".*Mozilla Thunderbird.*"] move workspace 10
 
