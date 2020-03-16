@@ -32,6 +32,7 @@ URxvt.lineSpace: 1
 *Menu.background: Black
 *Menu.foreground: White
 
+
 ! special
 *.foreground:   #ffffff
 *.background:   #000000
@@ -68,3 +69,4 @@ URxvt.lineSpace: 1
 ! white
 *.color7:       #e6eae2
 *.color15:      #f3f3f1
+
