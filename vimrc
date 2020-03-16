@@ -8,10 +8,40 @@ set formatoptions+=j " Delete comment character when joining commented lines
 set undodir=~/.config/nvim/undo " Persistent undo
 set undofile
 
+" Generic function to preserve cursor and search when using
+" 'destructive' commands
+function! Preserve(command)
+  " Save the last search.
+  let search = @/
+
+  " Save the current cursor position.
+  let cursor_position = getpos('.')
+
+  " Save the current window position.
+  normal! H
+  let window_position = getpos('.')
+  call setpos('.', cursor_position)
+
+  " Execute the command.
+  execute a:command
+
+  " Restore the last search.
+  let @/ = search
+
+  " Restore the previous window position.
+  call setpos('.', window_position)
+  normal! zt
+
+  " Restore the previous cursor position.
+  call setpos('.', cursor_position)
+endfunction
 
 " Neovim plugins - may not be compatible with classical vim
 call plug#begin('~/.config/nvim/plugs')
 highlight Pmenu ctermfg=black ctermbg=white
+
+" Colorscheme
+Plug 'dracula/vim'
 
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -44,6 +74,7 @@ Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
 Plug 'vimwiki/vimwiki'
 let g:vimwiki_path='$KBFS/private/xaviernunn/wiki/'
 let g:vimwiki_template_path='$KBFS/private/xaviernunn/wiki_templates/'
+let g:vimwiki_autowriteall=1
 "   Auto-open vimwiki if no file is specified
 autocmd VimEnter * if argc() == 0 | execute 'VimwikiIndex' | endif
 
@@ -63,6 +94,14 @@ augroup ocamlau
         elseif expand('%:e') ==# "mli"
             execute "e " . substitute(expand('%:p'), ".mli", ".ml", "")
         end
+    endfunction
+
+    "    Function to use ocamlformat without the hassle
+    function! Ocamlformat()
+        let formatted=system('ocamlformat --enable-outside-detected-project ' . expand("%"))
+        if v:shell_error == "0"
+            call Preserve('%!ocamlformat --enable-outside-detected-project ' . expand("%"))
+        endif
     endfunction
 
     "    Setup merlin
@@ -118,24 +157,14 @@ set syntax=on
 " Always show powerline
 set laststatus=2
 
-" Colorscheme
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" set termguicolors
-set t_8b=^[[48;2;%lu;%lu;%lum
-set t_8f=^[[38;2;%lu;%lu;%lum
-set background=dark
-if exists('$TMUX')
-    set termguicolors
-endif
-
 " Autoformatting
 augroup autoformatting
     au!
-    autocmd FileType python noremap <buffer> <C-F> :call Flake8()<CR>
-    autocmd FileType elixir noremap <buffer> <C-F> :MixFormat<CR>
+    autocmd FileType python nnoremap <buffer> <C-F> :call Flake8()<CR>
+    autocmd FileType elixir nnoremap <buffer> <C-F> :MixFormat<CR>
     autocmd FileType elm nnoremap <buffer> <C-F> :ElmFormat<CR>
-    autocmd FileType ocaml  noremap <buffer> <C-F> :%!ocamlformat --enable-outside-detected-project %<CR>
-    autocmd FileType dart noremap <buffer> <C-F> :DartFmt<CR>
+    autocmd FileType ocaml nnoremap <buffer> <C-F> :call Ocamlformat()<CR>
+    autocmd FileType dart nnoremap <buffer> <C-F> :DartFmt<CR>
 augroup END
 
 " Commenting
@@ -216,5 +245,19 @@ inoremap <Down> <nop>
 inoremap <Right> <nop>
 
 
+" Quick shortcuts for buffers and files
 nnoremap s :Buffers<CR>
 nnoremap f :Files<CR>
+
+" Visual stuff
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" set termguicolors
+set t_8b=^[[48;2;%lu;%lu;%lum
+set t_8f=^[[38;2;%lu;%lu;%lum
+set background=dark
+if exists('$TMUX')
+    set termguicolors
+endif
+colorscheme dracula
+
+

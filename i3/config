@@ -225,7 +225,7 @@ for_window [class="^.*"] border pixel 0
 force_xinerama yes
 
 # Load monitor settings
-bindsym $mod+Shift+F12 exec xrandr --output eDP-1 --primary --mode 2560x1440 --pos 0x2160 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --mode 1920x1080 --pos 0x0 --rotate normal
+bindsym $mod+Shift+F12 exec xrandr --output eDP-1 --primary --mode 2560x1440 --pos 0x2160 --scale 1.1x1.1 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --mode 1920x1080 --pos 0x0 --scale 1.6x1.6 --rotate normal
 
 # Power management - done right
 bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, reboot' '/home/xnunn/.config/i3/i3exit reboot'"
