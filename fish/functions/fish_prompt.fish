@@ -2,44 +2,42 @@
 # Colors
 #
 
-
-
 # special
-set foreground "c5c8c6"
-set background "1d1f21"
-set cursorColor "c5c8c6"
+set foreground ffffff
+set cursor ffffff
+set background 181c30
 
 # black
-set color0 "282a2e"
-set color8 "373b41"
+set color0 1b1d1e
+set color8 505354
 
 # red
-set color1 "a54242"
-set color9 "cc6666"
+set color1 f92672
+set color9 ff5995
 
 # green
-set color2 "8c9440"
-set color10 "b5bd68"
+set color2 82b414
+set color10 b6e354
 
 # yellow
-set color3 "de935f"
-set color11 "f0c674"
+set color3 fd971f
+set color11 feed6c
 
 # blue
-set color4 "5f819d"
-set color12 "81a2be"
+set color4 0066cc
+set color12 333399
 
 # magenta
-set color5 "85678f"
-set color13 "b294bb"
+set color5 8c54fe
+set color13 9e6ffe
 
 # cyan
-set color6 "5e8d87"
-set color14 "8abeb7"
+set color6 465457
+set color14 899ca1
 
 # white
-set color7 "707880"
-set color15 "c5c8c6"
+set color7 ccccc6
+set color15 f8f8f2
 
 # Status Chars
 set __fish_git_prompt_char_dirtystate '•'
@@ -58,7 +56,7 @@ set __fish_git_prompt_showuntrackedfiles 'yes'
 function __user_color --desc "Return background color depending on active user"
     switch $USER
     case root
-        echo $color1
+        echo AA5555
     case exenon
         echo $color2
     case '*'
