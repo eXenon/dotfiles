@@ -32,41 +32,39 @@ URxvt.lineSpace: 1
 *Menu.background: Black
 *Menu.foreground: White
 
-
 ! special
-*.foreground:   #ffffff
+*.foreground:   #cbd3d5
 *.background:   #000000
-*.cursorColor:  #ffffff
+*.cursorColor:  #cbd3d5
 
 ! black
-*.color0:       #2e3436
-*.color8:       #555753
+*.color0:       #04060e
+*.color8:       #5da8a5
 
 ! red
-*.color1:       #cc0000
-*.color9:       #ef2929
+*.color1:       #4a404e
+*.color9:       #54455a
 
 ! green
-*.color2:       #4e9a06
-*.color10:      #8ae234
+*.color2:       #5e3653
+*.color10:      #69385b
 
 ! yellow
-*.color3:       #c4a000
-*.color11:      #fce94f
+*.color3:       #674173
+*.color11:      #70417f
 
 ! blue
-*.color4:       #3465a4
-*.color12:      #729fcf
+*.color4:       #8c4e83
+*.color12:      #984e8e
 
 ! magenta
-*.color5:       #75507b
-*.color13:      #ad7fa8
+*.color5:       #45757d
+*.color13:      #457f89
 
 ! cyan
-*.color6:       #06989a
-*.color14:      #34e2e2
+*.color6:       #428b96
+*.color14:      #4095a1
 
 ! white
-*.color7:       #e6eae2
-*.color15:      #f3f3f1
-
+*.color7:       #a85d7f
+*.color15:      #acc3cb

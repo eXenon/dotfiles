@@ -8,42 +8,12 @@
 ;=====================================================
 
 [colors]
-; Dracula theme ============
-;base00 = #282936
-;base01 = #3a3c4e
-;base02 = #4d4f68
-;base03 = #626483
-;base04 = #62d6e8
-;base05 = #e9e9f4
-;base06 = #f1f2f8
-;base07 = #f7f7fb
-;base08 = #ea51b2
-;base09 = #b45bcf
-;base0A = #00f769
-;base0B = #ebff87
-;base0C = #a1efe4
-;base0D = #62d6e8
-;base0E = #b45bcf
-;base0F = #00f769
-; =======================
-
-base00 = #000000
-base01 = #edf5f2
-base02 = #ffffff
-base03 = #ffffff
-base04 = #ffffff
-base05 = #ffffff
-base06 = #ffffff
-base07 = #ffffff
-base08 = #ffffff
-base09 = #ffffff
-base0A = #ffffff
-base0B = #ffffff
-base0C = #ffffff
-base0D = #ffffff
-base0E = #ffffff
-base0F = #00f769
-
+background = #00000000
+foreground = #bababa
+primary = #a2527a
+secondary = #767680
+white = #FFFFFF
+red = #FF0000
 
 [bar/default]
 width = 100%
@@ -54,8 +24,8 @@ fixed-center = true
 bottom = false
 monitor = ${env:MONITOR:}
 
-background = ${colors.base00}
-foreground = ${colors.base05}
+background = ${colors.background}
+foreground = ${colors.foreground}
 
 module-margin-left = 1
 module-margin-right = 1
@@ -83,7 +53,7 @@ strip-wsnumbers = true
 
 format-padding = 0
 label-focused = %index%
-label-focused-foreground = ${colors.base0F}
+label-focused-foreground = ${colors.white}
 label-focused-padding = 1
 
 label-unfocused = %index%
@@ -93,21 +63,21 @@ label-visible = %index%
 label-visible-padding = 1
 
 label-urgent = %index%
-label-urgent-foreground = ${colors.base01}
+label-urgent-foreground = ${colors.red}
 label-urgent-padding = 1
 
 [module/cpu]
 type = internal/cpu
 interval = 5
 format = " <label>"
-format-foreground = ${colors.base05}
+format-foreground = ${colors.secondary}
 label = %percentage%%
 
 [module/memory]
 type = internal/memory
 interval = 5
 format = " <label>"
-format-foreground = ${colors.base05}
+format-foreground = ${colors.secondary}
 label = %percentage_used%%
 
 [module/time]
@@ -118,7 +88,7 @@ time = %H:%M:%S
 label = %time%
 
 format = " <label>"
-format-foreground = ${colors.base05}
+format-foreground = ${colors.secondary}
 
 [module/date]
 type = internal/date
@@ -128,7 +98,7 @@ date = "%m/%d/%Y"
 label = %date%
 
 format = " <label>"
-format-foreground = ${colors.base05}
+format-foreground = ${colors.secondary}
 
 [module/vpn]
 type = custom/script
