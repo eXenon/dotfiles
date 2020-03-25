@@ -152,9 +152,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
 set background=dark
-if exists('$TMUX')
-    set termguicolors
-endif
+set termguicolors
 colo dark-neon
 
 " Dart

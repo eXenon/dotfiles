@@ -1,4 +1,5 @@
 __pycache__/
+fish/fish_variables
 fish/functions/__fnm_index_update.fish
 fish/functions/__fnm_list.fish
 fish/functions/__fnm_mirror.fish
