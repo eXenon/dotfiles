@@ -46,12 +46,6 @@ gaps outer $default_gaps_outer
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 0 ms
 
-# nautilus
-bindsym $mod+n exec --no-startup-id nautilus --browser --no-desktop
-
-
-
-
 
 
 
@@ -218,9 +212,6 @@ exec --no-startup-id kitty --name scratchterm
 # Lock workspace
 bindsym $mod+l exec i3lock --blur=1 --ringcolor=000000ff --linecolor=000000ff --keyhlcolor=000000ff --ringvercolor=000000ff --insidevercolor=000000ff --ringwrongcolor=000000ff --insidewrongcolor=000000ff --screen=2
 
-# Disable window title bars
-for_window [class="^.*"] border pixel 0
-
 # Multi monitor support
 force_xinerama yes
 
@@ -289,3 +280,6 @@ bindsym $mod+Shift+g move workspace to output left
 
 # Screenshot utility
 bindsym $mod+F11 exec maim -s ~/Pictures/$(date +%s).png
+
+border_radius 10
+for_window [class=".*"] border pixel 2
