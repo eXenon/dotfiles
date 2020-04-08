@@ -6,65 +6,25 @@ Xft.autohint: false
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 
-URxvt.print-pipe: "cat > /dev/null"
-
-URxvt.geometry: 200x40
-URxvt.depth: 32
-URxvt.internalBorder: 10
-URxvt.fading: 10
-
-URxvt.scrollBar: off
-URxvt.saveLines: 60000
-URxvt.scrollTtyOutput: False
-URxvt.scrollTtyKeypress: True
-
-URxvt.urgentOnBell: True
-URxvt.visualBell: False
-
-URxvt.perl-ext-common: default,selection-to-clipboard,font-size,config-reload
-
-URxvt.font: xft:DejaVuSansMono Nerd Font Mono:style=book:antialias=true;pixelsize=14
-URxvt.boldFont: xft:DejaVuSansMono Nerd Font Mono:style=bold:antialias=true;pixelsize=14
-URxvt.letterSpace: -1
-URxvt.font-size.step: 2
-URxvt.lineSpace: 1
-
 *Menu.background: Black
 *Menu.foreground: White
 
-! special
-*.foreground:   #cbd3d5
-*.background:   #000000
-*.cursorColor:  #cbd3d5
+*.foreground: #F8F8F2
+*.background: #161D38
+*.color0:     #29315A
+*.color8:     #613E9F
+*.color1:     #E356A7
+*.color9:     #FF79C6
+*.color2:     #42E66C
+*.color10:    #50FA7B
+*.color3:     #E4F34A
+*.color11:    #F1FA8C
+*.color4:     #9B6BDF
+*.color12:    #BD93F9
+*.color5:     #E64747
+*.color13:    #FF5555
+*.color6:     #44D1EF
+*.color14:    #70D2E6
+*.color7:     #EFA554
+*.color15:    #FFB86C
 
-! black
-*.color0:       #04060e
-*.color8:       #5da8a5
-
-! red
-*.color1:       #4a404e
-*.color9:       #54455a
-
-! green
-*.color2:       #5e3653
-*.color10:      #69385b
-
-! yellow
-*.color3:       #674173
-*.color11:      #70417f
-
-! blue
-*.color4:       #8c4e83
-*.color12:      #984e8e
-
-! magenta
-*.color5:       #45757d
-*.color13:      #457f89
-
-! cyan
-*.color6:       #428b96
-*.color14:      #4095a1
-
-! white
-*.color7:       #a85d7f
-*.color15:      #acc3cb
