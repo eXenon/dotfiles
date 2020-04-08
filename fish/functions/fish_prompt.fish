@@ -56,49 +56,58 @@ function __user_color --desc "Return background color depending on active user"
     switch $USER
     case root
         echo AA5555
-    case exenon
+    case exenon xavier
         echo $color2
     case '*'
         echo $color4
     end
 end
 
-function __segment --desc "Create a powerline segment with color transition"
-    set bg1 $argv[1]
-    set fg1 $argv[2]
-    set bg2 $argv[3]
-    set fg2 $argv[4]
+function __bubble --desc "Create a powerline segment with color transition"
+    set bg $argv[1]
+    set fg $argv[2]
+    set content $argv[3]
 
-    # A final space
-    set_color -b "$bg1"
-    set_color "$fg1"
-    echo -n " "
+    # A starting bubble
+    set_color -b "$background"
+    set_color "$bg"
+    echo -n \uE0B6
 
-    # Then the arrow
-    set_color -b "$bg2"
-    set_color "$bg1"
-    echo -n \uE0B0
+    # Then the content
+    set_color -b "$bg"
+    set_color "$fg"
+    echo -n $content
 
-    # Then a space with color transition
-    set_color "$fg2"
-    echo -n " "
+    # And finish the bubble 
+    set_color -b "$background"
+    set_color "$bg"
+    echo -n \uE0B4
+
+    # Reset colors
+    set_color "$foreground"
 end
 
 function fish_prompt
-        # User
-        set_color $foreground
-        set_color -b (__user_color)
-        echo -n "$USER "
-
-        # Pwd
-        __segment (__user_color) $background $color0 $foreground
-        echo -n (prompt_pwd)
-
-        # Git
-        __segment $color0 $foreground $color8 $foreground
-        printf "%s" (__fish_git_prompt)
-
-        # End
-        __segment $color8 $foreground normal normal
+	echo -n " "
+        __bubble $color4 (__user_color) ">"
+	echo -n " "
 end
 
+function fish_right_prompt
+	# Pwd
+	__bubble $color1 $color4 (prompt_pwd)
+
+	echo -n " "
+
+	# Root
+	if test $USER = "root"
+		__bubble $color9 $color11 "🗲"
+		echo -n " "
+	end
+
+        # Git
+	set git_prompt (__fish_git_prompt)
+	if git rev-parse --git-dir > /dev/null 2>&1;
+		__bubble $color5 $color15 $git_prompt
+	end
+end
