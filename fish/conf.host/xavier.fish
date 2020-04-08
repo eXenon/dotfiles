@@ -1,4 +1,5 @@
 set -xg KBFS /home/xavier/kbfs/
+set -xg DOTFILES /root/dotfiles/
 
 # Start X at login
 if test (id -u) -eq 0

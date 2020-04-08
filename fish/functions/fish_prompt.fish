@@ -3,41 +3,40 @@
 #
 
 # special
-set foreground ffffff
-set cursor ffffff
-set background 181c30
+set foreground F8F8F2
+set background 161D38
 
 # black
-set color0 1b1d1e
-set color8 505354
+set color0 29315A
+set color8 613E9F
 
 # red
-set color1 f92672
-set color9 ff5995
+set color1 E356A7
+set color9 FF79C6
 
 # green
-set color2 82b414
-set color10 b6e354
+set color2 42E66C
+set color10 50FA7B
 
 # yellow
-set color3 fd971f
-set color11 feed6c
+set color3 E4F34A
+set color11 F1FA8C
 
 # blue
-set color4 0066cc
-set color12 333399
+set color4 9B6BDF
+set color12 BD93F9
 
 # magenta
-set color5 8c54fe
-set color13 9e6ffe
+set color5 E64747
+set color13 FF5555
 
 # cyan
-set color6 465457
-set color14 899ca1
+set color6 44D1EF
+set color14 70D2E6
 
 # white
-set color7 ccccc6
-set color15 f8f8f2
+set color7 EFA554
+set color15 FFB86C
 
 # Status Chars
 set __fish_git_prompt_char_dirtystate '•'
