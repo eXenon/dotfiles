@@ -19,3 +19,13 @@ source $FISH_HOST_CONFIG_FILE
 if test -n "$OPAM_SWITCH_PREFIX"
     eval (opam env)
 end
+
+# Autoload NVM on directory change
+function __check_rvm --on-variable PWD --description 'Autoload .nvmrc file'
+  status --is-command-substitution; and return
+  if test -e .nvmrc
+    set node_v (cat .nvmrc)
+    echo "Loading $node_v..."
+    nvm
+  end
+end
