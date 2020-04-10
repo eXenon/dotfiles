@@ -1,6 +1,5 @@
 set -gx KBFS /home/exenon/keybase/
 set -gx CHALET 5.196.1.178
-set -gx TERM xterm
 set -gx DOTFILES /home/exenon/dotfiles/
 
 function tx
