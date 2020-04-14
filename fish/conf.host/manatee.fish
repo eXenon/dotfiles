@@ -1,3 +1,4 @@
+set -g fish_term24bit 1
 set -gx KBFS /home/exenon/keybase/
 set -gx CHALET 5.196.1.178
 set -gx DOTFILES /home/exenon/dotfiles/
