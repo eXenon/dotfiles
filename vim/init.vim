@@ -86,6 +86,8 @@ Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' } " Elixir docs, eval 
 Plug 'mhinz/vim-mix-format'
 
 " Ocaml stuff
+Plug 'ocaml/vim-ocaml'
+let g:ocaml_folding=1
 augroup ocamlau
     au!
 
