@@ -8,21 +8,44 @@
 ;=====================================================
 
 [colors]
-background = #00000000
-foreground = #bababa
-primary = #a2527a
-secondary = #767680
-white = #FFFFFF
-red = #FF0000
+background = #161D38
+foreground = #F8F8F2
+red = #E356A7
+light_red = FF79C6
+purple = #29315A
+light_purple = #613E9F
+green = #42E66C
+light_green = #50FA7B
+yellow = #E4F34A
+light_yellow = #F1FA8C
+blue = #9B6BDF
+light_blue = #BD93F9
+magenta = #E64747
+light_magenta = #FF5555
+cyan = #44D1EF
+light_cyan = #70D2E6
+grey = #676767
+light_grey = #A1A1A1
+white = #F8F8F2
 
-[bar/default]
-width = 100%
+
+#
+# BAR CENTER
+#
+
+[bar/center]
+width = 16%
 height = 32
-radius = 0
 padding = 1
+radius = 10
 fixed-center = true
 bottom = false
 monitor = ${env:MONITOR:}
+
+wm-restack = i3
+override-redirect = true
+offset-x = 42%
+offset-y = 2
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -35,9 +58,83 @@ font-1 = Inconsolata for Powerline:style=Medium:size=15
 font-2 = Font Awesome:style=Regular:size=15
 font-3 = Droid Sans:style=Regular:size=15
 
-modules-left = i3
-modules-center = time
-modules-right = keyboard ping network battery volume date
+modules-left =
+modules-center = i3
+modules-right =
+
+#
+# BAR RIGHT
+#
+
+[bar/right]
+width = 25%
+height = 32
+padding = 1
+radius = 10
+fixed-center = true
+bottom = false
+monitor = ${env:MONITOR:}
+
+wm-restack = i3
+override-redirect = true
+offset-x = 74%
+offset-y = 2
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+module-margin-left = 1
+module-margin-right = 1
+
+padding-left = 2
+
+font-0 = DroidSansMonoForPowerline Nerd Font:style=Book:size=15
+font-1 = Inconsolata for Powerline:style=Medium:size=15
+font-2 = Font Awesome:style=Regular:size=15
+font-3 = Droid Sans:style=Regular:size=15
+
+modules-left = keyboard
+modules-center =
+modules-right = time date powermenu
+
+#
+# BAR LEFT
+#
+
+[bar/left]
+width = 25%
+height = 32
+padding = 1
+radius = 10
+fixed-center = true
+bottom = false
+monitor = ${env:MONITOR:}
+
+wm-restack = i3
+override-redirect = true
+offset-x = 1%
+offset-y = 2
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+module-margin-left = 1
+module-margin-right = 1
+
+padding-left = 2
+
+font-0 = DroidSansMonoForPowerline Nerd Font:style=Book:size=15
+font-1 = Inconsolata for Powerline:style=Medium:size=15
+font-2 = Font Awesome:style=Regular:size=15
+font-3 = Droid Sans:style=Regular:size=15
+
+modules-left = network battery
+modules-center =
+modules-right =
+
+#
+# MODULES
+#
 
 [module/keyboard]
 type = custom/script
@@ -53,13 +150,16 @@ strip-wsnumbers = true
 
 format-padding = 0
 label-focused = %index%
-label-focused-foreground = ${colors.white}
+label-focused-foreground = ${colors.green}
 label-focused-padding = 1
 
 label-unfocused = %index%
 label-unfocused-padding = 1
+label-unfocused-foreground = ${colors.grey}
 
 label-visible = %index%
+label-visible-foreground = ${colors.white}
+label-visible-underline = ${colors.light_grey}
 label-visible-padding = 1
 
 label-urgent = %index%
@@ -88,7 +188,7 @@ time = %H:%M:%S
 label = %time%
 
 format = " <label>"
-format-foreground = ${colors.secondary}
+format-foreground = ${colors.light_grey}
 
 [module/date]
 type = internal/date
@@ -98,7 +198,7 @@ date = "%m/%d/%Y"
 label = %date%
 
 format = " <label>"
-format-foreground = ${colors.secondary}
+format-foreground = ${colors.light_grey}
 
 [module/vpn]
 type = custom/script
@@ -130,12 +230,13 @@ ramp-capacity-4 = %{F#00f769}%{F-}
 
 [module/network]
 type = internal/network
-interface = wlp3s0
+interface = wlp61s0
 interval = 1
 ping-interval = 3
-format-connected =   <label-connected>
+format-connected =  <label-connected>
 label-connected = %essid%
-format-disconnected =   <label-disconnected>
+label-connected-foreground = ${colors.light_grey}
+format-disconnected =  <label-disconnected>
 label-disconnected = "Not Connected"
 
 [module/ping]
@@ -157,6 +258,32 @@ interval = 60
 type = custom/script
 exec = ~/.config/polybar/toggl.sh
 interval = 30
+
+[module/powermenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = 
+label-close = 
+label-close-foreground = ${colors.foreground}
+label-separator = |
+label-separator-foreground = ${colors.foreground}
+
+menu-0-0 = 
+menu-0-0-exec = i3lock
+menu-0-1 = 
+menu-0-1-exec = systemctl reboot
+menu-0-2 = 
+menu-0-2-exec = betterlockscreen -l dimblur && sleep 1 && systemctl suspend
+menu-0-3 = 
+menu-0-3-exec = systemctl poweroff
+
+
+format-background = ${colors.background}
+format-foreground = ${colors.white}
+format-underline = ${colors.foreground}
+format-padding = 1
 
 [settings]
 screenchange-reload = true

@@ -42,6 +42,7 @@ set $default_gaps_inner 8
 set $default_gaps_outer 5
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
+gaps top 15
 
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 0 ms
@@ -282,4 +283,7 @@ bindsym $mod+Shift+g move workspace to output left
 bindsym $mod+F11 exec maim -s ~/Pictures/$(date +%s).png
 
 border_radius 10
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border none
+
+# picom
+exec picom --corner-radius 12 --fading --fade-in-step 0.1 --fade-out-step 0.1 --shadow --no-dock-shadow
