@@ -131,22 +131,12 @@ Plug 'tpope/vim-speeddating'
 "   Flake8
 Plug 'nvie/vim-flake8'
 let g:flake8_show_in_gutter = 1
-"   Autopep8
-Plug 'tell-k/vim-autopep8'
-let g:autopep8_on_save = 1
-let g:autopep8_max_line_length = 120
-let g:autopep8_disable_show_diff = 1
+"   Black
+Plug 'psf/black', { 'branch': 'stable' }
+let g:black_linelength = 120
 "   Import sorter
 Plug 'fisadev/vim-isort'
 let g:vim_isort_python_version = 'python3'
-"   Autocmds
-augroup pyautocmd
-    au!
-    "   Flake8 on command
-    autocmd FileType python nnoremap <buffer> <C-F> :call Flake8()<CR>
-    "   Break a function call into mutiple lines
-    autocmd FileType python nnoremap <buffer> <leader>J :s/\((\zs\\|,\ *\zs\\|)\)/\r&/g<CR><Bar>:'[,']Autopep8<CR>:set nohlsearch<CR>
-augroup END
 
 " Visual stuff
 "    True colors
@@ -173,7 +163,7 @@ set laststatus=2
 " Autoformatting
 augroup autoformatting
     au!
-    autocmd FileType python nnoremap <buffer> <C-F> :call Flake8()<CR>
+    autocmd FileType python nnoremap <buffer> <C-F> :Black<CR>
     autocmd FileType elixir nnoremap <buffer> <C-F> :MixFormat<CR>
     autocmd FileType elm nnoremap <buffer> <C-F> :ElmFormat<CR>
     autocmd FileType ocaml nnoremap <buffer> <C-F> :call Ocamlformat()<CR>
