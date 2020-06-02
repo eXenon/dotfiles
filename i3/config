@@ -192,7 +192,7 @@ for_window [title=".*Mozilla Thunderbird.*"] move workspace 10
 # Launcher shortcuts
 bindsym $mod+1 exec firefox
 bindsym $mod+2 exec thunderbird
-bindsym $mod+3 exec spotify
+bindsym $mod+3 exec spotify --force-device-scale-factor=1.3
 bindsym $mod+4 exec keepassxc
 bindsym $mod+5 exec --no-startup-id kitty --name scratchpython -e ipython3
 bindsym $mod+6 exec subl
@@ -204,7 +204,7 @@ bindsym $mod+d exec rofi -show run
 bindsym $mod+s exec rofi -show ssh
 
 # Start a few programms
-exec spotify
+exec spotify --force-device-scale-factor=1.3
 exec keepassxc
 exec firefox
 exec --no-startup-id kitty --name scratchpython -e ipython3
@@ -217,7 +217,7 @@ bindsym $mod+l exec i3lock --blur=1 --ringcolor=000000ff --linecolor=000000ff --
 force_xinerama yes
 
 # Load monitor settings
-bindsym $mod+Shift+F12 exec xrandr --output eDP-1 --primary --mode 2560x1440 --pos 0x2160 --scale 1.1x1.1 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --mode 1920x1080 --pos 0x0 --scale 1.6x1.6 --rotate normal
+bindsym $mod+Shift+F12 exec xrandr --output eDP-1 --primary --mode 2560x1440 --pos 0x2160 --scale 1.1x1.1 --rotate normal --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --mode 1920x1080 --pos 0x0 --scale 1.6x1.6 --rotate normal
 
 # Power management - done right
 bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, reboot' '/home/xnunn/.config/i3/i3exit reboot'"
