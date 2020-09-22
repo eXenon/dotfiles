@@ -15,7 +15,7 @@ configuration {
 }
 
 window {
-  font: "Iosevka Term thin 40";
+  font: "Iosevka Term 20";
   transparency: "real";
   fullscreen: false;
 }
