@@ -29,3 +29,6 @@ function __check_rvm --on-variable PWD --description 'Autoload .nvmrc file'
     nvm
   end
 end
+
+# VI mode
+fish_vi_key_bindings
