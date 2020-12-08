@@ -18,3 +18,5 @@ direnv hook fish | source
 # Kitty setup
 kitty + complete setup fish | source
 
+# Add execs to path
+set -xg PATH /home/xavier/execs:$PATH

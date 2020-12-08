@@ -67,8 +67,9 @@ function __user_prompt --desc "Return small prompt based on user"
   switch $USER
   case root
     echo "🗲"
+    __vi_mode
   case exenon xavier
-    echo ">"
+    __vi_mode
   case '*'
     echo "?"
   end
@@ -96,6 +97,26 @@ function __bubble --desc "Create a powerline segment with color transition"
 
   # Reset colors
   set_color "$foreground"
+end
+
+function __vi_mode --desc "Translate the vi mode into a single caracter"
+  switch $fish_bind_mode
+    case default
+      echo '_'
+    case insert
+      set_color --bold green
+      echo '>'
+    case replace_one
+      set_color --bold green
+      echo 'r'
+    case visual
+      set_color --bold brmagenta
+      echo 'v'
+    case '*'
+      set_color --bold red
+      echo '?'
+  end
+  set_color normal
 end
 
 function fish_prompt
