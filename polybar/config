@@ -123,7 +123,7 @@ font-0 = DroidSansMono Nerd Font:style=Book:size=15;3
 font-1 = Inconsolata for Powerline:style=Medium:size=15
 
 modules-left = network battery
-modules-center =
+modules-center = 
 modules-right = spotify
 
 #
@@ -217,11 +217,11 @@ interval = 1
 
 [module/battery]
 type = internal/battery
-
 battery = BAT0
 adapter = AC
 poll-interval = 5
 time-format = %H:%M
+format-low = <ramp-capacity> %{F#ea51b2}!%{F-}
 format-charging = %{F#00f769}%{F-} <label-charging>
 label-charging = %percentage%%
 format-discharging = <ramp-capacity> <label-discharging>
