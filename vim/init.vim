@@ -259,4 +259,16 @@ inoremap <Right> <nop>
 nnoremap s :Buffers<CR>
 nnoremap f :Files<CR>
 
-
+" Toggle quickly between 2 spaces and 4 spaces TABs
+function! TabsR2Spaces()
+    set tabstop=2
+    set softtabstop=2
+    set shiftwidth=2
+endfunction
+function! TabsR4Spaces()
+    set tabstop=4
+    set softtabstop=4
+    set shiftwidth=4
+endfunction
+nnoremap <leader>' :call TabsR4Spaces()<CR>
+nnoremap <leader>é :call TabsR2Spaces()<CR>
