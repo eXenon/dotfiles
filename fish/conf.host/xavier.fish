@@ -20,3 +20,28 @@ kitty + complete setup fish | source
 
 # Add execs to path
 set -xg PATH /home/xavier/execs:$PATH
+
+# Screen switch functions
+function only_hdmi
+  set external (xrandr | grep " connected" | grep -v eDP | head -n 1 | cut -d" " -f 1)
+  set internal (xrandr | grep " connected" | grep eDP | head -n 1 | cut -d" " -f 1)
+
+  # Set monitor to exernal
+  xrandr --output $external --mode 1920x1080 --pos 0x0 --rotate normal --scale 1.6x1.6 --output $internal --off
+
+  # Set keyboard to bépo
+  setxkbmap fr bepo
+  touch "/tmp/bepo"
+end
+
+function only_internal
+  set external (xrandr | grep " connected" | grep -v eDP | head -n 1 | cut -d" " -f 1)
+  set internal (xrandr | grep " connected" | grep eDP | head -n 1 | cut -d" " -f 1)
+
+  # Set monitor to internal
+  xrandr --output $internal --mode 2560x1440 --pos 0x0 --rotate normal --output $external --off
+
+  # Set keyboard to french
+  setxkbmap fr
+  rm -f "/tmp/bepo"
+end
