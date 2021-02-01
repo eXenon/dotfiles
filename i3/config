@@ -217,6 +217,7 @@ bindsym $mod+l exec i3lock --blur=1 --ringcolor=000000ff --linecolor=000000ff --
 force_xinerama yes
 
 # Load monitor settings
+bindsym $mod+Shift+F11 exec xrandr --output eDP-1 --off --output DP-1 --mode 1920x1080 --scale 1.6x1.6 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --off
 bindsym $mod+Shift+F12 exec xrandr --output eDP-1 --primary --mode 2560x1440 --pos 0x2160 --scale 1.1x1.1 --rotate normal --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --mode 1920x1080 --pos 0x0 --scale 1.6x1.6 --rotate normal
 
 # Power management - done right

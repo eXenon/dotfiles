@@ -212,9 +212,15 @@ set smartcase
 " Mouse bleuark
 set mouse=""
 
-" New splits will be at the bottom or to the right side of the screen
+" Split management
+" 	New splits will be at the bottom or to the right side of the screen
 set splitbelow
 set splitright
+"	Navigate between splits
+nnoremap <leader>h <C-w><C-h>
+nnoremap <leader>j <C-w><C-j>
+nnoremap <leader>k <C-w><C-k>
+nnoremap <leader>l <C-w><C-l>
 
 
 " Toggle visibility
