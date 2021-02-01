@@ -11,13 +11,11 @@ else
         if [ -f "/tmp/bepo" ]; then
             echo "Switching to azerty"
             setxkbmap fr
-            touch "/tmp/azerty"
             rm -f "/tmp/bepo"
         else
             echo "Switching to bépo"
             setxkbmap fr bepo
             touch "/tmp/bepo"
-            rm -f "/tmp/azerty"
         fi
     fi
 fi
