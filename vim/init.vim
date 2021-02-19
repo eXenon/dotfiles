@@ -41,6 +41,9 @@ endfunction
 call plug#begin('~/.config/nvim/plugs')
 highlight Pmenu ctermfg=black ctermbg=white
 
+" gundo
+Plug 'simnalamburt/vim-mundo'
+nnoremap <leader>u :MundoToggle<CR>
 
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
