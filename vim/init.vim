@@ -57,8 +57,36 @@ nnoremap <C-g> :GGrep<CR>
 
 " Theming
 
+" Vim focused editing
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+function! s:goyo_enter()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+  Limelight
+  " ...
+endfunction
+function! s:goyo_leave()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  set showmode
+  set showcmd
+  set scrolloff=5
+  Limelight!
+  " ...
+endfunction
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+nnoremap <leader>! :Goyo<CR>
+
 " Vim plugs
-Plug 'thinca/vim-ref' " Docs on K-press
 Plug 'ervandew/supertab' " Autocomplete on tab
 
 " Fish stuff
@@ -126,9 +154,6 @@ augroup END
 " Highlighter
 Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:highlighter#auto_update = 2
-
-" Date increment/decrement
-Plug 'tpope/vim-speeddating'
 
 " Python stuff
 "   Flake8
@@ -281,3 +306,7 @@ function! TabsR4Spaces()
 endfunction
 nnoremap <leader>' :call TabsR4Spaces()<CR>
 nnoremap <leader>é :call TabsR2Spaces()<CR>
+
+" Avoid conflicting tmux bindings
+nnoremap <leader>a <C-A>
+nnoremap <leader>x <C-X>
