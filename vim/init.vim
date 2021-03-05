@@ -56,6 +56,7 @@ command! -bang -nargs=* GGrep
 nnoremap <C-g> :GGrep<CR>
 
 " Theming
+Plug 'arcticicestudio/nord-vim'
 
 " Vim focused editing
 Plug 'junegunn/goyo.vim'
@@ -166,20 +167,19 @@ let g:black_linelength = 120
 Plug 'fisadev/vim-isort'
 let g:vim_isort_python_version = 'python3'
 
-" Visual stuff
-"    True colors
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set t_8b=^[[48;2;%lu;%lu;%lum
-set t_8f=^[[38;2;%lu;%lu;%lum
-set background=dark
-set termguicolors
-colo dark-neon
 
 " Dart
 Plug 'dart-lang/dart-vim-plugin'
 
 " Initialize plugs
 call plug#end()
+
+" Visual stuff
+"    True colors
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set t_8b=^[[48;2;%lu;%lu;%lum
+set t_8f=^[[38;2;%lu;%lu;%lum
+colorscheme nord
 
 set nocompatible
 filetype plugin on
