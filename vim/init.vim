@@ -166,6 +166,8 @@ let g:black_linelength = 120
 "   Import sorter
 Plug 'fisadev/vim-isort'
 let g:vim_isort_python_version = 'python3'
+"   Jinja highlighter
+Plug 'lepture/vim-jinja'
 
 
 " Dart
