@@ -35,3 +35,8 @@ fish_vi_key_bindings
 
 # Remove greeting
 set fish_greeting
+
+# Pimp your iex
+function iex --wraps iex --description 'alias iEX with history enabled'
+  /usr/bin/iex --erl "-kernel shell_history enabled" $argv
+end
