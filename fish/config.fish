@@ -40,3 +40,6 @@ set fish_greeting
 function iex --wraps iex --description 'alias iEX with history enabled'
   /usr/bin/iex --erl "-kernel shell_history enabled" $argv
 end
+
+# asdf version manager
+source ~/.asdf/asdf.fish
