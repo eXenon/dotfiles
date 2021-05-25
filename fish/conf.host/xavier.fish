@@ -13,7 +13,10 @@ else
 end
 
 # Direnv
-direnv hook fish | source
+eval (asdf direnv hook fish)
+function direnv
+  asdf exec direnv "$argv"
+end
 
 # Kitty setup
 kitty + complete setup fish | source
