@@ -8,7 +8,9 @@ Configuration files for my setup
 * [playerctl](https://github.com/acrisci/playerctl) for the media buttons
 * pamixer, xbacklight for volume and screen brightness control
 * feh for the wallpaper
+* [fish](fishshell.com) as a shell
 * [kitty](https://sw.kovidgoyal.net/kitty/) as terminal emulator (for the sweet sweet ligatures)
 * [FiraCode](https://github.com/tonsky/FiraCode) as font (for the sweet sweet ligatures)
 * [rofi](https://github.com/davatorium/rofi) for the launcher
-* [fish-nvm](https://github.com/jorgebucaran/fish-nvm) for managing Node (and periodically wiping all because ****** npm broke once again)
+* [asdf](https://asdf-vm.com) for the version management
+* [direnv](https://direnv.net) for transparent version switching
