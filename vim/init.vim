@@ -8,6 +8,7 @@ set clipboard+=unnamed " Use general clipboard for y and p
 set formatoptions+=j " Delete comment character when joining commented lines
 set undodir=~/.config/nvim/undo " Persistent undo
 set undofile
+set relativenumber
 
 " Generic function to preserve cursor and search when using
 " 'destructive' commands
@@ -41,6 +42,12 @@ endfunction
 call plug#begin('~/.config/nvim/plugs')
 highlight Pmenu ctermfg=black ctermbg=white
 
+" Unicode shenanigans
+Plug 'chrisbra/unicode.vim'
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
+
 " gundo
 Plug 'simnalamburt/vim-mundo'
 nnoremap <leader>u :MundoToggle<CR>
@@ -60,9 +67,6 @@ Plug 'arcticicestudio/nord-vim'
 
 " Vim focused editing
 Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-let g:limelight_conceal_ctermfg=17
-let g:limelight_conceal_guifg='#161D38'
 function! s:goyo_enter()
   if executable('tmux') && strlen($TMUX)
     silent !tmux set status off
@@ -71,7 +75,6 @@ function! s:goyo_enter()
   set noshowmode
   set noshowcmd
   set scrolloff=999
-  Limelight
 endfunction
 function! s:goyo_leave()
   if executable('tmux') && strlen($TMUX)
@@ -81,7 +84,6 @@ function! s:goyo_leave()
   set showmode
   set showcmd
   set scrolloff=5
-  Limelight!
 endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
@@ -89,6 +91,9 @@ nnoremap <leader>! :Goyo<CR>
 
 " Vim plugs
 Plug 'ervandew/supertab' " Autocomplete on tab
+"   Set supertab to omnicompletion (powered by lsp)
+autocmd FileType python let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+autocmd FileType python let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Fish stuff
 Plug 'dag/vim-fish'
@@ -142,7 +147,7 @@ augroup ocamlau
 
     "    Setup merlin
     if executable('opam')
-        let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+        let g:opamshare = substitute(system('opam var share'),'\n$','','''')
         execute "set rtp+=" . g:opamshare . "/merlin/vim"
     endif
     nnoremap <leader>t :MerlinTypeOf<return>
@@ -169,9 +174,9 @@ let g:vim_isort_python_version = 'python3'
 "   Jinja highlighter
 Plug 'lepture/vim-jinja'
 
+" Git integration
+Plug 'tpope/vim-fugitive'
 
-" Dart
-Plug 'dart-lang/dart-vim-plugin'
 
 " Initialize plugs
 call plug#end()
@@ -312,3 +317,63 @@ nnoremap <leader>é :call TabsR2Spaces()<CR>
 " Avoid conflicting tmux bindings
 nnoremap <leader>a <C-A>
 nnoremap <leader>x <C-X>
+
+" LSP setup
+lua require'lspconfig'.pylsp.setup{}
+lua require'lspconfig'.ocamllsp.setup{}
+
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pylsp', 'ocamllsp' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 50,
+    }
+  }
+end
+nvim_lsp['elixirls'].setup {
+  cmd={'elixir-ls'},
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    elixirLS = {
+      dialyzerEnabled = false,
+      fetchDeps = false,
+    }
+  }
+}
+EOF
