@@ -27,3 +27,6 @@ fish/project_specific/
 fish/fishfile
 fish/conf.d/
 fish/completions/
+vim/undo/
+vim/plugs/
+vim/.netrwhist

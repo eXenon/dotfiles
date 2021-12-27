@@ -3,6 +3,7 @@ set -gx KBFS /home/exenon/keybase/
 set -gx CHALET 51.38.236.94
 set -gx TODOASSIST 51.68.228.135
 set -gx DOTFILES /home/exenon/dotfiles/
+fish_add_path --global $HOME/.cargo/bin
 
 function tx
   tmux attach -t txmain; or tmux new -s txmain

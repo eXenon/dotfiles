@@ -4,7 +4,6 @@ let maplocalleader = "\<Space>"
 let g:netrw_liststyle = 3 " File explorer style
 au BufNewFile,BufRead /*.rasi setf css
 
-set clipboard+=unnamed " Use general clipboard for y and p
 set formatoptions+=j " Delete comment character when joining commented lines
 set undodir=~/.config/nvim/undo " Persistent undo
 set undofile
@@ -116,6 +115,8 @@ let g:nv_search_paths = ['$KBFS/private/xaviernunn/wiki/']
 let g:nv_default_extension = '.wiki'
 
 
+" Rust stuff
+Plug 'simrat39/rust-tools.nvim'
 
 " Elixir stuff
 Plug 'elixir-editors/vim-elixir' " Highlighting, indentation and filetype for elixir
@@ -356,7 +357,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp', 'ocamllsp' }
+local servers = { 'pylsp', 'ocamllsp', 'rls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
