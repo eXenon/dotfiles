@@ -8,6 +8,7 @@ set formatoptions+=j " Delete comment character when joining commented lines
 set undodir=~/.config/nvim/undo " Persistent undo
 set undofile
 set relativenumber
+set inccommand="" " Disable live replace (so sloooooowwwwww)
 
 " Generic function to preserve cursor and search when using
 " 'destructive' commands
@@ -54,7 +55,7 @@ nnoremap <leader>u :MundoToggle<CR>
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :GFiles<CR>
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number '.shellescape(<q-args>), 0,
@@ -299,7 +300,7 @@ inoremap <Right> <nop>
 
 " Quick shortcuts for buffers and files
 nnoremap s :Buffers<CR>
-nnoremap f :Files<CR>
+nnoremap f :GFiles<CR>
 
 " Toggle quickly between 2 spaces and 4 spaces TABs
 function! TabsR2Spaces()
@@ -377,4 +378,5 @@ nvim_lsp['elixirls'].setup {
     }
   }
 }
+require('rust-tools.inlay_hints').set_inlay_hints()
 EOF
