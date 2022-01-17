@@ -126,7 +126,6 @@ Plug 'mhinz/vim-mix-format'
 
 " Ocaml stuff
 Plug 'ocaml/vim-ocaml'
-let g:ocaml_folding=1
 augroup ocamlau
     au!
 
@@ -179,6 +178,8 @@ Plug 'lepture/vim-jinja'
 " Git integration
 Plug 'tpope/vim-fugitive'
 
+" Read inputs in format file:line
+Plug 'bogado/file-line'
 
 " Initialize plugs
 call plug#end()
