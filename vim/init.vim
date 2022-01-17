@@ -205,6 +205,7 @@ augroup autoformatting
     autocmd FileType elm nnoremap <buffer> <C-F> :ElmFormat<CR>
     autocmd FileType ocaml nnoremap <buffer> <C-F> :call Ocamlformat()<CR>
     autocmd FileType dart nnoremap <buffer> <C-F> :DartFmt<CR>
+    autocmd FileType rust nnoremap <buffer> <C-F> :!cargo fmt<CR>
 augroup END
 
 " Commenting
