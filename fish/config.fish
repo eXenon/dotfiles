@@ -21,10 +21,9 @@ fish_vi_key_bindings
 # Remove greeting
 set fish_greeting
 
-# Pimp your iex
-function iex --wraps iex --description 'alias iEX with history enabled'
-  /usr/bin/iex --erl "-kernel shell_history enabled" $argv
-end
+# IEx options
+set -xg ERL_AFLAGS "-kernel shell_history enabled"
+set -xg IEX_WITH_WERL 1
 
 # asdf version manager
 source ~/.asdf/asdf.fish
