@@ -303,6 +303,7 @@ inoremap <Right> <nop>
 " Quick shortcuts for buffers and files
 nnoremap s :Buffers<CR>
 nnoremap f :GFiles<CR>
+nnoremap <leader>f :Files<CR>
 
 " Toggle quickly between 2 spaces and 4 spaces TABs
 function! TabsR2Spaces()
