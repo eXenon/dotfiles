@@ -32,3 +32,12 @@ source ~/.asdf/asdf.fish
 set -xg HOSTNAME (hostname)
 set -xg FISH_HOST_CONFIG_FILE "$__fish_config_dir/conf.host/$HOSTNAME.fish"
 source $FISH_HOST_CONFIG_FILE
+
+# Set up zoxide
+zoxide init fish | source
+
+# Set up shiny new tools!
+alias cat="bat --paging=never"
+alias grep="rg"
+alias psql="pgcli"
+alias cd="z"
