@@ -42,6 +42,9 @@ endfunction
 call plug#begin('~/.config/nvim/plugs')
 highlight Pmenu ctermfg=black ctermbg=white
 
+" TreeSitter Highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 " Unicode shenanigans
 Plug 'chrisbra/unicode.vim'
 
@@ -122,7 +125,15 @@ Plug 'simrat39/rust-tools.nvim'
 " Elixir stuff
 Plug 'elixir-editors/vim-elixir' " Highlighting, indentation and filetype for elixir
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' } " Elixir docs, eval and completion
-Plug 'mhinz/vim-mix-format'
+augroup elixirau
+    au!
+
+    " Mix format command
+    function! MixFormat()
+        silent write
+        silent !mix format
+    endfunction
+augroup END
 
 " Ocaml stuff
 Plug 'ocaml/vim-ocaml'
@@ -202,7 +213,8 @@ set laststatus=2
 augroup autoformatting
     au!
     autocmd FileType python nnoremap <buffer> <C-F> :Black<CR>
-    autocmd FileType elixir nnoremap <buffer> <C-F> :MixFormat<CR>
+    autocmd FileType elixir nnoremap <buffer> <C-F> :call MixFormat()<CR>
+    autocmd FileType heex nnoremap <buffer> <C-F> :call MixFormat()<CR>
     autocmd FileType elm nnoremap <buffer> <C-F> :ElmFormat<CR>
     autocmd FileType ocaml nnoremap <buffer> <C-F> :call Ocamlformat()<CR>
     autocmd FileType dart nnoremap <buffer> <C-F> :DartFmt<CR>
@@ -322,6 +334,37 @@ nnoremap <leader>é :call TabsR2Spaces()<CR>
 " Avoid conflicting tmux bindings
 nnoremap <leader>a <C-A>
 nnoremap <leader>x <C-X>
+
+" TreeSitter config
+lua << EUF
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "elixir", "eex", "heex", "fish", "gleam", "css", "scss", "html", "javascript", "bash", "json", "elm", "rust", "ocaml", "python", "vim", "lua" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = true,
+
+  -- List of parsers to ignore installing (for "all")
+  ignore_install = { },
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+    disable = { },
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EUF
 
 " LSP setup
 lua require'lspconfig'.pylsp.setup{}
