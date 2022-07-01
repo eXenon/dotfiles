@@ -41,3 +41,6 @@ alias cat="bat --paging=never"
 alias grep="rg"
 alias psql="pgcli"
 alias cd="z"
+
+# Direnv
+eval (asdf exec direnv hook fish)

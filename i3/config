@@ -188,6 +188,7 @@ for_window [instance="scratchvim"] move scratchpad
 for_window [instance="scratchterm"] move scratchpad
 for_window [class="Spotify"] move scratchpad
 for_window [title=".*Mozilla Thunderbird.*"] move workspace 10
+for_window [title=".*Obsidian.*"] move workspace 9
 
 # Launcher shortcuts
 bindsym $mod+1 exec firefox
@@ -195,7 +196,7 @@ bindsym $mod+2 exec thunderbird
 bindsym $mod+3 exec spotify --force-device-scale-factor=1.3
 bindsym $mod+4 exec keepassxc
 bindsym $mod+5 exec --no-startup-id kitty --name scratchpython -e ipython3
-bindsym $mod+6 exec subl
+bindsym $mod+6 exec obsidian
 bindsym $mod+7 exec --no-startup-id kitty --name scratchvim -e nvim -n /home/cba/notes
 bindsym $mod+8 exec --no-startup-id $HOME/.config/i3/polybar.sh
 
@@ -207,6 +208,8 @@ bindsym $mod+s exec "rofi -no-lazy-grab -show ssh -modi run,drun,window -theme $
 exec spotify --force-device-scale-factor=1.3
 exec keepassxc
 exec firefox
+exec nextcloud
+exec obsidian
 exec --no-startup-id kitty --name scratchpython -e ipython3
 exec --no-startup-id kitty --name scratchterm
 
