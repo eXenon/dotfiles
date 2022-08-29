@@ -65,6 +65,8 @@ Plug 'hrsh7th/cmp-cmdline'
 " Vsnip
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets'
 
 " gundo
 Plug 'simnalamburt/vim-mundo'
@@ -243,10 +245,21 @@ nnoremap <leader>l <C-w><C-l>
 
 " Toggle visibility
 nnoremap <c-h> :set hlsearch!<CR>
-nnoremap <c-j> :set number!<CR>
 nnoremap <c-k> :set list!<CR>
-nnoremap <c-l> :set cursorline!<CR>:set cursorcolumn!<CR>
-nnoremap <c-m> :set nu!<CR>
+
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
 " Statusline
 set statusline=
@@ -452,7 +465,7 @@ cmp.setup({
         cmp.select_next_item()
       elseif vim.fn["vsnip#available"](1) == 1 then
         feedkey("<Plug>(vsnip-expand-or-jump)", "")
-      elseif has_words_before() then
+      elseif has_words_before~=nil and has_words_before() then
         cmp.complete()
       else
         fallback()
@@ -495,6 +508,7 @@ local servers = { 'pylsp', 'ocamllsp', 'rls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     flags = {
       debounce_text_changes = 50,
     }
