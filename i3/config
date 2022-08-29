@@ -82,8 +82,8 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty -e tmux -2
-bindsym $mod+Shift+Return exec kitty
+bindsym $mod+ShiftReturn exec kitty -e tmux -2
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+x kill
@@ -208,7 +208,6 @@ bindsym $mod+s exec "rofi -no-lazy-grab -show ssh -modi run,drun,window -theme $
 exec spotify --force-device-scale-factor=1.3
 exec keepassxc
 exec firefox
-exec nextcloud
 exec obsidian
 exec --no-startup-id kitty --name scratchpython -e ipython3
 exec --no-startup-id kitty --name scratchterm
