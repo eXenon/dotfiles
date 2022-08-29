@@ -55,6 +55,17 @@ Plug 'chrisbra/unicode.vim'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 
+" Autocomplete
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+
+" Vsnip
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
 " gundo
 Plug 'simnalamburt/vim-mundo'
 nnoremap <leader>u :MundoToggle<CR>
@@ -62,7 +73,7 @@ nnoremap <leader>u :MundoToggle<CR>
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-nnoremap <C-p> :GFiles<CR>
+nnoremap <C-t> :GFiles<CR>
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number '.shellescape(<q-args>), 0,
@@ -71,36 +82,6 @@ nnoremap <C-g> :GGrep<CR>
 
 " Theming
 Plug 'arcticicestudio/nord-vim'
-
-" Vim focused editing
-Plug 'junegunn/goyo.vim'
-function! s:goyo_enter()
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status off
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  endif
-  set noshowmode
-  set noshowcmd
-  set scrolloff=999
-endfunction
-function! s:goyo_leave()
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  endif
-  set showmode
-  set showcmd
-  set scrolloff=5
-endfunction
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-nnoremap <leader>! :Goyo<CR>
-
-" Vim plugs
-Plug 'ervandew/supertab' " Autocomplete on tab
-"   Set supertab to omnicompletion (powered by lsp)
-autocmd FileType python let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-autocmd FileType python let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Fish stuff
 Plug 'dag/vim-fish'
@@ -111,24 +92,10 @@ endif
 " Elm stuff
 Plug 'ElmCast/elm-vim' " Elm HL and elm-format on save
 
-" VimWiki
-Plug 'vimwiki/vimwiki'
-let g:vimwiki_path='$KBFS/private/xaviernunn/wiki/'
-let g:vimwiki_template_path='$KBFS/private/xaviernunn/wiki_templates/'
-let g:vimwiki_syntax = 'markdown'
-let g:vimwiki_autowriteall=1
-"   Notational velocity integration
-Plug 'alok/notational-fzf-vim'
-let g:nv_search_paths = ['$KBFS/private/xaviernunn/wiki/']
-let g:nv_default_extension = '.wiki'
-
-
 " Rust stuff
 Plug 'simrat39/rust-tools.nvim'
 
 " Elixir stuff
-Plug 'elixir-editors/vim-elixir' " Highlighting, indentation and filetype for elixir
-Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' } " Elixir docs, eval and completion
 augroup elixirau
     au!
 
@@ -172,10 +139,6 @@ augroup ocamlau
     "    Switch between ml and mli
     nnoremap <leader>m :call ToggleMLI()<return>
 augroup END
-
-" Highlighter
-Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:highlighter#auto_update = 2
 
 " Python stuff
 "   Flake8
@@ -268,10 +231,10 @@ set smartcase
 set mouse=""
 
 " Split management
-" 	New splits will be at the bottom or to the right side of the screen
+"   New splits will be at the bottom or to the right side of the screen
 set splitbelow
 set splitright
-"	Navigate between splits
+"   Navigate between splits
 nnoremap <leader>h <C-w><C-h>
 nnoremap <leader>j <C-w><C-j>
 nnoremap <leader>k <C-w><C-k>
@@ -460,16 +423,71 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
 end
+
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      -- setting up snippet engine
+      -- this is for vsnip, if you're using other
+      -- snippet engine, please refer to the `nvim-cmp` guide
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif vim.fn["vsnip#available"](1) == 1 then
+        feedkey("<Plug>(vsnip-expand-or-jump)", "")
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function()
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+        feedkey("<Plug>(vsnip-jump-prev)", "")
+      end
+    end, { "i", "s" })
+  },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'buffer' }
+  })
+})
+
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+nvim_lsp['elixirls'].setup {
+  cmd={'elixir-ls'},
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    elixirLS = {
+      dialyzerEnabled = false,
+      fetchDeps = false,
+    }
+  }
+}
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -482,16 +500,6 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
-nvim_lsp['elixirls'].setup {
-  cmd={'elixir-ls'},
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    elixirLS = {
-      dialyzerEnabled = false,
-      fetchDeps = false,
-    }
-  }
-}
+
 require('rust-tools.inlay_hints').set_inlay_hints()
 EOF
