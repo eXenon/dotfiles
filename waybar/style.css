@@ -3,7 +3,7 @@
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: Liberation Mono;
-    min-height: 20px;
+    min-height: 15px;
 }
 
 window#waybar {
@@ -14,40 +14,19 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-#window {
-    margin-right: 8px;
+#workspaces {
+    padding-left: 16px;
+    padding-right: 8px;
     border-radius: 10px;
     transition: none;
-    background: #383c4a;
-    color: #7c818c;
+    background: #ffffff;
 }
 
-#window button {
-    transition: none;
-    color: #7c818c;
-    background: transparent;
-    padding: 5px;
-    font-size: 18px;
+#workspaces.button {
+    color: #ffffff;
+    background: #f00;
 }
 
-#window button.persistent {
-    color: #7c818c;
-    font-size: 12px;
-}
-
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-#window button:hover {
-    transition: none;
-    box-shadow: inherit;
-    text-shadow: inherit;
-    border-radius: inherit;
-    color: #383c4a;
-    background: #7c818c;
-}
-
-#window button.focused {
-    color: white;
-}
 
 #language {
     padding-left: 16px;
@@ -99,6 +78,17 @@ window#waybar.hidden {
     background-color: #90b1b1;
     color: #2a5c45;
 }
+
+#custom-keyboard {
+    margin-right: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 10px;
+    transition: none;
+    color: #ffffff;
+    background: #383c4a;
+}
+
 
 #custom-mem {
     margin-right: 8px;
