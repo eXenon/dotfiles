@@ -349,6 +349,7 @@ EUF
 " LSP setup
 lua require'lspconfig'.pylsp.setup{}
 lua require'lspconfig'.ocamllsp.setup{}
+lua require'lspconfig'.rust_analyzer.setup{}
 
 lua << EOF
 local nvim_lsp = require('lspconfig')
@@ -504,7 +505,7 @@ nvim_lsp['elixirls'].setup {
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp', 'ocamllsp', 'rls' }
+local servers = { 'pylsp', 'ocamllsp' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
