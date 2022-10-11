@@ -515,5 +515,4 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-require('rust-tools.inlay_hints').set_inlay_hints()
 EOF
