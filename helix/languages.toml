@@ -1,0 +1,5 @@
+[[langage]]
+name = "elm"
+file-types = ["elm"]
+auto-format = true
+formatter = { command = "elm-format", args=["--stdin"] }
