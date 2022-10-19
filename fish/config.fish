@@ -44,3 +44,4 @@ alias cd="z"
 
 # Direnv
 eval (asdf exec direnv hook fish)
+
