@@ -319,7 +319,7 @@ nnoremap <leader>x <C-X>
 lua << EUF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "elixir", "eex", "heex", "fish", "gleam", "css", "scss", "html", "javascript", "bash", "json", "elm", "rust", "ocaml", "python", "vim", "lua" },
+  ensure_installed = { "elixir", "eex", "heex", "fish", "gleam", "css", "scss", "html", "javascript", "bash", "json", "elm", "rust", "ocaml", "python", "vim", "lua", "hcl" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = true,

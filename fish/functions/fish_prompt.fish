@@ -68,10 +68,10 @@ function __user_prompt --desc "Return small prompt based on user"
   case root
     echo "🗲"
     __vi_mode
-  case exenon xavier
+  case exenon xavier xavier.nunn
     __vi_mode
   case '*'
-    echo "?"
+    echo "unknown user"
   end
 end
 
@@ -114,7 +114,7 @@ function __vi_mode --desc "Translate the vi mode into a single caracter"
       echo 'v'
     case '*'
       set_color --bold red
-      echo '?'
+      echo "unknown mode"
   end
   set_color normal
 end
@@ -141,7 +141,7 @@ function fish_right_prompt
 
   # Background jobs
   if test (jobs -p | wc -l) -gt 0
-    __bubble $color3 $color0 (jobs -p | wc -l)
+    __bubble $color3 $color0 (jobs -p | wc -l | string trim)
     echo -n " "
   end
 
