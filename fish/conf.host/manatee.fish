@@ -24,3 +24,8 @@ end
 function reload
   source ~/.config/fish/config.fish
 end
+
+
+function __tabby_working_directory_reporting --on-event fish_prompt --description "Function to allow the tabby terminal to know where it's at"
+    echo -en "\e]1337;CurrentDir=$PWD\x7"
+end
