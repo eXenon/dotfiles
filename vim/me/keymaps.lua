@@ -21,9 +21,13 @@ vim.keymap.set("x", "<leader>p", "\"_dP")
 
 -- Copy-paste using system clipboard
 vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keYmap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("n", "<leader>Y", "\"+Y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 
 -- Delete without putting into the buffer
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
+
+-- Quickfix navigation
+vim.keymap.set("n", "<leader>qn", ":cn<CR>")
+vim.keymap.set("n", "<leader>qp", ":cp<CR>")
