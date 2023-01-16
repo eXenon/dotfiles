@@ -14,12 +14,16 @@ return require("packer").startup(function(use)
 	-- Treesitter & related
 	use { "nvim-treesitter/nvim-treesitter", run = { ':TSUpdate' }}
 	use "nvim-treesitter/playground"
-	
+
 	-- Undotree
 	use "mbbill/undotree"
 
 	-- Git integration
 	use "tpope/vim-fugitive"
+
+    -- Load neovim lua API
+    use "folke/neodev.nvim"
+    require("neodev").setup({ }) -- This needs to be set up before the LSP
 
 	-- LSP
 	use {
