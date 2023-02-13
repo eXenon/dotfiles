@@ -7,12 +7,14 @@ return require("packer").startup(function(use)
 		'nvim-telescope/telescope.nvim', branch = '0.1.x',
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
 	-- Catppuccin Colorscheme
 	use { "catppuccin/nvim", as = "catppuccin" }
 
 	-- Treesitter & related
 	use { "nvim-treesitter/nvim-treesitter", run = { ':TSUpdate' }}
+    use "nvim-treesitter/nvim-treesitter-textobjects"
 	use "nvim-treesitter/playground"
 
 	-- Undotree
@@ -47,4 +49,10 @@ return require("packer").startup(function(use)
 			{'rafamadriz/friendly-snippets'},
 		}
 	}
+
+    -- Jinja higlighting
+    use "hiphish/jinja.vim"
+
+    -- Black formatting
+    use 'ambv/black'
 end)
