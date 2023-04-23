@@ -1,10 +1,6 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
-lsp.ensure_installed({
-    'sumneko_lua',
-})
-
 lsp.on_attach(function(client, buf)
     local opts = { buffer = buf, remap = false }
 
