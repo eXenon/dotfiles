@@ -31,3 +31,4 @@ vim/undo/
 vim/plugs/
 vim/.netrwhist
 vim/plugin/packer_compiled.lua
+.luarc.json
