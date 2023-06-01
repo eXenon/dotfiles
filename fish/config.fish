@@ -45,3 +45,8 @@ alias find="fd"
 
 # Direnv
 eval (asdf exec direnv hook fish)
+
+# atuin
+if status is-interactive
+    atuin init fish | source
+end
