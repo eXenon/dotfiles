@@ -4,13 +4,16 @@ lsp.preset('recommended')
 lsp.on_attach(function(client, buf)
     local opts = { buffer = buf, remap = false }
 
+    -- Format on save
+    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+
     -- Default keymaps I use:
     -- gd -> goto definition
     -- K  -> display documentation under cursor
     vim.keymap.set("n", "gn", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "gp", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("n", "<leader>f", vim.cmd.LspZeroFormat, opts)
+    vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, opts)
     vim.keymap.set("n", "<leader>t", function() vim.lsp.buf.type_definition() end, opts)
 end)
 
@@ -22,9 +25,9 @@ lsp.setup()
 --  Fix Elm LSP root directory detection
 local lspconfig = require('lspconfig')
 lspconfig.elmls.setup({
-    root_dir = function(fname)
+    root_dir = function(_)
         return vim.loop.cwd()
-    end
+    end,
 })
 
 --  Add Tailwind LSP to elm files
@@ -68,5 +71,3 @@ lspconfig.tailwindcss.setup({
         }
     }
 })
-
-vim.lsp.set_log_level("debug")

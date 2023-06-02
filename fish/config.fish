@@ -46,7 +46,9 @@ alias find="fd"
 # Direnv
 eval (asdf exec direnv hook fish)
 
-# atuin
+# Atuin
 if status is-interactive
     atuin init fish | source
 end
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /Users/xavier.nunn/.ghcup/bin # ghcup-env
