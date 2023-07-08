@@ -21,12 +21,12 @@ fish_vi_key_bindings
 # Remove greeting
 set fish_greeting
 
+# RTX
+rtx activate -s fish | source
+
 # IEx options
 set -xg ERL_AFLAGS "-kernel shell_history enabled"
 set -xg IEX_WITH_WERL 1
-
-# asdf version manager
-source ~/.asdf/asdf.fish
 
 # Load host-specific file
 set -xg HOSTNAME (hostname)
@@ -42,8 +42,5 @@ alias grep="rg"
 alias psql="pgcli"
 alias cd="z"
 alias find="fd"
-
-# Direnv
-eval (asdf exec direnv hook fish)
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /Users/xavier.nunn/.ghcup/bin # ghcup-env

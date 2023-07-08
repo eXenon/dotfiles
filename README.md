@@ -12,5 +12,4 @@ Configuration files for my setup
 * [kitty](https://sw.kovidgoyal.net/kitty/) as terminal emulator (for the sweet sweet ligatures)
 * [FiraCode](https://github.com/tonsky/FiraCode) as font (for the sweet sweet ligatures)
 * [rofi](https://github.com/davatorium/rofi) for the launcher
-* [asdf](https://asdf-vm.com) for the version management
-* [direnv](https://direnv.net) for transparent version switching
+* [rtx](https://github.com/jdxcode/rtx) for the version management and transparent environments
