@@ -42,5 +42,3 @@ alias grep="rg"
 alias psql="pgcli"
 alias cd="z"
 alias find="fd"
-
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /Users/xavier.nunn/.ghcup/bin # ghcup-env
