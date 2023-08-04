@@ -9,12 +9,50 @@ lsp.on_attach(function(client, buf)
 
     -- Default keymaps I use:
     -- gd -> goto definition
-    -- K  -> display documentation under cursor
+    -- gR -> rename
+    -- gn/gp goto next/prev issue
     vim.keymap.set("n", "gn", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "gp", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, opts)
     vim.keymap.set("n", "<leader>t", function() vim.lsp.buf.type_definition() end, opts)
+
+    -- Toggle automatic hover of info and symbol highlight
+    vim.g.local_automatic_lsp_hover = true
+    vim.keymap.set("n", "<leader>Ld", function()
+        if vim.g.local_automatic_lsp_hover then
+            vim.g.local_automatic_lsp_hover = false
+            print("Disabled automatic hover info.")
+        else
+            vim.g.local_automatic_lsp_hover = true
+            print("Enabled automatic hover info.")
+        end
+    end, opts)
+
+    -- Highlight symbol under cursor
+    if client.server_capabilities.documentHighlightProvider then
+        vim.cmd [[
+      hi! LspReferenceRead cterm=bold ctermbg=235 guibg=DarkBlue
+      hi! LspReferenceText cterm=bold ctermbg=235 guibg=DarkBlue
+      hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=DarkBlue
+    ]]
+        vim.api.nvim_create_augroup('lsp_document_highlight', {})
+        vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+            group = 'lsp_document_highlight',
+            buffer = 0,
+            callback = function()
+                if vim.g.local_automatic_lsp_hover then
+                    vim.lsp.buf.document_highlight()
+                    vim.lsp.buf.hover()
+                end
+            end
+        })
+        vim.api.nvim_create_autocmd('CursorMoved', {
+            group = 'lsp_document_highlight',
+            buffer = 0,
+            callback = vim.lsp.buf.clear_references,
+        })
+    end
 end)
 
 

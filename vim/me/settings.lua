@@ -1,6 +1,6 @@
 -- Set linenumbers
 vim.opt.nu = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 -- Expand tabs to 4 spaces
 vim.opt.tabstop = 4
@@ -10,7 +10,7 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- Persistent undofile, even after close
 vim.opt.undofile = true
