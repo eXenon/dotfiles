@@ -21,9 +21,6 @@ fish_vi_key_bindings
 # Remove greeting
 set fish_greeting
 
-# RTX
-rtx activate -s fish | source
-
 # IEx options
 set -xg ERL_AFLAGS "-kernel shell_history enabled"
 set -xg IEX_WITH_WERL 1
@@ -32,6 +29,9 @@ set -xg IEX_WITH_WERL 1
 set -xg HOSTNAME (hostname)
 set -xg FISH_HOST_CONFIG_FILE "$__fish_config_dir/conf.host/$HOSTNAME.fish"
 source $FISH_HOST_CONFIG_FILE
+
+# RTX
+rtx activate -s fish | source
 
 # Set up zoxide
 zoxide init fish | source
