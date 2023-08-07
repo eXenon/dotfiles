@@ -14,12 +14,15 @@ lsp.on_attach(function(client, buf)
     vim.keymap.set("n", "gn", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "gp", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, opts)
-    vim.keymap.set("n", "<leader>t", function() vim.lsp.buf.type_definition() end, opts)
+    vim.keymap.set("n", "gf", function() vim.lsp.buf.format() end, opts)
+    vim.keymap.set("n", "gt", function() vim.lsp.buf.type_definition() end, opts)
+    vim.keymap.set("n", "gh", function() vim.lsp.buf.hover() end, opts)
+    vim.keymap.set("n", "gS", function() vim.lsp.buf.code_action() end, opts)
 
-    -- Toggle automatic hover of info and symbol highlight
+    -- Toggle automatic hover symbol highlight
     vim.g.local_automatic_lsp_hover = true
-    vim.keymap.set("n", "<leader>Ld", function()
+    vim.g.local_automatic_lsp_hover_flag = true
+    vim.keymap.set("n", "gI", function()
         if vim.g.local_automatic_lsp_hover then
             vim.g.local_automatic_lsp_hover = false
             print("Disabled automatic hover info.")
@@ -41,16 +44,16 @@ lsp.on_attach(function(client, buf)
             group = 'lsp_document_highlight',
             buffer = 0,
             callback = function()
-                if vim.g.local_automatic_lsp_hover then
+                if vim.g.local_automatic_lsp_hover and vim.g.local_automatic_lsp_hover_flag then
                     vim.lsp.buf.document_highlight()
-                    vim.lsp.buf.hover()
+                    vim.g.local_automatic_lsp_hover_flag = false
+                else
+                    if vim.g.local_automatic_lsp_hover then
+                        vim.lsp.buf.clear_references()
+                        vim.g.local_automatic_lsp_hover_flag = true
+                    end
                 end
             end
-        })
-        vim.api.nvim_create_autocmd('CursorMoved', {
-            group = 'lsp_document_highlight',
-            buffer = 0,
-            callback = vim.lsp.buf.clear_references,
         })
     end
 end)
