@@ -13,11 +13,13 @@ lsp.on_attach(function(client, buf)
     -- gn/gp goto next/prev issue
     vim.keymap.set("n", "gn", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "gp", function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("n", "gf", function() vim.lsp.buf.format() end, opts)
     vim.keymap.set("n", "gt", function() vim.lsp.buf.type_definition() end, opts)
     vim.keymap.set("n", "gh", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "gS", function() vim.lsp.buf.code_action() end, opts)
+
+    -- Act on the code using the LSP
+    vim.keymap.set("n", "gas", function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set("n", "gar", function() vim.lsp.buf.rename() end, opts)
 
     -- Toggle automatic hover symbol highlight
     vim.g.local_automatic_lsp_hover = true
