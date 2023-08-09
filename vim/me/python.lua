@@ -5,6 +5,7 @@ vim.api.nvim_create_autocmd(
         pattern = { "*.py" },
         callback = function()
             vim.cmd "Black"
+            vim.cmd "Isort"
         end
     }
 )

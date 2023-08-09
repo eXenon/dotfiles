@@ -56,4 +56,7 @@ return require("packer").startup(function(use)
 
     -- Black formatting
     use 'ambv/black'
+
+    -- Isort formatting
+    use 'stsewd/isort.nvim'
 end)
