@@ -34,15 +34,16 @@ vim.keymap.set("n", "<leader>qp", ":cp<CR>")
 
 -- Integrate with local envs
 local makefile = #(vim.fs.find('Makefile', {}))
-function fallback()
+function Fallback()
     print("No Makefile detected.")
 end
+
 if makefile > 0 then
     vim.keymap.set("n", "<leader>mf", ":!make format<CR>")
     vim.keymap.set("n", "<leader>mc", ":!make check<CR>")
     vim.keymap.set("n", "<leader>mb", ":!make build<CR>")
 else
-    vim.keymap.set("n", "<leader>mf", fallback)
-    vim.keymap.set("n", "<leader>mc", fallback)
-    vim.keymap.set("n", "<leader>mb", fallback)
+    vim.keymap.set("n", "<leader>mf", Fallback)
+    vim.keymap.set("n", "<leader>mc", Fallback)
+    vim.keymap.set("n", "<leader>mb", Fallback)
 end
