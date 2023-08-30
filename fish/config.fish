@@ -10,11 +10,6 @@ set -xg ERL_AFLAGS "-kernel shell_history enabled"
 set -xg PATH ~/.local/bin/ $PATH
 set -xg EDITOR "/usr/bin/nvim"
 
-# Opam
-if test -n "$OPAM_SWITCH_PREFIX"
-    eval (opam env)
-end
-
 # VI mode
 fish_vi_key_bindings
 

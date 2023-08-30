@@ -29,6 +29,3 @@ end
 function __tabby_working_directory_reporting --on-event fish_prompt --description "Function to allow the tabby terminal to know where it's at"
     echo -en "\e]1337;CurrentDir=$PWD\x7"
 end
-
-# Opam
-source /home/exenon/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
