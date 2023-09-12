@@ -8,9 +8,10 @@ lsp.on_attach(function(client, buf)
     vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
     -- Default keymaps I use:
-    -- gd -> goto definition
-    -- gR -> rename
     -- gn/gp goto next/prev issue
+    -- gf format
+    -- gt goto type type_definition
+    -- gh see hover
     vim.keymap.set("n", "gn", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "gp", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "gf", function() vim.lsp.buf.format() end, opts)
@@ -64,9 +65,18 @@ end)
 lsp.setup()
 
 -- Fixes to specific LSP setups
+local lspconfig = require('lspconfig')
+
+-- Fix purescript filetype detection
+vim.api.nvim_create_autocmd(
+    { "BufEnter", "BufWinEnter" },
+    {
+        pattern = "*.purs",
+        command = 'set filetype=purescript syntax=haskell',
+    }
+)
 
 --  Fix Elm LSP root directory detection
-local lspconfig = require('lspconfig')
 lspconfig.elmls.setup({
     root_dir = function(_)
         return vim.loop.cwd()

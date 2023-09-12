@@ -29,3 +29,6 @@ vim.opt.scrolloff = 8
 
 -- Always draw sign column for consistent UI
 vim.opt.signcolumn = "yes"
+
+-- Always reload from disk
+vim.opt.autoread = true
