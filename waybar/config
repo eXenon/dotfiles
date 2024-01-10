@@ -2,34 +2,26 @@
     // "layer": "top", // Waybar at top layer
     // "position": "left", // Waybar position (top|bottom|left|right)
     // "height": 30, // Waybar height (to be removed for auto height)
-    "margin": "10 20 0 20",
+    "margin": "2 5 0 10",
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["wlr/workspaces"],
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock", "custom/weather"],
-    "modules-right": ["custom/keyboard", "pulseaudio", "battery"],
+    "modules-right": ["pulseaudio", "battery"],
 
 
     //***************************
     //*  Modules configuration  *
     //***************************
 
-    "custom/keyboard": {
-        "format": "{} ",
-        "interval": 3,
-        "exec": "hyprctl getoption -j input:kb_variant | jq -r .str",
-        "tooltip": false,
-        "on-click": "hyprctl keyword input:kb_variant $(echo bepoazerty | sed \"s/$(hyprctl getoption -j input:kb_variant | jq -r .str)//\")"
-    },
-
-    "wlr/workspaces": {
+    "hyprland/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
         "all-outputs": true,
         "format-icons": {
             "web": "",
             "music": "",
-            "notes": "",
+            "notes": "󰎈",
             "1": "1",
             "2": "2",
             "3": "3",
@@ -65,25 +57,25 @@
         "reverse-scrolling": 1,
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": "婢 {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
+            "hands-free": "󱠰",
             "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["奄", "奔", "墳"]
+            "default": ["", "", ""]
         },
         "on-click": "pavucontrol",
         "min-length": 13,
     },
 
     "custom/mem": {
-        "format": "{} ",
+        "format": "{} 󰍛",
         "interval": 3,
         "exec": "free -h | awk '/Mem:/{printf $3}'",
         "tooltip": false,
@@ -112,11 +104,11 @@
             "critical": 15
         },
         "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
+        "format-charging": "{capacity}% 󱟠",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", "", ""],
-    "on-update": "$HOME/.config/waybar/scripts/check_battery.sh",
+        "format-icons": ["", "", "", "", ""],
+	"on-update": "$HOME/.config/waybar/scripts/check_battery.sh",
     },
 
 }
