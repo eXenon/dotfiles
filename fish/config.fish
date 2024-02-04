@@ -26,7 +26,7 @@ set -xg FISH_HOST_CONFIG_FILE "$__fish_config_dir/conf.host/$HOSTNAME.fish"
 source $FISH_HOST_CONFIG_FILE
 
 # RTX
-rtx activate -s fish | source
+mise activate -s fish | source
 
 # Set up zoxide
 zoxide init fish | source
@@ -34,6 +34,4 @@ zoxide init fish | source
 # Set up shiny new tools!
 alias cat="bat --paging=never"
 alias grep="rg"
-alias psql="pgcli"
-alias cd="z"
 alias find="fd"
