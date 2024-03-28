@@ -1,7 +1,7 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
-lsp.on_attach(function(client, buf)
+on_attach = function(client, buf)
     local opts = { buffer = buf, remap = false }
 
     -- Format on save
@@ -59,7 +59,8 @@ lsp.on_attach(function(client, buf)
             end
         })
     end
-end)
+end
+lsp.on_attach(on_attach)
 
 
 lsp.setup()
@@ -123,4 +124,10 @@ lspconfig.tailwindcss.setup({
             validate = true
         }
     }
+})
+
+-- OCaml LSP doesn’t work out of the box
+lspconfig.ocamllsp.setup({
+    filetypes = { "ocaml" },
+    on_attach = on_attach,
 })
