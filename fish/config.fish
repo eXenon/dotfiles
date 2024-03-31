@@ -25,7 +25,7 @@ set -xg HOSTNAME (hostname)
 set -xg FISH_HOST_CONFIG_FILE "$__fish_config_dir/conf.host/$HOSTNAME.fish"
 source $FISH_HOST_CONFIG_FILE
 
-# Mise-en-place
+# mise-en-place
 mise activate -s fish | source
 
 # Set up zoxide
