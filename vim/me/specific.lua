@@ -22,6 +22,32 @@ vim.api.nvim_create_autocmd(
     }
 )
 
+vim.api.nvim_create_autocmd(
+    "BufReadPost",
+    {
+        pattern = { "*.purs" },
+        callback = function()
+            local lspconfig = require("lspconfig")
+            lspconfig.purescriptls.setup({})
+            lspconfig.tailwindcss.setup({
+                settings = {
+                    includeLanguages = {
+                        purescript = "html"
+                    },
+                    experimental = {
+                        classRegex = {
+                            [[ClassName "([^"]*)]],
+                        }
+                    },
+                },
+                filetypes = {
+                    "purescript"
+                },
+            })
+        end
+    }
+)
+
 ---- Purescript formatter
 vim.api.nvim_create_autocmd(
     "BufWritePost",
@@ -30,7 +56,6 @@ vim.api.nvim_create_autocmd(
         callback = function()
             vim.fn.system("purs-tidy format-in-place src/*")
             vim.cmd("e")
-            vim.cmd("set syntax=haskell")
         end
     }
 )

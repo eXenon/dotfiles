@@ -30,6 +30,19 @@ return require("packer").startup(function(use)
     -- LSP
     use "neovim/nvim-lspconfig"
     use {
+        "williamboman/mason.nvim",
+        requires = {
+            "mhartington/formatter.nvim",
+            "neovim/nvim-lspconfig",
+            "williamboman/mason-lspconfig.nvim",
+            "jose-elias-alvarez/null-ls.nvim",
+            "mfussenegger/nvim-dap",
+            "rcarriga/nvim-dap-ui",
+            "mfussenegger/nvim-lint",
+        }
+    }
+    use "williamboman/mason-lspconfig.nvim"
+    use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
             -- LSP Support
@@ -59,4 +72,18 @@ return require("packer").startup(function(use)
 
     -- Isort formatting
     use 'stsewd/isort.nvim'
+
+    -- Setup
+    local lsp_zero = require("lsp-zero")
+    require("mason").setup({})
+    require('mason-lspconfig').setup({
+        ensure_installed = {},
+        handlers = {
+            lsp_zero.default_setup,
+            lua_ls = function()
+                local lua_opts = lsp_zero.nvim_lua_ls()
+                require('lspconfig').lua_ls.setup(lua_opts)
+            end,
+        }
+    })
 end)
