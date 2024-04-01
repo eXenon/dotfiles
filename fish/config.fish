@@ -35,3 +35,4 @@ zoxide init fish | source
 alias cat="bat --paging=never"
 alias grep="rg"
 alias find="fd"
+alias cd="z"
