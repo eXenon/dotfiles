@@ -1,10 +1,16 @@
 #
 #   Simple aliases
 #
-alias tmux="tmux -2"
-alias vim="nvim"
-alias txp="tmuxp"
-alias txl="tmuxp load"
+if type -q "tmux" then
+    alias tmux="tmux -2"
+end
+if type -q "nvim" then
+    alias vim="nvim"
+end
+if type -q "tmuxp" then
+    alias txp="tmuxp"
+    alias txl="tmuxp load"
+end
 
 set -xg ERL_AFLAGS "-kernel shell_history enabled"
 set -xg PATH ~/.local/bin/ $PATH
@@ -32,7 +38,15 @@ mise activate -s fish | source
 zoxide init fish | source
 
 # Set up shiny new tools!
-alias cat="bat --paging=never"
-alias grep="rg"
-alias find="fd"
-alias cd="z"
+if type -q "bat" then
+    alias cat="bat --paging=never"
+end
+if type -q "rg" then
+    alias grep="rg"
+end
+if type -q "fd" then
+    alias find="fd"
+end
+if type -q "z" then 
+    alias cd="z"
+end
