@@ -1,17 +1,3 @@
-#
-#   Simple aliases
-#
-if type -q "tmux" then
-    alias tmux="tmux -2"
-end
-if type -q "nvim" then
-    alias vim="nvim"
-end
-if type -q "tmuxp" then
-    alias txp="tmuxp"
-    alias txl="tmuxp load"
-end
-
 set -xg ERL_AFLAGS "-kernel shell_history enabled"
 set -xg PATH ~/.local/bin/ $PATH
 set -xg EDITOR "/usr/bin/nvim"
@@ -49,4 +35,14 @@ if type -q "fd" then
 end
 if type -q "z" then 
     alias cd="z"
+end
+if type -q "tmux" then
+    alias tmux="tmux -2"
+end
+if type -q "nvim" then
+    alias vim="nvim"
+end
+if type -q "tmuxp" then
+    alias txp="tmuxp"
+    alias txl="tmuxp load"
 end
