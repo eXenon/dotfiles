@@ -1,8 +1,11 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
-on_attach = function(client, buf)
+local on_attach = function(client, buf)
     local opts = { buffer = buf, remap = false }
+
+    -- LSP Zero default keymaps
+    lsp.default_keymaps({ buffer = buf })
 
     -- Format on save
     vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
@@ -73,7 +76,7 @@ vim.api.nvim_create_autocmd(
     { "BufEnter", "BufWinEnter" },
     {
         pattern = "*.purs",
-        command = 'set filetype=purescript syntax=haskell',
+        command = 'set filetype=purescript',
     }
 )
 
@@ -84,22 +87,24 @@ lspconfig.elmls.setup({
     end,
 })
 
---  Add Tailwind LSP to elm files
+--  Add Tailwind LSP to elm and purescript files
 lspconfig.tailwindcss.setup({
-    filetypes = { "html", "elm" },
+    filetypes = { "html", "elm", "purescript" },
     init_options = {
         userLanguages = {
             elm = "html",
-            html = "html"
+            html = "html",
+            purescript = "html"
         }
     },
     settings = {
         tailwindCSS = {
             includeLanguages = {
                 elm = "html",
-                html = "html"
+                html = "html",
+                purescript = "html"
             },
-            classAttributes = { "class", "className", "classList", "ngClass" },
+            classAttributes = { "class", "className", "classList", "ngClass", "CSS" },
             experimental = {
                 classRegex = {
                     "\\bclass[\\s(<|]+\"([^\"]*)\"",
@@ -109,7 +114,8 @@ lspconfig.tailwindcss.setup({
                     "\\bclass[\\s<|]+\"[^\"]*\"\\s*\\+{2}\\s*\" [^\"]*\"\\s*\\+{2}\\s*\" [^\"]*\"\\s*\\+{2}\\s*\" ([^\"]*)\"",
                     "\\bclassList[\\s\\[\\(]+\"([^\"]*)\"",
                     "\\bclassList[\\s\\[\\(]+\"[^\"]*\",\\s[^\\)]+\\)[\\s\\[\\(,]+\"([^\"]*)\"",
-                    "\\bclassList[\\s\\[\\(]+\"[^\"]*\",\\s[^\\)]+\\)[\\s\\[\\(,]+\"[^\"]*\",\\s[^\\)]+\\)[\\s\\[\\(,]+\"([^\"]*)\""
+                    "\\bclassList[\\s\\[\\(]+\"[^\"]*\",\\s[^\\)]+\\)[\\s\\[\\(,]+\"[^\"]*\",\\s[^\\)]+\\)[\\s\\[\\(,]+\"([^\"]*)\"",
+                    "\\bCSS\\.[_a-z]+\\s\"[^\"]+",
                 }
             },
             lint = {
