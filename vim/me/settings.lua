@@ -32,3 +32,11 @@ vim.opt.signcolumn = "yes"
 
 -- Always reload from disk
 vim.opt.autoread = true
+
+-- Show illegal whitespaces
+vim.opt.list = true
+vim.opt.listchars["tab"] = "»"
+vim.opt.listchars["trail"] = "·"
+vim.opt.listchars["nbsp"] = "⎵"
+vim.opt.listchars["precedes"] = "◀"
+vim.opt.listchars["extends"] = "▶"
