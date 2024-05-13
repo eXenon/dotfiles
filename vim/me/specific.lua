@@ -23,14 +23,3 @@ vim.api.nvim_create_autocmd(
 )
 
 
----- Purescript formatter
-vim.api.nvim_create_autocmd(
-    "BufWritePost",
-    {
-        pattern = { "*.purs" },
-        callback = function()
-            vim.fn.system("purs-tidy format-in-place src/*")
-            vim.cmd("e")
-        end
-    }
-)

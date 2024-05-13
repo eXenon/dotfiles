@@ -83,8 +83,21 @@ vim.api.nvim_create_autocmd(
 --  Fix Elm LSP root directory detection
 lspconfig.elmls.setup({
     root_dir = function(_)
-        return vim.loop.cwd()
+        return vim.fn.getcwd()
     end,
+})
+
+
+-- Purescript LSP setup
+lspconfig.purescriptls.setup({
+    root_dir = function(_)
+        return vim.fn.getcwd()
+    end,
+    settings = {
+        purescript = {
+            formatter = "purs-tidy",
+        }
+    }
 })
 
 --  Add Tailwind LSP to elm and purescript files
