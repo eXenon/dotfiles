@@ -150,3 +150,8 @@ lspconfig.ocamllsp.setup({
     filetypes = { "ocaml" },
     on_attach = on_attach,
 })
+
+-- Gleam shouldn’t be installed through Mason
+lspconfig.gleam.setup({
+    on_attach = on_attach
+})
