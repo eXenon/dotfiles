@@ -1,0 +1,70 @@
+#!/usr/bin/fish
+
+# Script to generate icons for Hyprland Workspaces
+set active (hyprctl -j activeworkspace | jq -r .name)
+set existing (hyprctl -j workspaces | jq -r ".[] | .name" | sort)
+set all web 1 2 3 4 5 6 7 8 9
+
+# Active workspace
+function __eww_active_workspace_icon
+    if test "$active" = "web"
+        echo -n ""
+    else
+        echo -n "$active"
+    end
+end
+
+# Translate workspace name into icon
+function __eww_workspace_icon
+    if test "$argv[1]" = "web"
+        echo -n ""
+    else
+        echo -n "$argv[1]"
+    end
+end
+
+# Make box for one workspace
+function __eww_workspace_box
+    for w in $argv
+        set icon (__eww_workspace_icon $w)
+        set classes (__eww_classes $w)
+        echo "
+(button   :class \"$classes\"
+          :onclick \"hyprctl dispatch -- workspace $w\"
+          \"$icon\"
+)"
+    end
+end
+
+# Extra classes for styling
+function __eww_classes
+    set classes w-button
+    if test $argv[1] = $all[1]
+        set classes[2] w-first
+    end
+    if test $argv[1] = $active
+        set classes[3] w-active
+    end
+    if test $argv[1] = $all[-1]
+        set classes[4] w-last
+    end
+    if ! contains $argv[1] $existing
+        set classes[5] w-inactive
+    end
+    echo -n (string join " " $classes)
+end
+
+# Make list into literal by adding a box around it
+function __eww_list_to_literal
+    echo "
+(box  :orientation \"v\"
+      :space-evenly \"true\"
+$argv
+)"
+end
+
+set command (echo "$argv[1]")
+switch $command
+    case "all"
+        __eww_list_to_literal (__eww_workspace_box $all)
+end

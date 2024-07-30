@@ -1,0 +1,86 @@
+*{
+  all: unset;
+}
+
+// Variable Color's
+$background: #1e1e2e;
+$foreground: #cdd6f4;
+
+$black: #45475a;
+$gray: #585b70;
+$darkgray: #313244;
+$red: #f38ba8;
+$green: #a6e3a1;
+$yellow: #f9e2af;
+$blue: #89b4fa;
+$magenta: #f5c2e7;
+$cyan: #94e2d5;
+$white: #bac2de;
+$truewhite: #fff;
+
+.bar {
+  background-color: $background;
+  padding: 5px;
+  border-radius: 10px;
+  margin: 10px 2px 10px 5px;
+  border: 1px solid $gray;
+}
+
+.top-bar {
+  padding: 0;
+}
+
+.bat{
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 1.2em;
+}
+
+.bat-high {
+  color: $green;
+}
+
+.bat-medium {
+  color: $yellow;
+}
+
+.bat-low {
+  color: $red;
+}
+
+.bat-charging {
+  color: $green;
+}
+
+.label {
+  color: $blue;
+}
+
+.w-button {
+  font-size: 1.2em;
+  padding: 5px 2px 5px 2px;
+  background-color: $background;
+  color: $white;
+  border-left: 3px solid $background;
+  border-right: 3px solid $background;
+}
+
+.w-first {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-top: 5px;
+}
+
+.w-last {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-bottom: 5px;
+}
+
+.w-active {
+  color: $truewhite;
+  border-left: 3px solid white;
+}
+
+.w-inactive {
+  color: $darkgray;
+}

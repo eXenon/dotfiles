@@ -1,0 +1,82 @@
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                      Widget Section
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Battery Widget
+(defwidget bat []
+    (box    :orientation "v"
+            :space-evenly "false"
+    (label  :class "${battery-classes}"
+            :halign "center"
+            :text battery
+            :tooltip "Battery: ${battery-capacity}%")))
+(defpoll battery            :interval "5s"  "scripts/battery icon")
+(defpoll battery-capacity  :interval "5s"  "scripts/battery percent")
+(defpoll battery-classes    :interval "5s"  "scripts/battery classes")
+
+;; Clock Widget
+(defwidget time []
+    (box    :orientation "v" 
+            :class "time" 
+            :valign "end"
+    (button :onclick "scripts/popup calendar"   
+            :class "time-hour" hour)
+    (button :onclick "scripts/popup calendar"   
+            :class "time-min"  min)))
+(defpoll hour   :interval "1s"  "date '+%H'")
+(defpoll min    :interval "1s"  "date '+%M'")
+
+;; Hyprctl Workspace Widget
+(defwidget workspaces []
+    (box    :orientation "v"
+            :space-evenly "false"
+    (literal :content workspaceliteral)
+    ))
+(defpoll workspaceliteral :interval "500ms"  "scripts/hyprland all")
+
+
+;; Grouping widgets
+(defwidget top-bar []
+ (box :class "bar top-bar"
+      :orientation "v"
+      :vexpand "false"
+      :hexpand "false"
+      :space-evenly "true"
+  (workspaces)))
+
+(defwidget bottom-bar []
+ (box :class "bar bottom-bar"
+      :orientation "v"
+      :vexpand "false"
+      :hexpand "false"
+      :space-evenly "true"
+  (time)
+  (bat)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                      Window Section
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defwindow topbar
+ :geometry (geometry :x "0"
+     :y "0"
+     :height "20%"
+     :width "47px")
+ :monitor 0
+ :reserve (struts :distance "35px" :side "left")
+ :wm-ignore false
+ :hexpand "false"
+ :vexpand "false"
+ (top-bar))
+
+(defwindow bottombar
+ :geometry (geometry :x "0"
+     :y "80%"
+     :height "20%"
+     :width "47px")
+ :monitor 0
+ :reserve (struts :distance "35px" :side "left")
+ :wm-ignore false
+ :hexpand "false"
+ :vexpand "false"
+ (bottom-bar))

@@ -1,0 +1,131 @@
+#!/usr/bin/fish
+
+set capacity $(cat /sys/class/power_supply/BAT0/capacity)
+set is_charging $(cat /sys/class/power_supply/BAT0/status)
+
+# Return state string to easily switch on
+function __eww_charging_state
+    if test $is_charging = "Discharging"
+        echo -n "no"
+    else
+        echo -n "yes"
+    end
+end
+function __eww_capacity_state
+    if test $capacity -lt 10
+        echo -n 0
+    else if test $capacity -lt 20
+        echo -n 1
+    else if test $capacity -lt 30
+        echo -n 2
+    else if test $capacity -lt 40
+        echo -n 3
+    else if test $capacity -lt 50
+        echo -n 4
+    else if test $capacity -lt 60
+        echo -n 5
+    else if test $capacity -lt 70
+        echo -n 6
+    else if test $capacity -lt 80
+        echo -n 7
+    else if test $capacity -lt 90
+        echo -n 8
+    else
+        echo -n 9
+    end
+end
+
+# Return icon to represent battery state
+function __eww_bat_icon
+    set charging (__eww_charging_state)
+    switch (__eww_capacity_state)
+    case 0
+        if test $charging = "no"
+            echo -e "󰂎"
+        else
+            echo -e "󰢟"
+        end
+    case 1
+        if test $charging = "no"
+            echo -e "󰁺"
+        else
+            echo -e "󰢜"
+        end
+    case 2
+        if test $charging = "no"
+            echo -e "󰁻"
+        else
+            echo -e "󰂆"
+        end
+    case 3
+        if test $charging = "no"
+            echo -e "󰁼"
+        else
+            echo -e "󰂈"
+        end
+    case 4
+        if test $charging = "no"
+            echo -e "󰁾"
+        else
+            echo -e "󰢝"
+        end
+    case 5
+        if test $charging = "no"
+            echo -e "󰁿"
+        else
+            echo -e "󰂉"
+        end
+    case 6
+        if test $charging = "no"
+            echo -e "󰂀"
+        else
+            echo -e "󰢞"
+        end
+    case 7
+        if test $charging = "no"
+            echo -e "󰂁"
+        else
+            echo -e "󰂊"
+        end
+    case 8
+        if test $charging = "no"
+            echo -e "󰂂"
+        else
+            echo -e "󰂋"
+        end
+    case 9
+        if test $charging = "no"
+            echo -e "󰁹"
+        else
+            echo -e "󰂅"
+        end
+    end
+end
+
+# Add classes to make things pruuuuty
+function __eww_bat_classes
+    set charging (__eww_charging_state)
+    set capacity (__eww_capacity_state)
+    set classes bat
+    if test $capacity -lt 3
+        set classes[2] "bat-low"
+    else if test $capacity -lt 6
+        set classes[2] "bat-medium"
+    else
+        set classes[2] "bat-high"
+    end
+    if test $charging = "yes"
+        set classes[2] "bat-charging"
+    end
+    echo -n (string join " " $classes)
+end
+
+# Execute required action
+switch $argv[1]
+case "icon"
+    __eww_bat_icon
+case "percent"
+    echo "$capacity"
+case "classes"
+    __eww_bat_classes
+end
