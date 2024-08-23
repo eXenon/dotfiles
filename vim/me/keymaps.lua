@@ -47,3 +47,9 @@ else
     vim.keymap.set("n", "<leader>mc", Fallback)
     vim.keymap.set("n", "<leader>mb", Fallback)
 end
+
+-- bépo navigation
+vim.keymap.set("n", "<leader>n", "<C-w><right>")
+vim.keymap.set("n", "<leader>t", "<C-w><left>")
+vim.keymap.set("n", "<leader>s", vim.cmd.bprev)
+vim.keymap.set("n", "<leader>r", vim.cmd.bnext)

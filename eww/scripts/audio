@@ -1,0 +1,52 @@
+#!/usr/bin/fish
+
+
+function __eww_volume
+    string match -r "\d+%" (pactl --format json get-sink-volume 0) | string trim -r -c "%"
+end
+
+function __eww_volume_set
+    echo $argv[1]
+    pactl set-sink-volume 0 "$argv[1]%"
+end
+
+function __eww_volume_classes
+    set classes "volume-bar-inner"
+    if test (pactl get-sink-mute 0) = "Mute: oui"
+        set classes[2] "volume-mute"
+    end
+    echo -n (string join " " $classes)
+end
+
+function __eww_toggle_mute
+    pactl set-sink-mute 0 toggle
+end
+
+function __eww_volume_icon
+    if test (pactl get-sink-mute 0) = "Mute: oui"
+        echo ""
+    else
+        set volume (__eww_volume)
+        if test $volume -eq 0
+            echo ""
+        else if test $volume -lt 50
+            echo ""
+        else
+            echo ""
+        end
+    end
+end
+
+# Execute required action
+switch $argv[1]
+case "volume"
+    __eww_volume
+case "set"
+    __eww_volume_set $argv[2]
+case "classes"
+    __eww_volume_classes
+case "toggle-mute"
+    __eww_toggle_mute
+case "icon"
+    __eww_volume_icon
+end

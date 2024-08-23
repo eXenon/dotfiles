@@ -1,0 +1,41 @@
+#!/usr/bin/fish
+
+# Parse output of nmcli tabular
+function __eww_wifi_name
+    string split -f 1 ":" $argv
+end
+
+# Gather info
+set state (nmcli -c no -m tabular -f name,type --terse connection show --active | string join "|")
+set wifistate (string match -r ".*wireless" "$state")
+set ethernetstate (string match -r "ethernet" "$state")
+
+# Command parsing
+set command (echo "$argv[1]")
+switch $command
+    case "icon"
+        if test $ethernetstate
+            echo -n "󰈁"
+        else if test $wifistate
+            echo -n "󰖩"
+        else
+            echo -n "󱘖"
+        end
+    case "text"
+        if test $wifistate
+            echo -n "Connected to $(__eww_wifi_name $wifistate)"
+        else if test $ethernetstate
+            echo -n "Connected to wired ethernet"
+        else
+            echo -n "No network"
+        end
+    case "classes"
+        if test $ethernetstate
+            echo -n "network-connected ethernet"
+        else if test $wifistate
+            echo -n "network-connected wifi"
+        else
+            echo -n "network-disconnected"
+        end
+end
+

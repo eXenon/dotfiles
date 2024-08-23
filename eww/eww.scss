@@ -30,7 +30,59 @@ $truewhite: #fff;
   padding: 0;
 }
 
-.bat{
+.bottom-bar {
+  padding-top: 0;
+}
+
+.icon-bar {
+}
+
+.volume-bar {
+  background: $background;
+}
+
+.volume-bar-inner {
+  color: $yellow;
+}
+
+.volume-bar-mute-button {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 1.2em;
+  margin-right: 5px;
+}
+
+.volume-bar-inner contents trough highlight {
+  background: $yellow;
+  min-width: 10px;
+  border-radius: 15px;
+  color: $yellow;
+}
+
+.volume-bar-inner contents trough slider {
+  min-width: 10px;
+  min-height: 15px;
+  background-color: $yellow;
+  border-radius: 15px;
+}
+
+.volume-mute {
+  color: $red;
+}
+
+.volume-mute contents trough highlight {
+  background-color: $red;
+}
+
+.volume-mute contents trough slider {
+  background-color: $red;
+}
+
+.time {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.bat {
   font-family: JetBrainsMono Nerd Font;
   font-size: 1.2em;
 }
@@ -49,6 +101,18 @@ $truewhite: #fff;
 
 .bat-charging {
   color: $green;
+}
+
+.network {
+  padding-right: 5px;
+}
+
+.network-connected {
+  color: $green;
+}
+
+.network-disconnected {
+  color: $red;
 }
 
 .label {

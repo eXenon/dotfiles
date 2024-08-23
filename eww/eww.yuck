@@ -7,25 +7,39 @@
 (defwidget bat []
     (box    :orientation "v"
             :space-evenly "false"
+            :valign "center"
     (label  :class "${battery-classes}"
             :halign "center"
             :text battery
             :tooltip "Battery: ${battery-capacity}%")))
 (defpoll battery            :interval "5s"  "scripts/battery icon")
-(defpoll battery-capacity  :interval "5s"  "scripts/battery percent")
+(defpoll battery-capacity   :interval "5s"  "scripts/battery percent")
 (defpoll battery-classes    :interval "5s"  "scripts/battery classes")
 
 ;; Clock Widget
 (defwidget time []
     (box    :orientation "v" 
             :class "time" 
-            :valign "end"
+            :valign "start"
     (button :onclick "scripts/popup calendar"   
             :class "time-hour" hour)
     (button :onclick "scripts/popup calendar"   
             :class "time-min"  min)))
-(defpoll hour   :interval "1s"  "date '+%H'")
-(defpoll min    :interval "1s"  "date '+%M'")
+(defpoll hour   :interval "10s"  "date '+%H'")
+(defpoll min    :interval "60s"  "date '+%M'")
+
+;; Network Widget
+(defwidget network []
+    (box    :orientation "v"
+            :space-evenly "false"
+            :valign "center"
+    (label  :class "network ${network-classes}"
+            :halign "center"
+            :text network
+            :tooltip network-tooltip)))
+(defpoll network            :interval "5s"  "scripts/wifi icon")
+(defpoll network-tooltip    :interval "5s"  "scripts/wifi text")
+(defpoll network-classes    :interval "5s"  "scripts/wifi classes")
 
 ;; Hyprctl Workspace Widget
 (defwidget workspaces []
@@ -37,6 +51,39 @@
 
 
 ;; Grouping widgets
+(defwidget icon-bar []
+ (box   :class "icon-bar"
+        :orientation "v"
+        :vexpand "false"
+        :hexpand "true"
+        :valign "end"
+    (network)
+    (bat)))
+
+(defwidget volume-bar []
+  (box  :class "volume-bar"
+        :orientation "v"
+        :vexpand "true"
+        :hexpand "true"
+        :valign "end"
+        :tooltip "Volume ${volume}%"
+        :height 100
+    (scale   :class volume-classes
+             :orientation "v"
+             :flipped true
+             :min 0
+             :max 100
+             :vexpand "true"
+             :onchange "scripts/audio set {}"
+             :value volume)
+    (button  :class "volume-mute-button ${volume-classes}"
+             :onclick "scripts/audio toggle-mute"
+             :valign "end"
+             volume-icon)))
+(defpoll volume :interval "1s" "scripts/audio volume")
+(defpoll volume-classes :interval "1s" "scripts/audio classes")
+(defpoll volume-icon :interval "1s" "scripts/audio icon")
+
 (defwidget top-bar []
  (box :class "bar top-bar"
       :orientation "v"
@@ -48,11 +95,11 @@
 (defwidget bottom-bar []
  (box :class "bar bottom-bar"
       :orientation "v"
-      :vexpand "false"
-      :hexpand "false"
-      :space-evenly "true"
+      :vexpand "true"
+      :space-evenly "false"
   (time)
-  (bat)))
+  (volume-bar)
+  (icon-bar)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                                      Window Section
@@ -71,8 +118,8 @@
 
 (defwindow bottombar
  :geometry (geometry :x "0"
-     :y "80%"
-     :height "20%"
+     :y "60%"
+     :height "40%"
      :width "47px")
  :monitor 0
  :reserve (struts :distance "35px" :side "left")
