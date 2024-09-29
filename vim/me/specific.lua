@@ -23,3 +23,12 @@ vim.api.nvim_create_autocmd(
 )
 
 
+--- Clojure
+-- Map leader to comma
+vim.g.maplocalleader=","
+
+-- Toggle this for vim-sexp to not go into insert mode after wrapping something
+vim.g.sexp_insert_after_wrap = 0
+-- Toggle this to disable automatically creating closing brackets and quotes
+vim.g.sexp_enable_insert_mode_mappings = 1
+

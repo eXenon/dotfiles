@@ -73,6 +73,13 @@ return require("packer").startup(function(use)
     -- Isort formatting
     use 'stsewd/isort.nvim'
 
+    -- Clojure
+    use 'Olical/conjure'
+    use 'guns/vim-sexp'
+    use 'tpope/vim-sexp-mappings-for-regular-people'
+    use 'tpope/vim-repeat'
+    use 'tpope/vim-surround'
+
     -- Setup
     local lsp_zero = require("lsp-zero")
     require("mason").setup({})
