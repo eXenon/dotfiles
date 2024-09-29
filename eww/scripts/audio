@@ -2,7 +2,12 @@
 
 
 function __eww_volume
-    string match -r "\d+%" (pactl --format json get-sink-volume 0) | string trim -r -c "%"
+    set volume (string match -r "\d+%" (pactl --format json get-sink-volume 0) | string trim -r -c "%")
+    if test -n $volume
+        echo 0
+    else
+        echo $volume
+    end
 end
 
 function __eww_volume_set
