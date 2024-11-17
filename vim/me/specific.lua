@@ -32,3 +32,14 @@ vim.g.sexp_insert_after_wrap = 0
 -- Toggle this to disable automatically creating closing brackets and quotes
 vim.g.sexp_enable_insert_mode_mappings = 1
 
+--- SuperHTML LSP
+ vim.api.nvim_create_autocmd("Filetype", {
+    pattern = { "html", "shtml", "htm" },
+    callback = function()
+        vim.lsp.start({
+            name = "superhtml",
+            cmd = { "superhtml", "lsp" },
+            root_dir = vim.fs.dirname(vim.fs.find({".git"}, { upward = true })[1])
+        })
+    end
+ })
