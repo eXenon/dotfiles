@@ -1,0 +1,6 @@
+# Options
+copy-on-select = true
+shell-integration = fish
+
+# Keybindings
+keybind = global:ctrl+t=toggle_quick_terminal
