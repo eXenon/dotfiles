@@ -2,9 +2,6 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 
-vim.keymap.set("n", "<leader><Right>", vim.cmd.bnext)
-vim.keymap.set("n", "<leader><Left>", vim.cmd.bprev)
-
 -- Move blocks in visual mode, reindenting on the fly
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -49,7 +46,10 @@ else
 end
 
 -- bépo navigation
+vim.keymap.set("n", "<leader><Right>", vim.cmd.bnext)
+vim.keymap.set("n", "<leader><Left>", vim.cmd.bprev)
 vim.keymap.set("n", "<leader>n", "<C-w><right>")
 vim.keymap.set("n", "<leader>t", "<C-w><left>")
 vim.keymap.set("n", "<leader>s", vim.cmd.bprev)
 vim.keymap.set("n", "<leader>r", vim.cmd.bnext)
+vim.keymap.set("n", "<leader><tab>", vim.cmd.bnext)
