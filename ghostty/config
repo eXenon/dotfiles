@@ -5,3 +5,5 @@ shell-integration = fish
 # Keybindings
 keybind = global:ctrl+t=toggle_quick_terminal
 
+# Notifications
+app-notifications = no-clipboard-copy
