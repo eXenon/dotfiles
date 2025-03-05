@@ -26,6 +26,17 @@ vim.api.nvim_create_autocmd(
 --- Clojure
 -- Map leader to comma
 vim.g.maplocalleader=","
+-- LSP
+vim.api.nvim_create_autocmd("Filetype", {
+    pattern = { "clj", "clojure" },
+    callback = function()
+        vim.lsp.start({
+            name = "clojure-lsp",
+            cmd = { "clojure-lsp" },
+            root_dir = vim.fs.dirname(vim.fs.find({".lsp"}, { upward = true })[1])
+        })
+    end
+})
 
 -- Toggle this for vim-sexp to not go into insert mode after wrapping something
 vim.g.sexp_insert_after_wrap = 0

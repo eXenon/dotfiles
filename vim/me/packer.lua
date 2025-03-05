@@ -79,6 +79,9 @@ return require("packer").startup(function(use)
     use 'tpope/vim-sexp-mappings-for-regular-people'
     use 'tpope/vim-repeat'
     use 'tpope/vim-surround'
+    use 'tpope/vim-dispatch'
+    use 'clojure-vim/vim-jack-in'
+    use 'radenling/vim-dispatch-neovim'
 
     -- Setup
     local lsp_zero = require("lsp-zero")
