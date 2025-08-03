@@ -40,3 +40,6 @@ vim.opt.listchars["trail"] = "·"
 vim.opt.listchars["nbsp"] = "⎵"
 vim.opt.listchars["precedes"] = "◀"
 vim.opt.listchars["extends"] = "▶"
+
+-- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
+vim.opt.completeopt = { "menuone", "noselect", "popup" } 
