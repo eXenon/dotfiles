@@ -7,7 +7,6 @@ vim.api.nvim_create_autocmd("Filetype", {
 vim.api.nvim_create_autocmd("Filetype", {
     pattern = { "clj", "clojure", "bb" },
     callback = function()
-
         -- Toggle this for vim-sexp to not go into insert mode after wrapping something
         vim.g.sexp_insert_after_wrap = 0
         -- Toggle this to disable automatically creating closing brackets and quotes
