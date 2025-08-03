@@ -1,3 +1,6 @@
 go2.fish
 es.fish
 .*
+functions/_*
+functions/tide.fish
+functnions/tide/
