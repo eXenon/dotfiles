@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = ","
 
 -- Generic keymaps and settings
 require("config.keymaps")
@@ -24,6 +24,7 @@ require("language.html")
 require("language.ocaml")
 require("language.clojure")
 require("language.python")
+require("language.misc")
 
 
 -- dofile(os.getenv("HOME") .. "/.config/nvim/me/packer.lua")

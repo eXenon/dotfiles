@@ -15,8 +15,7 @@ vim.api.nvim_create_autocmd("Filetype", {
         vim.lsp.start({
             name = "clojure-lsp",
             cmd = { "clojure-lsp" },
-            root_dir = vim.fs.dirname(vim.fs.find({".lsp"}, { upward = true })[1])
+            root_dir = vim.fs.dirname(vim.fs.find({ ".lsp" }, { upward = true })[1])
         })
-
     end
 })

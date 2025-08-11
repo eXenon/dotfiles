@@ -31,4 +31,5 @@ vim/undo/
 vim/plugs/
 vim/.netrwhist
 vim/plugin/packer_compiled.lua
+vim/lazy-lock.json
 .luarc.json
