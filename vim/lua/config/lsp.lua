@@ -1,7 +1,7 @@
-
 vim.api.nvim_create_autocmd('lspattach', {
     group = vim.api.nvim_create_augroup('my.lsp', {}),
     callback = function(args)
+        print("LSP attached, setting up configuration.")
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))-- Format on save
 
         vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
