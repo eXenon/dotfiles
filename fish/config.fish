@@ -48,7 +48,7 @@ if type -q "tmuxp" then
 end
 
 # Key bindings
-bind -M insert -k ppage _fzf_search_history
+bind -M insert pageup _fzf_search_history
 bind -M insert \cc kill-whole-line repaint
 bind -M insert \cf _fzf_search_directory
 bind -M insert \cp _fzf_search_processes
