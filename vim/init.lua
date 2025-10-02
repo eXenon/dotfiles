@@ -15,6 +15,7 @@ require("config.undotree")
 
 -- All the things LSP
 require("config.lsp")
+require("config.formatter")
 
 -- Custom function packages
 require("config.qmk")
@@ -25,7 +26,6 @@ require("language.ocaml")
 require("language.clojure")
 require("language.python")
 require("language.misc")
-
 
 -- dofile(os.getenv("HOME") .. "/.config/nvim/me/packer.lua")
 -- dofile(os.getenv("HOME") .. "/.config/nvim/me/specific.lua")
