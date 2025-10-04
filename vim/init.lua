@@ -26,6 +26,7 @@ require("language.ocaml")
 require("language.clojure")
 require("language.python")
 require("language.misc")
+require("language.elixir")
 
 -- dofile(os.getenv("HOME") .. "/.config/nvim/me/packer.lua")
 -- dofile(os.getenv("HOME") .. "/.config/nvim/me/specific.lua")
