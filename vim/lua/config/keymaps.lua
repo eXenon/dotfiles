@@ -12,23 +12,23 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- Paste over selected text, but don't change the value in the buffer
-vim.keymap.set("x", "<leader>p", "\"_dP")
+vim.keymap.set("x", "<leader>p", '"_dP')
 
 -- Copy-paste using system clipboard
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
-vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
+vim.keymap.set("v", "<leader>y", '"+y')
 
 -- Delete without putting into the buffer
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set("n", "<leader>d", '"_d')
+vim.keymap.set("v", "<leader>d", '"_d')
 
 -- Quickfix navigation
 vim.keymap.set("n", "<leader>qn", ":cn<CR>")
 vim.keymap.set("n", "<leader>qp", ":cp<CR>")
 
 -- Integrate with local envs
-local makefile = #(vim.fs.find('Makefile', {}))
+local makefile = #(vim.fs.find("Makefile", {}))
 function Fallback()
     print("No Makefile detected.")
 end
@@ -48,6 +48,7 @@ vim.keymap.set("n", "<leader><Right>", vim.cmd.bnext)
 vim.keymap.set("n", "<leader><Left>", vim.cmd.bprev)
 vim.keymap.set("n", "<leader>n", "<C-w><right>")
 vim.keymap.set("n", "<leader>t", "<C-w><left>")
-vim.keymap.set("n", "<leader>s", vim.cmd.bprev)
-vim.keymap.set("n", "<leader>r", vim.cmd.bnext)
+vim.keymap.set("n", "<leader>s", ":tabprev<CR>")
+vim.keymap.set("n", "<leader>r", ":tabnext<CR>")
 vim.keymap.set("n", "<leader><tab>", vim.cmd.bnext)
+vim.keymap.set("n", "<leader>q", ":tabclose<CR>")

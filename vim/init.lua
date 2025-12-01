@@ -28,6 +28,9 @@ require("language.python")
 require("language.misc")
 require("language.elixir")
 
+-- Quick round of LSP config
+vim.lsp.enable("gopls")
+
 -- dofile(os.getenv("HOME") .. "/.config/nvim/me/packer.lua")
 -- dofile(os.getenv("HOME") .. "/.config/nvim/me/specific.lua")
 -- dofile(os.getenv("HOME") .. "/.config/nvim/me/qmk.lua")
