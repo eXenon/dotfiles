@@ -3,8 +3,9 @@ require("conform").setup({
         lua = { "stylua" },
         python = { "isort", "black" },
         rust = { "rustfmt", lsp_format = "fallback" },
-        javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { "prettier", stop_after_first = true },
         clojure = { "cljfmt" },
+        css = { "stylelint" },
     },
     format_on_save = {
         -- These options will be passed to conform.format()
